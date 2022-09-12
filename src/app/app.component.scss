@@ -1,0 +1,29 @@
+.app {
+    &-logo {
+        width: 10rem;
+        margin-left: 1rem;
+    }
+    &-title {
+        width: 100%;
+        text-align: center;
+        padding-right: 10rem;
+    }
+    &-container {
+        width: 100vw;
+        max-width: 98%;
+        height: auto;
+        min-height: 100vh;
+        padding: 8px;
+    }
+    &-page {
+        &-container {
+            padding: 2rem 3rem;
+            max-width: 1200px;
+            margin: 0px auto;
+        }
+        &-view {
+            width: 100%;
+            min-height: 90vh;
+        }
+    }
+}
