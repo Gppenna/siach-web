@@ -44,3 +44,8 @@ body {
     background-color: #fff;
     border-bottom: 1px solid #DFDADA;
 }
+
+.mat-list-item-content {
+    display: flex;
+    align-items: center;
+}

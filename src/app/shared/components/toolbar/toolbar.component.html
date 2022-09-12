@@ -1,13 +1,14 @@
-<!-- src\app\shared\components\sidenav\sidenav.component.html -->
-
-<div [class.dark-theme]="isDark">
-    <!-- ? we're wrapping whole content in a div, to handle dark/light theme -->
-    <mat-toolbar>
+<div [class.dark-theme]="execute('actual_theme')">
+    <mat-toolbar class="menu-grid">
         <span>Toolbar</span>
-        <span class="example-spacer"></span>
 
-        <!-- ? below button will help us change the theme at run-time. -->
-        <button mat-icon-button (click)="toggleTheme()" matTooltip="Toggle dark theme">
+        <div>
+            <div class="itens-menu">
+                <app-menu-list-item *ngFor="let item of appStateService.state.menu" [item]="item"></app-menu-list-item>
+            </div>
+        </div>
+
+        <button mat-icon-button (click)="execute('toggle_dark_theme')" matTooltip="Toggle dark theme">
         <mat-icon>
           brightness_6
         </mat-icon>

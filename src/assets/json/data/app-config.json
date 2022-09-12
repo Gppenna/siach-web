@@ -1,0 +1,24 @@
+{
+    "configs": {},
+    "menu": [{
+            "displayName": "Início",
+            "route": "/home"
+        },
+        {
+            "displayName": "Atividades",
+            "route": "/atividades"
+        },
+        {
+            "displayName": "Solicitações",
+            "children": [{
+                    "displayName": "Criar",
+                    "route": "/solicitacoes/criar"
+                },
+                {
+                    "displayName": "Visualizar",
+                    "route": "/solicitacoes"
+                }
+            ]
+        }
+    ]
+}

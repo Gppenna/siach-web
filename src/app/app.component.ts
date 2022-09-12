@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppStateService } from './app.state';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'siach-web';
+
+  constructor(
+    private appState: AppStateService,
+  ) {}
+
+  ngOnInit(): void {
+    this.initState();
+  }
+
+  private initState() {
+    this.appState.getState().subscribe((state) => {
+      console.log('state', state);
+    });
+  }
+
+  get state() {
+    return this.appState.state;
+  }
 }

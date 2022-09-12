@@ -2,6 +2,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { AppStateService } from 'src/app/app.state';
 
 @Component({
   selector: 'app-toolbar',
@@ -9,19 +10,16 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   styleUrls: ['./toolbar.component.scss'],
 })
 export class ToolbarComponent implements OnInit {
-  isDark = false;
-  constructor(private overlayContainer: OverlayContainer) {}
 
-  ngOnInit(): void {}
+  constructor(
+    public appStateService: AppStateService) {}
 
-  toggleTheme(): void {
-    this.isDark = !this.isDark;
-    if (this.isDark) {
-      this.overlayContainer.getContainerElement().classList.add('dark-theme');
-    } else {
-      this.overlayContainer
-        .getContainerElement()
-        .classList.remove('dark-theme');
-    }
+  ngOnInit(): void {
   }
+
+  execute(type: string, data?: any) {
+    return this.appStateService.execute({ type: type, data: data });
+  }
+
+  
 }

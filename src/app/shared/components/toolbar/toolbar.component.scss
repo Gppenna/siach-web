@@ -14,8 +14,15 @@
     text-transform: capitalize;
 }
 
-.example-spacer {
-    flex: 1 1 auto;
+.menu-grid {
+    display: grid;
+    grid-template-columns: 40% 57% 3%;
+}
+
+.itens-menu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .mat-icon-no-color {
