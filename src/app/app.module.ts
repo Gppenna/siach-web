@@ -7,10 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfig } from './app.config';
+import { InicioModule } from './modules/inicio/inicio.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +19,8 @@ import { AppConfig } from './app.config';
     MatToolbarModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule 
+    HttpClientModule,
+    InicioModule 
   ],
   providers: [AppConfig],
   bootstrap: [AppComponent]

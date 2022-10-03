@@ -1,5 +1,5 @@
 // ? Importing `Work Sans` font for headings, you can change this if you want
-@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500&display=swap");
 // ? 1. Default theme
 $theming-material-components-primary: mat-palette($mat-blue,
 600,
@@ -21,7 +21,7 @@ A400);
 $dark-warn: mat-palette($mat-deep-orange);
 $dark-theme: mat-dark-theme( ( color: ( primary: $dark-primary, accent: $dark-accent, warn: $dark-warn, ), ));
 // ? 3. Define a custom heading typography config
-$heading-font-family: "'Work Sans', sans-serif";
+$heading-font-family: "'Nunito', sans-serif";
 $typography: mat-typography-config( $display-4: mat-typography-level(112px, $font-family: $heading-font-family),
 $display-3: mat-typography-level(56px, $font-family: $heading-font-family),
 $display-2: mat-typography-level(45px, $font-family: $heading-font-family),

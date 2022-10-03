@@ -1,13 +1,12 @@
-<div style="position: relative; padding: 0.5rem" [class.dark-theme]="execute('actual_theme')">
+<div style="position: relative;height: inherit" [class.dark-theme]="execute('actual_theme')">
     <a mat-list-item class="menu-list-item" (click)="onItemSelected(item)">
-        {{ item.displayName }}
-        <mat-icon *ngIf="item.children && item.children.length"
-            [@indicatorRotate]="expanded ? 'expanded' : 'collapsed'">
+        <span>{{ item.displayName }}</span>
+        <mat-icon *ngIf="item.children && item.children.length" [@indicatorRotate]="expanded ? 'expanded' : 'collapsed'">
             expand_more
         </mat-icon>
     </a>
     <div class="menu-list-expanded" *ngIf="expanded">
-        <app-menu-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
+        <app-menu-list-item class="child" *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
         </app-menu-list-item>
     </div>
 </div>

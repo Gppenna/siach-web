@@ -2,7 +2,7 @@
     "configs": {},
     "menu": [{
             "displayName": "Início",
-            "route": "/home"
+            "route": "/inicio"
         },
         {
             "displayName": "Atividades",

@@ -16,13 +16,23 @@
 
 .menu-grid {
     display: grid;
-    grid-template-columns: 40% 57% 3%;
+    grid-template-columns: 60% 35% 5%;
+    padding: 0 3rem;
+}
+
+mat-toolbar>* {
+    height: inherit;
 }
 
 .itens-menu {
+    height: inherit;
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.itens-menu * {
+    height: inherit;
 }
 
 .mat-icon-no-color {

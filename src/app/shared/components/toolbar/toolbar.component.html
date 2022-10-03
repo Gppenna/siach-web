@@ -1,7 +1,6 @@
 <div [class.dark-theme]="execute('actual_theme')">
     <mat-toolbar class="menu-grid">
-        <span>Toolbar</span>
-
+        <img src="../../../../assets/images/siachlogo.png" alt="Logo SIACH">
         <div>
             <div class="itens-menu">
                 <app-menu-list-item *ngFor="let item of appStateService.state.menu" [item]="item"></app-menu-list-item>
