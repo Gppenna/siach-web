@@ -19,6 +19,22 @@
                     "route": "/solicitacoes"
                 }
             ]
+        },
+        {
+            "icon": "account_circle",
+            "children": [{
+                    "displayName": "Perfil",
+                    "route": "/perfil"
+                },
+                {
+                    "displayName": "Sair",
+                    "route": "/logout"
+                }
+            ]
+        },
+        {
+            "button": "brightness_6",
+            "action": "toggle_dark_theme"
         }
     ]
 }

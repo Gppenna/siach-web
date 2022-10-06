@@ -44,7 +44,19 @@ body {
 
 body {
     margin: 0;
-    font-family: "Nunito", "Helvetica Neue", sans-serif;
+    font-family: "Nunito";
+}
+
+img.dark-theme {
+    filter: invert(100%);
+}
+
+.nm {
+    margin: 0!important;
+}
+
+np {
+    padding: 0!important;
 }
 
 .mat-toolbar {
@@ -61,21 +73,30 @@ body {
     display: block;
 }
 
+a.dark-theme:hover {
+    color: inherit;
+}
+
 .mat-list-item-content {
     display: flex;
     height: inherit;
     align-items: center;
+    justify-content: center;
     border-bottom: 2px solid transparent;
-    span:hover,
-    span:focus {
+    span.mat-display-1:hover,
+    span.mat-display-1:focus {
         padding-bottom: 0px;
         border-bottom: 2px solid #5F8ED3;
     }
 }
 
+a {
+    text-decoration: none;
+}
+
 .dark-theme .mat-list-item-content {
-    span:hover,
-    span:focus {
+    span.mat-display-1:hover,
+    span.mat-display-1:focus {
         padding-bottom: 0px;
         border-bottom: 2px solid #fff;
     }

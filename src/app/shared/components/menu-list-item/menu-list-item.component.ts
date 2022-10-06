@@ -16,7 +16,7 @@ import { AppStateService } from 'src/app/app.state';
   animations: [
     trigger('indicatorRotate', [
       state('collapsed', style({ transform: 'rotate(0deg)' })),
-      state('expanded', style({ transform: 'rotate(180deg)' })),
+      state('expanded', style({ transform: 'rotate(180deg) translate(-25%, 0%)'  })),
       transition(
         'expanded <=> collapsed',
         animate('225ms cubic-bezier(0.4,0.0,0.2,1)')

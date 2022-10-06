@@ -1,9 +1,15 @@
 <div style="position: relative;height: inherit" [class.dark-theme]="execute('actual_theme')">
-    <a mat-list-item class="menu-list-item" (click)="onItemSelected(item)">
-        <span>{{ item.displayName }}</span>
-        <mat-icon *ngIf="item.children && item.children.length" [@indicatorRotate]="expanded ? 'expanded' : 'collapsed'">
+    <a mat-list-item class="menu-list-item" (click)="onItemSelected(item)" [class.dark-theme]="execute('actual_theme')">
+        <span *ngIf="item.displayName" class="mat-display-1 nm">{{ item.displayName }}</span>
+        <mat-icon *ngIf="item.icon" style="cursor: pointer;">{{ item.icon }}</mat-icon>
+        <mat-icon *ngIf="item.children && item.children.length && !item.icon" [@indicatorRotate]="expanded ? 'expanded' : 'collapsed'">
             expand_more
         </mat-icon>
+        <button *ngIf="item.button && item.action === 'toggle_dark_theme'" mat-icon-button (click)="execute('toggle_dark_theme')" matTooltip="Alternar tema escuro">
+            <mat-icon>
+                {{ item.button }}
+            </mat-icon>
+        </button>
     </a>
     <div class="menu-list-expanded" *ngIf="expanded">
         <app-menu-list-item class="child" *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
