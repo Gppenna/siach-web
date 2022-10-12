@@ -9,11 +9,17 @@
         padding-right: 10rem;
     }
     &-container {
-        width: 100vw;
-        max-width: 98%;
+        display: flex;
         height: auto;
         min-height: 100vh;
+        justify-content: center;
         padding: 8px;
+    }
+    &-container.dark-theme {
+        background-color: #000;
+    }
+    &-container>* {
+        justify-content: center;
     }
     &-page {
         &-container {

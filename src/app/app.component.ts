@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'siach-web';
 
   constructor(
-    private appState: AppStateService,
+    private appStateService: AppStateService,
   ) {}
 
   ngOnInit(): void {
@@ -18,12 +18,16 @@ export class AppComponent {
   }
 
   private initState() {
-    this.appState.getState().subscribe((state) => {
+    this.appStateService.getState().subscribe((state) => {
       console.log('state', state);
     });
   }
 
+  execute(type: string, data?: any) {
+    return this.appStateService.execute({ type: type, data: data });
+  }
+
   get state() {
-    return this.appState.state;
+    return this.appStateService.state;
   }
 }
