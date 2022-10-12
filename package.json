@@ -3,9 +3,9 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "node server.js",
+        "start": "http-server-spa dist/siach-web index.html $PORT",
         "build": "ng build",
-        "heroku-postbuild": "ng build --configuration production",
+        "heroku-postbuild": "ng build --configuration production && npm install -g http-server-spa",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },
