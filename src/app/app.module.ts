@@ -8,6 +8,9 @@ import { SharedModule } from './shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { InicioModule } from './modules/inicio/inicio.module';
+import { AtividadesModule } from './modules/atividades/atividades.module';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { InicioModule } from './modules/inicio/inicio.module';
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
-    InicioModule 
+    InicioModule,
+    AtividadesModule,
+    MatDividerModule
   ],
   providers: [AppConfig],
   bootstrap: [AppComponent]

@@ -10,13 +10,20 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'atividades',
+    loadChildren: () =>
+      import('./modules/atividades/atividades.module').then(
+        (m) => m.AtividadesModule
+      ),
+  },
+  {
     path: 'em-construção',
     loadChildren: () =>
       import('./modules/under-construction/under-construction.module').then(
         (m) => m.UnderConstructionModule
       ),
   },
-  { path: '**', redirectTo: 'em-construção', pathMatch: 'full' },
+  { path: '**', redirectTo: 'inicio', pathMatch: 'full' },
 ];
 
 @NgModule({

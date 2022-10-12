@@ -9,11 +9,11 @@
         padding-right: 10rem;
     }
     &-container {
-        display: flex;
         height: auto;
         min-height: 100vh;
-        justify-content: center;
         padding: 8px;
+        max-width: 80%;
+        margin: auto;
     }
     &-container>* {
         justify-content: center;

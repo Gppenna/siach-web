@@ -22,6 +22,7 @@
 // `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
 :root {
     --bs-body-color-span-night-eye: hsla(0, 0%, 75%, 1);
+    --bs-body-color-heading-night-eye: hsla(0, 0%, 90%, 1);
     --bs-blue-night-eye: hsla(216, 60%, 52%, 1);
     --bs-indigo-night-eye: hsla(263, 60%, 51%, 1);
     --bs-purple-night-eye: hsla(261, 51%, 51%, 1);
@@ -152,24 +153,72 @@ span.menu {
     color: inherit;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    color: #646464;
+}
+
+.chip {
+    border-radius: 10px;
+    max-width: fit-content;
+    max-height: fit-content;
+    padding: 5px;
+    color: #fff;
+    font-family: "Nunito";
+    font-size: 16px;
+}
+
+.chip.primary {
+    background-color: #5F8ED3;
+}
+
+.card-container {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+.card-img {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+    mask-image: linear-gradient(to right, transparent 10%, black 40%);
+}
+
+.card-container h2,
+.card-container h3,
+.card-container h4 {
+    color: #000;
+}
+
+.logo {
+    height: 50px!important;
+}
+
 // DARK THEME
 .dark-theme {
     *:hover {
         transition: all 100s ease-in-out;
     }
-    span,
+    span {
+        color: var(--bs-body-color-span-night-eye);
+    }
     h1,
     h2,
     h3,
     h4 {
-        color: var(--bs-body-color-span-night-eye);
+        color: var(--bs-body-color-heading-night-eye);
     }
     .mat-toolbar {
-        background-color: rgb(28, 28, 33);
+        background-color: rgb(31, 31, 31);
         color: rgb(155, 184, 228)!important;
         border-bottom: 1px solid rgb(59, 59, 59);
     }
-    .app-container {
+    .app-container,
+    .main-container {
         background-color: var(--bs-body-bg-night-eye);
     }
     span.highlight {
@@ -181,5 +230,8 @@ span.menu {
     }
     .logo {
         filter: invert(100%);
+    }
+    .card-container {
+        background-color: rgb(31, 31, 31);
     }
 }

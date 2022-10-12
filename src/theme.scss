@@ -27,7 +27,10 @@ $typography: mat-typography-config( $display-4: mat-typography-level(112px, $fon
 $display-3: mat-typography-level(56px, $font-family: $heading-font-family),
 $display-2: mat-typography-level(45px, $font-family: $heading-font-family),
 $display-1: mat-typography-level(20px, $font-family: $heading-font-family),
-$body-1: mat-typography-level(16px, $font-family: $body-font-family),
-$headline: mat-typography-level(24px, $font-family: $body-font-family),
-$title: mat-typography-level(30px, $font-family: $body-font-family),
+$body-1: mat-typography-level(20px, $font-family: $body-font-family),
+$headline: mat-typography-level(32px, $font-family: $heading-font-family),
+$title: mat-typography-level(24px, $font-family: $heading-font-family, $font-weight: 700),
+$subheading-2: mat-typography-level(24px, $font-family: $heading-font-family, $font-weight: 500),
+$subheading-1: mat-typography-level(22px, $font-family: $heading-font-family, $font-weight: 500),
+$caption: mat-typography-level(14px, $font-family: $heading-font-family, $font-weight: 700),
 );
