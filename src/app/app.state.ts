@@ -75,7 +75,6 @@ export class AppStateService {
   }
 
   public execute(command: { type: string; data?: any }): Observable<any> {
-    console.log('execute command ', command);
     switch (command.type) {
       case AppStateService.commands.INITILIZE:
         return this.initialize();

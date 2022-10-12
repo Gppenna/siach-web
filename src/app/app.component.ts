@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'siach-web';
 
   constructor(
-    private appStateService: AppStateService,
+    public appStateService: AppStateService,
   ) {}
 
   ngOnInit(): void {

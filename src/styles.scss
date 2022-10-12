@@ -20,8 +20,57 @@
 // Include the dark color styles inside of a block with a CSS class. You can make this
 // CSS class whatever you want. In this example, any component inside of an element with
 // `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
-.dark-theme {
-    @include angular-material-color($dark-theme);
+:root {
+    --bs-body-color-span-night-eye: hsla(0, 0%, 75%, 1);
+    --bs-blue-night-eye: hsla(216, 60%, 52%, 1);
+    --bs-indigo-night-eye: hsla(263, 60%, 51%, 1);
+    --bs-purple-night-eye: hsla(261, 51%, 51%, 1);
+    --bs-pink-night-eye: hsla(330, 60%, 52%, 1);
+    --bs-red-night-eye: hsla(354, 60%, 54%, 1);
+    --bs-orange-night-eye: hsla(27, 60%, 54%, 1);
+    --bs-yellow-night-eye: hsla(44, 100%, 20%, 1);
+    --bs-green-night-eye: hsla(152, 60%, 31%, 1);
+    --bs-teal-night-eye: hsla(162, 60%, 46%, 1);
+    --bs-cyan-night-eye: hsla(190, 60%, 50%, 1);
+    --bs-white-night-eye: hsla(240, 8%, 12%, 1);
+    --bs-gray-night-eye: hsla(208, 7%, 46%, 1);
+    --bs-gray-dark-night-eye: hsla(210, 10%, 23%, 1);
+    --bs-gray-100-night-eye: hsla(0, 0%, 12%, 1);
+    --bs-gray-200-night-eye: hsla(0, 0%, 17%, 1);
+    --bs-gray-300-night-eye: hsla(0, 0%, 21%, 1);
+    --bs-gray-400-night-eye: hsla(210, 14%, 27%, 1);
+    --bs-gray-500-night-eye: hsla(210, 11%, 39%, 1);
+    --bs-gray-600-night-eye: hsla(208, 7%, 46%, 1);
+    --bs-gray-700-night-eye: hsla(210, 9%, 31%, 1);
+    --bs-gray-800-night-eye: hsla(210, 10%, 23%, 1);
+    --bs-gray-900-night-eye: hsla(0, 0%, 15%, 1);
+    --bs-primary-night-eye: hsla(216, 60%, 52%, 1);
+    --bs-secondary-night-eye: hsla(208, 7%, 46%, 1);
+    --bs-success-night-eye: hsla(152, 60%, 31%, 1);
+    --bs-info-night-eye: hsla(190, 60%, 50%, 1);
+    --bs-warning-night-eye: hsla(44, 100%, 20%, 1);
+    --bs-danger-night-eye: hsla(354, 60%, 54%, 1);
+    --bs-light-night-eye: hsla(0, 0%, 12%, 1);
+    --bs-dark-night-eye: hsla(0, 0%, 15%, 1);
+    --bs-primary-rgb-night-eye: 59, 118, 206;
+    --bs-secondary-rgb-night-eye: 109, 118, 126;
+    --bs-success-rgb-night-eye: 32, 126, 82;
+    --bs-info-rgb-night-eye: 51, 179, 204;
+    --bs-warning-rgb-night-eye: 102, 75, 0;
+    --bs-danger-rgb-night-eye: 208, 67, 81;
+    --bs-light-rgb-night-eye: 31, 31, 31;
+    --bs-dark-rgb-night-eye: 38, 38, 38;
+    --bs-white-rgb-night-eye: 28, 28, 33;
+    --bs-black-rgb-night-eye: 0, 0, 0;
+    --bs-body-rgb-night-eye: 38, 38, 38;
+    --bs-font-sans-serif-night-eye: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace-night-eye: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient-night-eye: linear-gradient(180deg, hsla(240, 8%, 12%, 0.15), hsla(240, 8%, 12%, 0));
+    --bs-body-font-size-night-eye: 1rem;
+    --bs-body-font-weight-night-eye: 400;
+    --bs-body-line-height-night-eye: 1.5;
+    --bs-body-color-night-eye: hsla(0, 0%, 15%, 1);
+    --bs-body-bg-night-eye: hsla(240, 8%, 12%, 1);
 }
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
@@ -47,10 +96,6 @@ body {
     font-family: "Nunito";
 }
 
-img.dark-theme {
-    filter: invert(100%);
-}
-
 .nm {
     margin: 0!important;
 }
@@ -73,10 +118,6 @@ np {
     display: block;
 }
 
-a.dark-theme:hover {
-    color: inherit;
-}
-
 .mat-list-item-content {
     display: flex;
     height: inherit;
@@ -94,14 +135,6 @@ a {
     text-decoration: none;
 }
 
-.dark-theme .mat-list-item-content {
-    span.mat-display-1:hover,
-    span.mat-display-1:focus {
-        padding-bottom: 0px;
-        border-bottom: 2px solid #fff;
-    }
-}
-
 .child span {
     border-bottom: none!important;
     padding-bottom: 0px!important;
@@ -109,4 +142,44 @@ a {
 
 .mat-list-item-content span {
     padding-bottom: 2px;
+}
+
+span.highlight {
+    color: #2B468B;
+}
+
+span.menu {
+    color: inherit;
+}
+
+// DARK THEME
+.dark-theme {
+    *:hover {
+        transition: all 100s ease-in-out;
+    }
+    span,
+    h1,
+    h2,
+    h3,
+    h4 {
+        color: var(--bs-body-color-span-night-eye);
+    }
+    .mat-toolbar {
+        background-color: rgb(28, 28, 33);
+        color: rgb(155, 184, 228)!important;
+        border-bottom: 1px solid rgb(59, 59, 59);
+    }
+    .app-container {
+        background-color: var(--bs-body-bg-night-eye);
+    }
+    span.highlight {
+        color: rgb(157, 179, 225);
+    }
+    .menu,
+    .menu mat-icon {
+        color: rgb(157, 179, 225);
+    }
+    .logo {
+        filter: invert(100%);
+    }
 }

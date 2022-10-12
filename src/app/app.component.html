@@ -1,4 +1,7 @@
-<app-toolbar></app-toolbar>
-<section class="app-container" [class.dark-theme]="execute('actual_theme')">
-    <router-outlet></router-outlet>
-</section>
+<div [class.dark-theme]="execute('actual_theme')">
+    <app-toolbar>
+    </app-toolbar>
+    <section class="app-container">
+        <router-outlet></router-outlet>
+    </section>
+</div>

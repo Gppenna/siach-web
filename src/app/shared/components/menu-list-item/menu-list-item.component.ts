@@ -44,11 +44,13 @@ export class MenuListItemComponent implements OnInit {
   }
 
   onItemSelected(item: any) {
-    if (!item.children || !item.children.length) {
-      this.router.navigate([item.route]);
-    }
-    if (item.children && item.children.length) {
-      this.expanded = !this.expanded;
+    if(!item.hasOwnProperty('action')) {
+      if (!item.children || !item.children.length) {
+        this.router.navigate([item.route]);
+      }
+      if (item.children && item.children.length) {
+        this.expanded = !this.expanded;
+      }
     }
   }
 
