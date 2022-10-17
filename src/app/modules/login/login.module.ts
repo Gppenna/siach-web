@@ -3,28 +3,35 @@ import { NgModule } from '@angular/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule, Routes } from '@angular/router';
-import { AtividadesComponent } from './atividades.component';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
-import { AtividadesModalComponent } from './atividades-modal/atividades-modal.component';
+import { LoginComponent } from './login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 
 const routes: Routes = [
   {
     path: '',
-    component: AtividadesComponent,
+    component: LoginComponent,
   },
 ];
 
 @NgModule({
-  declarations: [AtividadesComponent, AtividadesModalComponent],
+  declarations: [LoginComponent],
   imports: [
     RouterModule.forChild(routes),
     MatDividerModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
   providers: [MatDatepickerModule],
-  entryComponents: [AtividadesComponent],
+  entryComponents: [LoginComponent],
 })
-export class AtividadesModule {}
+export class LoginModule {}

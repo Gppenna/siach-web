@@ -136,6 +136,11 @@ a {
     text-decoration: none;
 }
 
+.blurBackground {
+    background: rgba(244, 244, 244, 0.6);
+    backdrop-filter: blur(4px);
+}
+
 .child span {
     border-bottom: none!important;
     padding-bottom: 0px!important;
@@ -178,14 +183,32 @@ h4 {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .card-img {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    opacity: 0.8;
-    mask-image: linear-gradient(to right, transparent 10%, black 40%);
+    opacity: 0.5;
+    -webkit-mask-image: linear-gradient(to right, transparent 10%, black 80%);
+    transition: all 0.5s ease-in-out;
+}
+
+.card-img:hover {
+    opacity: 1;
+}
+
+.hide {
+    display: none;
+}
+
+pre {
+    white-space: pre-line;
+    word-break: break-all;
+    overflow: auto;
+    max-height: 500px;
+    font-size: 16px;
 }
 
 .card-container h2,

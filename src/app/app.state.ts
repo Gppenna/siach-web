@@ -1,5 +1,5 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import {
   throwError,
 } from 'rxjs';
 import { delay, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { AppConfig } from './app.config';
+import { AuthenticationService } from './core/security/authentication-service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +19,19 @@ import { AppConfig } from './app.config';
 export class AppStateService {
   @Output()
   sheetEvent = new EventEmitter<any>();
+
+  USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUser';
+  USER_PASSWORD_SESSION_ATTRIBUTE = 'authenticatedUserPassword';
+  
   static commands = {
     INITILIZE: 'initialize',
     HTTP_REQUEST: 'http-request',
     REGISTER_SHEET: 'register-sheet',
     OPEN_BOTTOM_SHEET: 'open-bottom-sheet',
     TOGGLE_DARK_THEME: 'toggle_dark_theme',
-    ACTUAL_THEME: 'actual_theme'
+    ACTUAL_THEME: 'actual_theme',
+    LOGIN: 'login',
+    LOGOUT: 'logout'
   };
 
   static APIS: { [key: string]: any } = {
@@ -37,6 +43,7 @@ export class AppStateService {
   private initialState: any = {
     loadingGlobal: false,
     initialized: false,
+    user: undefined,
     ready: false,
     menu: undefined,
   };
@@ -51,16 +58,12 @@ export class AppStateService {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private http: HttpClient,
-    private overlayContainer: OverlayContainer,
-    private appConfig: AppConfig,
+    private authenticationService: AuthenticationService,
+    private overlayContainer: OverlayContainer
   ) {
     this.routerHandler();
-
-    appConfig.load().then(() => {
-      AppStateService.APIS.ASSETS = AppConfig.settings.assets;
-      AppStateService.APIS.HUB_DEFAULT = AppConfig.settings.urlApi;
-      this.initialize().subscribe();
-    });
+    AppStateService.APIS.ASSETS = "/assets/json/data/";
+    this.initialize().subscribe();
   }
 
   getState(): Observable<any> {
@@ -82,6 +85,12 @@ export class AppStateService {
       case AppStateService.commands.ACTUAL_THEME:
         return this.checkTheme();
 
+      case AppStateService.commands.LOGIN:
+        return this.login(command.data);
+
+      case AppStateService.commands.LOGOUT:
+        return this.logout();
+
       case AppStateService.commands.TOGGLE_DARK_THEME:
         return of(this.toggleTheme());
 
@@ -99,6 +108,34 @@ export class AppStateService {
         const message = `comando desconhecido :: ${command.type}`;
         return throwError({ message: message });
     }
+  }
+
+  createBasicAuthToken(username: String, password: String) {
+    return 'Basic ' + window.btoa(username + ":" + password);
+  }
+
+  registerSuccessfulLogin(username: any, password: any) {
+    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, username);
+    sessionStorage.setItem(this.USER_PASSWORD_SESSION_ATTRIBUTE, password);
+  }
+
+  private login(credentials:any): Observable<any> {
+    return of(this.authenticationService.authenticate(credentials));
+  }
+
+  private logout() {
+    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
+    sessionStorage.removeItem(this.USER_PASSWORD_SESSION_ATTRIBUTE);
+    this.setState({
+      user: undefined
+    });
+    return of();
+  }
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE);
+    if (user === null) return false
+    return true
   }
 
   private initialize(): Observable<any> {

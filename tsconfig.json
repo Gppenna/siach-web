@@ -8,6 +8,8 @@
     "strict": true,
     "noImplicitReturns": true,
     "strictNullChecks":false,
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
