@@ -17,6 +17,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'admin',
+    canActivate: [GuardComponent],
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then(
+        (m) => m.AdminModule
+      ),
+  },
+  {
     path: 'atividades',
     canActivate: [GuardComponent],
     loadChildren: () =>

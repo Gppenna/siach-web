@@ -15,10 +15,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpInterceptorService } from './core/security/http-intercept';
 import { LogoutComponent } from './modules/logout/logout.component';
 import { GuardComponent } from './core/security/guard/guard.component';
+import { AdminComponent } from './modules/admin/admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

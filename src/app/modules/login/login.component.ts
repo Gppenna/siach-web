@@ -19,4 +19,8 @@ export class LoginComponent implements OnInit {
     return this.appStateService.execute({ type: type, data: data });
   }
 
+  login() {
+    this.execute('login', this.credentials);
+  }
+
 }

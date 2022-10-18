@@ -110,26 +110,29 @@ export class AppStateService {
     }
   }
 
-  createBasicAuthToken(username: String, password: String) {
-    return 'Basic ' + window.btoa(username + ":" + password);
-  }
-
-  registerSuccessfulLogin(username: any, password: any) {
-    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, username);
-    sessionStorage.setItem(this.USER_PASSWORD_SESSION_ATTRIBUTE, password);
-  }
 
   private login(credentials:any): Observable<any> {
-    return of(this.authenticationService.authenticate(credentials));
+    return of(this.authenticationService.authenticate(credentials).subscribe((response:any) => {
+      console.log("autenticado?", response, this.router);
+      this.setState({
+        user: response
+      });
+      if(this.router.url === '/login') {
+        this.router.navigate(['/inicio']);
+      }
+      sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, response.name);
+      sessionStorage.setItem(this.USER_PASSWORD_SESSION_ATTRIBUTE, credentials.senha);
+    }));
   }
 
   private logout() {
-    sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
-    sessionStorage.removeItem(this.USER_PASSWORD_SESSION_ATTRIBUTE);
-    this.setState({
-      user: undefined
-    });
-    return of();
+    return of(this.authenticationService.logout().subscribe((response:any) => {
+      sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
+      sessionStorage.removeItem(this.USER_PASSWORD_SESSION_ATTRIBUTE);
+      this.setState({
+        user: undefined
+      });
+    }));
   }
 
   isUserLoggedIn() {
@@ -139,6 +142,12 @@ export class AppStateService {
   }
 
   private initialize(): Observable<any> {
+    if(this.isUserLoggedIn() && this.state.user === undefined) {
+      this.login({
+        email: sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE),
+        senha: sessionStorage.getItem(this.USER_PASSWORD_SESSION_ATTRIBUTE)
+      });
+    }
     this.setState({
       initialized: true,
     });

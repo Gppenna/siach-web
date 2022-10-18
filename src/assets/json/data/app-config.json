@@ -27,6 +27,11 @@
                     "route": "/perfil"
                 },
                 {
+                    "displayName": "Admin",
+                    "route": "/admin",
+                    "admin": true
+                },
+                {
                     "displayName": "Sair",
                     "route": "/logout"
                 }
