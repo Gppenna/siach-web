@@ -21,5 +21,6 @@ export class ToolbarComponent implements OnInit {
     return this.appStateService.execute({ type: type, data: data });
   }
 
+
   
 }

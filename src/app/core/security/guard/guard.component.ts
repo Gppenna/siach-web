@@ -15,7 +15,11 @@ export class GuardComponent implements CanActivate {
   ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
     console.log(state, route, 'rotas');
     if(this.appStateService.isUserLoggedIn()) {
-      if(state.url === '/login' || state.url === '/registrar') {
+      if(
+        state.url === '/login' ||
+        state.url === '/registrar' ||
+        (state.url === '/admin' && this.appStateService.state?.user?.authorities[0].authority !== '1')
+        ) {
         this.router.navigate(['/inicio']);
       }
       return true;

@@ -6,6 +6,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminComponent } from './admin.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+
 
 
 const routes: Routes = [
@@ -21,7 +24,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatDividerModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatIconModule
   ],
   providers: [MatDatepickerModule],
   entryComponents: [AdminComponent],

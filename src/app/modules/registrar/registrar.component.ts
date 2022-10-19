@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppStateService } from 'src/app/app.state';
 
@@ -9,19 +10,28 @@ import { AppStateService } from 'src/app/app.state';
 })
 export class RegistrarComponent implements OnInit {
 
+  registerForm: FormGroup;
+
   confirmarSenha = '';
 
-  form:any = {
-    matricula: '',
-    nome: '',
-    email: '',
-    senha: '',
-    idCurso: ''
-  }
-
-  constructor(private readonly router: Router, public appStateService: AppStateService) { }
+  constructor(
+    private readonly router: Router,
+    public appStateService: AppStateService,
+    private readonly formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.buildRegisterForm();
+  }
+
+  private buildRegisterForm(): void {
+    this.registerForm = this.formBuilder.group({
+      email: '',
+      matricula: '',
+      nome: '',
+      idCurso: '',
+      senha: '',
+      confirmarSenha: ''
+    });
   }
 
   execute(type: string, data?: any) {
@@ -29,10 +39,10 @@ export class RegistrarComponent implements OnInit {
   }
 
   registrar() {
-    if(this.form.senha !== this.confirmarSenha) {
+    if(this.registerForm.value.senha !== this.confirmarSenha) {
       return;
     }
-    this.execute('registrar', this.form);
+    this.execute('registrar', this.registerForm.value);
   }
 
   cancel() {
