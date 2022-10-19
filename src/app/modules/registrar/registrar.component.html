@@ -1,0 +1,35 @@
+<div class="d-flex flex-column align-items-center mt-5" style="zoom: 0.9">
+    <h1>Cadastrar</h1>
+    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input type="text" matInput [(ngModel)]="form.email" />
+    </mat-form-field>
+    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
+        <mat-label>Matrícula</mat-label>
+        <input type="text" matInput [(ngModel)]="form.matricula" />
+    </mat-form-field>
+    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput [(ngModel)]="form.nome" />
+    </mat-form-field>
+    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
+        <mat-label>Curso</mat-label>
+        <input type="text" matInput [(ngModel)]="form.idCurso" />
+    </mat-form-field>
+    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input type="password" matInput [(ngModel)]="form.senha" />
+    </mat-form-field>
+    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
+        <mat-label>Confirmar Senha</mat-label>
+        <input type="password" matInput [(ngModel)]="confirmarSenha" />
+    </mat-form-field>
+    <span *ngIf="(form.senha && confirmarSenha) && (confirmarSenha !== form.senha)" class="danger pb-3">As senhas digitadas não correspondem!</span>
+
+    <div class="d-flex gap-3 align-items-center">
+        <button class="btn btn-primary" [disabled]="(!form.senha || !confirmarSenha || !form.matricula || !form.email || !form.nome) || (confirmarSenha !== form.senha)" (click)="registrar()">Cadastrar
+        </button>
+        <button class="btn btn-danger" (click)="cancel()">Cancelar</button>
+    </div>
+
+</div>

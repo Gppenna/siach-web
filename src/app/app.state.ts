@@ -1,6 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 import {
@@ -11,6 +12,7 @@ import {
   throwError,
 } from 'rxjs';
 import { delay, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { AuthenticationService } from './core/security/authentication-service';
 
 @Injectable({
@@ -31,7 +33,8 @@ export class AppStateService {
     TOGGLE_DARK_THEME: 'toggle_dark_theme',
     ACTUAL_THEME: 'actual_theme',
     LOGIN: 'login',
-    LOGOUT: 'logout'
+    LOGOUT: 'logout',
+    REGISTRAR : 'registrar'
   };
 
   static APIS: { [key: string]: any } = {
@@ -58,6 +61,7 @@ export class AppStateService {
     private readonly router: Router,
     private readonly route: ActivatedRoute,
     private http: HttpClient,
+    private readonly snackBar: MatSnackBar,
     private authenticationService: AuthenticationService,
     private overlayContainer: OverlayContainer
   ) {
@@ -88,6 +92,9 @@ export class AppStateService {
       case AppStateService.commands.LOGIN:
         return this.login(command.data);
 
+      case AppStateService.commands.REGISTRAR:
+        return this.registrar(command.data);
+
       case AppStateService.commands.LOGOUT:
         return this.logout();
 
@@ -108,6 +115,14 @@ export class AppStateService {
         const message = `comando desconhecido :: ${command.type}`;
         return throwError({ message: message });
     }
+  }
+
+  private registrar(form:any) : Observable<any> {
+    return of(this.http.post(`${environment.apiUrl}register`, form).subscribe((response:any) => {
+      console.log("registrar", response);
+      this.snackBar.open('Cadastro realizado com sucesso!', 'Ok')
+      this.router.navigate(['/login']);
+    }));
   }
 
 

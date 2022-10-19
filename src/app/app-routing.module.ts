@@ -40,6 +40,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'registrar',
+    loadChildren: () =>
+      import('./modules/registrar/registrar.module').then(
+        (m) => m.RegistrarModule
+      ),
+  },
+  {
     path: 'logout',
     loadChildren: () =>
       import('./modules/logout/logout.module').then(

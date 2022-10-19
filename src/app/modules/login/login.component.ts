@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppStateService } from 'src/app/app.state';
 
 @Component({
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   credentials = {email: '', senha: ''};
 
-  constructor(public appStateService: AppStateService) { }
+  constructor(public appStateService: AppStateService, private readonly router: Router,) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.execute('login', this.credentials);
+  }
+
+  registrar() {
+    this.router.navigate(['/registrar']);
   }
 
 }

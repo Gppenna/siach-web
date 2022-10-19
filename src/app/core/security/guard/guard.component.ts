@@ -15,12 +15,21 @@ export class GuardComponent implements CanActivate {
   ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
     console.log(state, route, 'rotas');
     if(this.appStateService.isUserLoggedIn()) {
-      if(state.url === '/login') {
+      if(state.url === '/login' || state.url === '/registrar') {
         this.router.navigate(['/inicio']);
       }
       return true;
     }
-    this.router.navigate(['/login']);
+    if(state.url === '/login') {
+      this.router.navigate(['/login']);
+    }
+    else if(state.url === '/registrar') {
+      this.router.navigate(['/registrar']);
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+    
     return false;
   }
 

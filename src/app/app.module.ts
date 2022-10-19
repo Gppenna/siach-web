@@ -16,11 +16,13 @@ import { HttpInterceptorService } from './core/security/http-intercept';
 import { LogoutComponent } from './modules/logout/logout.component';
 import { GuardComponent } from './core/security/guard/guard.component';
 import { AdminComponent } from './modules/admin/admin.component';
+import { RegistrarComponent } from './modules/registrar/registrar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AdminComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +36,7 @@ import { AdminComponent } from './modules/admin/admin.component';
     MatDividerModule,
     CommonModule,
     MatDialogModule,
+    MatSnackBarModule,
     FormsModule 
   ],
   providers: [
