@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   baseUrl: 'https://siach-web.herokuapp.com/',
-  apiUrl: ''
+  apiUrl: 'https://siach-api.herokuapp.com/'
 };
+  
