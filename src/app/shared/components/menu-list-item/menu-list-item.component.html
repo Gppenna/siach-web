@@ -12,7 +12,7 @@
         </button>
     </a>
     <div class="menu-list-expanded" *ngIf="expanded">
-        <app-menu-list-item class="child" [ngClass]="(this.appStateService.state?.user?.authorities[0].authority !== '1' && child.admin) ? 'd-none' : ''" *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
+        <app-menu-list-item class="child" [ngClass]="(this.appStateService.getAuthority() !== '1' && child.admin) ? 'd-none' : ''" *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
         </app-menu-list-item>
     </div>
 </div>

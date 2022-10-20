@@ -6,11 +6,12 @@ import { AuthenticationService } from './authentication-service';
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService) { }
-
+    constructor() { }
+    
     intercept(req: HttpRequest<any>, next: HttpHandler) {
+      console.log(document.cookie);
         const xhr = req.clone({
-          headers: req.headers.set('X-Requested-With', 'XMLHttpRequest')
+          withCredentials: true
         });
         return next.handle(xhr);
       }

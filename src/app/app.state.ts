@@ -23,7 +23,7 @@ export class AppStateService {
   sheetEvent = new EventEmitter<any>();
 
   USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUser';
-  USER_PASSWORD_SESSION_ATTRIBUTE = 'authenticatedUserPassword';
+  USER_AUTHORITY_SESSION_ATTRIBUTE = 'authenticatedUserAuthority';
   
   static commands = {
     INITILIZE: 'initialize',
@@ -39,7 +39,7 @@ export class AppStateService {
 
   static APIS: { [key: string]: any } = {
     ASSETS: undefined,
-    HUB_DEFAULT: undefined,
+    HUB_DEFAULT: '',
     URL_SYNC_USER: undefined,
   };
 
@@ -81,6 +81,9 @@ export class AppStateService {
     });
   }
 
+  public getAuthority() {
+    return sessionStorage.getItem(this.USER_AUTHORITY_SESSION_ATTRIBUTE);
+  }
   public execute(command: { type: string; data?: any }): Observable<any> {
     switch (command.type) {
       case AppStateService.commands.INITILIZE:
@@ -136,14 +139,14 @@ export class AppStateService {
         this.router.navigate(['/inicio']);
       }
       sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, response.name);
-      sessionStorage.setItem(this.USER_PASSWORD_SESSION_ATTRIBUTE, credentials.senha);
+      sessionStorage.setItem(this.USER_AUTHORITY_SESSION_ATTRIBUTE, response.authorities[0].authority);
     }));
   }
 
   private logout() {
     return of(this.authenticationService.logout().subscribe((response:any) => {
       sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
-      sessionStorage.removeItem(this.USER_PASSWORD_SESSION_ATTRIBUTE);
+      sessionStorage.removeItem(this.USER_AUTHORITY_SESSION_ATTRIBUTE);
       this.setState({
         user: undefined
       });
@@ -157,12 +160,6 @@ export class AppStateService {
   }
 
   private initialize(): Observable<any> {
-    if(this.isUserLoggedIn() && this.state.user === undefined) {
-      this.login({
-        email: sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE),
-        senha: sessionStorage.getItem(this.USER_PASSWORD_SESSION_ATTRIBUTE)
-      });
-    }
     this.setState({
       initialized: true,
     });
@@ -208,7 +205,7 @@ export class AppStateService {
             ? this.http
                 .get(url, {
                   headers: request.headers,
-                  responseType: 'blob' as 'json',
+                  responseType: 'blob' as 'json'
                 })
             : this.http.get(url);
         }

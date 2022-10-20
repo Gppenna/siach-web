@@ -18,7 +18,7 @@ export class GuardComponent implements CanActivate {
       if(
         state.url === '/login' ||
         state.url === '/registrar' ||
-        (state.url === '/admin' && this.appStateService.state?.user?.authorities[0].authority !== '1')
+        (state.url === '/admin' && this.appStateService.getAuthority() !== '1')
         ) {
         this.router.navigate(['/inicio']);
       }

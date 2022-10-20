@@ -1,5 +1,7 @@
+import { environment } from './../../../environments/environment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { AppStateService } from 'src/app/app.state';
 
 @Component({
   selector: 'app-admin',
@@ -34,15 +36,30 @@ export class AdminComponent implements OnInit {
   columnsToDisplayWithExpand:any = undefined;
   expandedElement: any | null;
 
-  constructor() { }
+  constructor(public appStateService: AppStateService) { }
 
   ngOnInit(): void {
     this.columnsToDisplay = this.columns? this.columns.map(c => c.columnDef) : null;
     this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+    this.loadDependencies();
+  }
+
+  loadDependencies() {
+    const request = {
+      type: 'GET',
+      api: environment.apiUrl,
+      path: 'barema/table'};
+    this.execute('http-request', request).subscribe((response:any) => {
+      console.log(response, 'response');
+    })
+  }
+
+  execute(type: string, data?: any) {
+    return this.appStateService.execute({ type: type, data: data });
   }
 
   novoGrupo() {
-    
+
   }
 
 }
