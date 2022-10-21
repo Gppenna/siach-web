@@ -5,7 +5,7 @@
         "ng": "ng",
         "start": "http-server-spa dist/siach-web index.html $PORT",
         "build": "ng build",
-        "heroku-postbuild": "ng build --configuration production && npm install -g http-server-spa",
+        "heroku-postbuild": "npm install -g http-server-spa",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },
