@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:4200/',
-  apiUrl: 'https://siach-api.herokuapp.com/'
+  apiUrl: 'https://siach-api.herokuapp.com/',
+  apiUrlSwitch: 'https://siach-api.herokuapp.com/'
 };
 
 /*
