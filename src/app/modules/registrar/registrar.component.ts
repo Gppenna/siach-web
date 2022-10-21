@@ -39,9 +39,6 @@ export class RegistrarComponent implements OnInit {
   }
 
   registrar() {
-    if(this.registerForm.value.senha !== this.confirmarSenha) {
-      return;
-    }
     this.execute('registrar', this.registerForm.value);
   }
 
