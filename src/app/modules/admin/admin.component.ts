@@ -47,7 +47,7 @@ export class AdminComponent implements OnInit {
   loadDependencies() {
     const request = {
       type: 'GET',
-      api: environment.apiUrlSwitch,
+      api: environment.apiUrl,
       path: 'barema/table'};
     this.execute('http-request', request).subscribe((response:any) => {
       console.log(response, 'response');

@@ -21,7 +21,6 @@ app.use(
         }
     })
 );
-if (app.get('env') === 'production') {}
 
 app.use(cors({
     origin: app.get('env') === 'production' ? 'https://siach-api.herokuapp.com/' : 'http://localhost:8080/',

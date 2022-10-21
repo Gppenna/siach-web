@@ -17,12 +17,12 @@ export class AuthenticationService {
             authorization : 'Basic ' + btoa(credentials.email + ':' + credentials.senha)
         } : {});
 
-        return this.http.get(`${environment.apiUrlSwitch}login`, {headers: headers});
+        return this.http.get(`${environment.apiUrl}login`, {headers: headers});
 
     }
 
     logout() {
-        return this.http.post(`${environment.apiUrlSwitch}logout`, {});
+        return this.http.post(`${environment.apiUrl}logout`, {});
     }
 
 }

@@ -121,7 +121,7 @@ export class AppStateService {
   }
 
   private registrar(form:any) : Observable<any> {
-    return of(this.http.post(`${environment.apiUrlSwitch}register`, form).subscribe((response:any) => {
+    return of(this.http.post(`${environment.apiUrl}register`, form).subscribe((response:any) => {
       console.log("registrar", response);
       this.snackBar.open('Cadastro realizado com sucesso!', 'Ok')
       this.router.navigate(['/login']);
