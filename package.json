@@ -3,9 +3,9 @@
     "version": "0.0.0",
     "scripts": {
         "ng": "ng",
-        "start": "http-server-spa dist/siach-web index.html $PORT",
+        "start": "node server.js",
         "build": "ng build",
-        "heroku-postbuild": "npm install -g http-server-spa",
+        "heroku-postbuild": "ng build --configuration production",
         "watch": "ng build --watch --configuration development",
         "test": "ng test"
     },
@@ -31,6 +31,7 @@
         "@types/jasmine": "~4.0.0",
         "bootstrap": "^5.2.2",
         "express": "^4.18.2",
+        "express-session": "^1.17.3",
         "jasmine-core": "~4.3.0",
         "karma": "~6.4.0",
         "karma-chrome-launcher": "~3.1.0",
