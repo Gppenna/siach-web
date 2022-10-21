@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  envName: 'dev',
   baseUrl: 'http://localhost:4200/',
   apiUrl: 'http://localhost:8080/',
   apiUrlSwitch: 'http://localhost:8080/'
