@@ -8,6 +8,8 @@ import { AppStateService } from 'src/app/app.state';
 })
 export class InicioComponent implements OnInit {
 
+  USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUserName';
+
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit(): void {
@@ -15,6 +17,10 @@ export class InicioComponent implements OnInit {
 
   execute(type: string, data?: any) {
     return this.appStateService.execute({ type: type, data: data });
+  }
+
+  getUserName() {
+    return sessionStorage.getItem(this.USER_NAME_SESSION_ATTRIBUTE);
   }
 
 }

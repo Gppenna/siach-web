@@ -213,6 +213,25 @@ h4 {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.btn-danger-small {
+    background-color: #E27060;
+    font-family: "Nunito";
+    color: #fff;
+    width: 120px;
+    height: 45px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-danger-small:hover,
+.btn-primary-small:hover {
+    color: #fff;
+}
+
 .nunito {
     font-family: "Nunito";
 }
@@ -221,6 +240,20 @@ h4 {
     background-color: #5F8ED3;
     font-family: "Nunito";
     width: 200px;
+    height: 45px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary-small {
+    background-color: #5F8ED3;
+    color: #fff;
+    font-family: "Nunito";
+    width: 120px;
     height: 45px;
     font-size: 24px;
     display: flex;
@@ -307,6 +340,63 @@ pre {
 
  ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+.mat-bottom-sheet-container {
+    overflow-y: auto!important;
+    overflow-x: hidden!important;
+}
+
+.app {
+    &-page {
+        &-container {
+            padding: 1.3rem 2rem;
+            max-width: 1200px;
+            margin: 0px auto;
+            &-bottomsheet {
+                padding: 0px;
+                min-width: 40vw;
+                min-height: 15vh;
+            }
+        }
+        &-bottomsheet {
+            &-header {
+                width: 100%;
+                position: relative;
+                margin-bottom: 1.3rem;
+                h1 {
+                    color: #000!important;
+                }
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: 0px;
+                    left: -2rem;
+                    right: -2rem;
+                    height: 1px;
+                    background-color: rgb(223, 223, 223);
+                }
+                // border-bottom: 1px solid gray;
+            }
+            &-actions {
+                display: flex;
+                justify-content: flex-end;
+                zoom: 0.9;
+                button {
+                    margin-left: 1rem;
+                }
+            }
+            &-content {
+                position: relative;
+            }
+        }
+        &-form {
+            &-full {
+                width: 100%;
+                color: #000;
+            }
+        }
+    }
 }
 
 // DARK THEME

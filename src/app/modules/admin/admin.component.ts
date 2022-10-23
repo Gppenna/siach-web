@@ -17,14 +17,7 @@ import { AppStateService } from 'src/app/app.state';
 })
 export class AdminComponent implements OnInit {
 
-  dataSource:any = [
-    {numero: '1', descricao: 'Extensão', minimoHoras: 30},
-    {numero: '2', descricao: 'Extensão', minimoHoras: 30},
-    {numero: '3', descricao: 'Extensão', minimoHoras: 30},
-    {numero: '4', descricao: 'Extensão', minimoHoras: 30},
-    {numero: '5', descricao: 'Extensão', minimoHoras: 30},
-    {numero: '6', descricao: 'Extensão', minimoHoras: 30},
-  ];
+  dataSource:any = [];
   columns =
     [
       { columnDef: 'numero', header: 'Número' },
@@ -50,6 +43,7 @@ export class AdminComponent implements OnInit {
       api: environment.apiUrl,
       path: 'barema/table'};
     this.execute('http-request', request).subscribe((response:any) => {
+      this.dataSource = response;
       console.log(response, 'response');
     })
   }
@@ -59,7 +53,9 @@ export class AdminComponent implements OnInit {
   }
 
   novoGrupo() {
-
+    this.execute('open-bottom-sheet', {
+      type: 'grupo'
+    });
   }
 
 }
