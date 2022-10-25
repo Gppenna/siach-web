@@ -1,18 +1,20 @@
 import { environment } from './../../../../environments/environment';
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppStateService } from 'src/app/app.state';
 
 @Component({
-  selector: 'grupo',
-  templateUrl: 'grupo.html',
+  selector: 'atividade',
+  templateUrl: 'atividade.html',
 })
-export class GrupoSheet {
+export class AtividadeSheet {
   loading = true;
   error: any = undefined;
   actionComplete = false;
   formControl: FormGroup;
+
+  baremaSelect:any = [];
 
   USER_COURSE_SESSION_ATTRIBUTE = 'authenticatedUserCourse';
 
@@ -25,9 +27,19 @@ export class GrupoSheet {
   itenData: any;
 
   constructor(
-    private _bottomSheetRef: MatBottomSheetRef<GrupoSheet>,
+    private _bottomSheetRef: MatBottomSheetRef<AtividadeSheet>,
     private formBuilder: FormBuilder
   ) {}
+
+  dependencies: any = {
+    grupoBarema: {
+      type: 'GET',
+      api: environment.apiUrl,
+      path: 'grupo-barema/table'
+    }
+  };
+
+  dependenciesData: any;
 
   onConnectedToParent() {
     this.initialize.emit();
@@ -45,7 +57,7 @@ export class GrupoSheet {
     const request = {
       type: 'POST',
       api: environment.apiUrl,
-      path: `grupo-barema/criar`,
+      path: `atividade-barema/criar`,
       body: value,
     };
     console.log('save :: ', this.itenData);
@@ -56,8 +68,7 @@ export class GrupoSheet {
     this.formControl = this.formBuilder.group({
       descricao: '',
       minimoHoras: '',
-      numero: '',
-      idCurso : sessionStorage.getItem(this.USER_COURSE_SESSION_ATTRIBUTE)
+      idGrupoBarema : ''
     });
     console.log(this.formControl);
   }

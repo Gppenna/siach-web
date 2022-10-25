@@ -1,9 +1,15 @@
 <section class="d-flex flex-column mt-5">
     <div>
         <div>
-            <h1>Atividades Complementares</h1>
-            <span><span class="highlight">Precisa de um certificado?</span> Nesta página você poderá encontrar oportunidades que geram horas complementares.</span>
+            <div>
+                <h1>Atividades Complementares</h1>
+                <span><span class="highlight">Precisa de um certificado?</span> Nesta página você poderá encontrar oportunidades que geram horas complementares.</span>
+            </div>
+            <div class="align-items-end d-flex flex-column gap-3">
+                <button class="btn btn-new" style="width: 230px!important" (click)="novaDivulgacaoAtividade()"><mat-icon>add_circle</mat-icon>Divulgar Atividade</button>
+            </div>
         </div>
+
 
         <div class="card-container my-4" (click)="openDetails(null)">
             <div class="d-flex">

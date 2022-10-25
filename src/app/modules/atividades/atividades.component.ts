@@ -34,4 +34,10 @@ export class AtividadesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
+  novaDivulgacaoAtividade() {
+    this.execute('open-bottom-sheet', {
+      type: 'divulgacaoAtividade'
+    });
+  }
 }

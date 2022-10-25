@@ -23,12 +23,17 @@ import { GrupoSheet } from './modules/forms/grupo/grupo';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatInputModule } from '@angular/material/input';
+import { AtividadeSheet } from './modules/forms/atividade/atividade';
+import { MatSelectModule } from '@angular/material/select';
+import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/divulgacao-atividade';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    GrupoSheet
+    GrupoSheet,
+    AtividadeSheet,
+    DivulgacaoAtividadeSheet
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,8 @@ import { MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatBottomSheetModule,
-    MatInputModule 
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [
     GuardComponent,

@@ -22,9 +22,18 @@ export class AdminComponent implements OnInit {
     [
       { columnDef: 'numero', header: 'Número' },
       { columnDef: 'descricao',  header: 'Grupo' },
-      { columnDef: 'minimoHoras',  header: 'Mínimo de Horas' },
+      { columnDef: 'minimoHoras',  header: 'Máximo de Horas' },
 
     ];
+  columnsExpanded =
+    [
+      { columnDef: 'descricao',  header: 'Atividade' },
+      { columnDef: 'minimoHoras',  header: 'Carga Horária' },
+
+    ];
+
+  columnsExpandedToDisplay:any = undefined;
+
   columnsToDisplay:any = undefined;
   columnsToDisplayWithExpand:any = undefined;
   expandedElement: any | null;
@@ -32,6 +41,8 @@ export class AdminComponent implements OnInit {
   constructor(public appStateService: AppStateService) { }
 
   ngOnInit(): void {
+    this.columnsExpandedToDisplay = this.columnsExpanded? this.columnsExpanded.map(c => c.columnDef) : null;
+    
     this.columnsToDisplay = this.columns? this.columns.map(c => c.columnDef) : null;
     this.columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
     this.loadDependencies();
@@ -41,7 +52,7 @@ export class AdminComponent implements OnInit {
     const request = {
       type: 'GET',
       api: environment.apiUrl,
-      path: 'barema/table'};
+      path: 'grupo-barema/table'};
     this.execute('http-request', request).subscribe((response:any) => {
       this.dataSource = response;
       console.log(response, 'response');
@@ -55,6 +66,12 @@ export class AdminComponent implements OnInit {
   novoGrupo() {
     this.execute('open-bottom-sheet', {
       type: 'grupo'
+    });
+  }
+
+  novaAtividade() {
+    this.execute('open-bottom-sheet', {
+      type: 'atividade'
     });
   }
 

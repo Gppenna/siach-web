@@ -3,6 +3,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AppStateService } from './app.state';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { AtividadeSheet } from './modules/forms/atividade/atividade';
+import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/divulgacao-atividade';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,8 @@ export class AppComponent {
 
   private components: { [key: string]: any } = {
     grupo: GrupoSheet,
+    atividade: AtividadeSheet,
+    divulgacaoAtividade: DivulgacaoAtividadeSheet
   };
 
   @ViewChild('drawer') drawer: MatSidenav;

@@ -7,6 +7,7 @@ import { AtividadesComponent } from './atividades.component';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AtividadesModalComponent } from './atividades-modal/atividades-modal.component';
+import { MatIconModule } from '@angular/material/icon';
 
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatDividerModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [MatDatepickerModule],
   entryComponents: [AtividadesComponent],

@@ -454,4 +454,18 @@ pre {
      ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
+    .btn-new {
+        background-color: rgb(96 111 143);
+    }
+    th,
+    tr,
+    td {
+        background-color: rgb(31, 31, 31);
+        color: var(--bs-body-color-span-night-eye);
+        border-bottom-color: hsla(0, 0%, 75%, 1);
+        border-top-color: hsla(0, 0%, 75%, 1);
+    }
+    td mat-icon {
+        color: var(--bs-body-color-span-night-eye);
+    }
 }
