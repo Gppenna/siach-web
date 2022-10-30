@@ -23,6 +23,8 @@ import { GrupoSheet } from './modules/forms/grupo/grupo';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatInputModule } from '@angular/material/input';
+import { MomentModule } from 'ngx-moment';
+
 import { AtividadeSheet } from './modules/forms/atividade/atividade';
 import { MatSelectModule } from '@angular/material/select';
 import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/divulgacao-atividade';
@@ -58,7 +60,8 @@ import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
     MatInputModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MomentModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
