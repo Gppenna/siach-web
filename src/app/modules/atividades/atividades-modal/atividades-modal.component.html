@@ -4,36 +4,30 @@
             <div style="padding: 1rem;">
                 <div class="px-2">
                     <div class="d-flex justify-content-between w-75 mb-3">
-                        <h2 class="nm">SEMCOMP - 2020</h2>
+                        <h2 class="nm">{{dataSource.titulo}}</h2>
                         <div class="chip primary">
-                            5 horas
+                            {{dataSource.horas}} horas
                         </div>
                     </div>
 
-                    <h3>Eventos Técnicos-científicos</h3>
+                    <h3>{{dataSource.grupoBarema?.descricao}}</h3>
                 </div>
                 <div class="mt-3 d-flex gap-4">
                     <h4>Atividade:</h4>
                     <span style="font-size: 18px;">
-                        Participação em congressos, seminários, simpósios, conferências, fóruns, workshops, semana de curso, etc.
+                        {{dataSource.atividadeBarema?.descricao}}
                     </span>
                 </div>
                 <div class="mt-3 d-flex gap-4">
                     <h4>Período:</h4>
                     <span style="font-size: 18px;">
-                        16/11/20 - 21/11/20
+                        Data: {{dataSource.periodoInicio | date : 'dd/MM/yyyy'}} - {{dataSource.periodoFim | date : 'dd/MM/yyyy'}}
                     </span>
                 </div>
                 <mat-divider style="border-top-color: #000"></mat-divider>
                 <div class="mt-3 d-flex gap-4">
                     <pre>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a ullamcorper nulla. Fusce facilisis mattis odio, et tristique erat porta in. Integer finibus, velit a pretium facilisis, tellus arcu iaculis tellus, eu convallis enim urna ac neque. Curabitur luctus cursus ultrices. Quisque at elit tellus. Suspendisse tellus sem, viverra eget posuere et, varius vitae ante. Aenean massa purus, ultricies in orci at, fringilla fermentum quam.
-
-                        Praesent accumsan suscipit nulla. Duis eu lectus ut magna pellentesque bibendum a in purus. Fusce a ullamcorper magna. Donec quis diam lacinia, facilisis neque at, aliquet ante. Nulla facilisis mi in varius aliquet. Nunc venenatis lorem et ultrices dignissim. Vestibulum pharetra rhoncus ligula suscipit accumsan. Nam finibus, quam sed finibus luctus, lectus eros auctor velit, sit amet ultricies nisi nibh eget lacus. Praesent sed ipsum nunc. Nulla facilisi. Fusce vitae purus nec massa auctor ornare vel vel dui. Etiam varius laoreet metus, a suscipit leo faucibus vitae. Pellentesque efficitur risus a tellus aliquet, et suscipit magna malesuada.
-                        
-                        Donec vitae dictum metus. Integer sit amet fermentum tellus. Curabitur finibus purus nisi, a ultrices lorem vulputate ut. Aliquam erat volutpat. Praesent sit amet risus id libero lobortis suscipit in at neque. Cras eleifend ipsum elit, nec gravida eros maximus vitae. Aenean urna velit, porta tempus sem vitae, efficitur eleifend augue. Maecenas ligula diam, cursus ut convallis ullamcorper, commodo ut enim. Fusce non volutpat massa, sed condimentum ligula. Fusce egestas rutrum ipsum viverra sagittis. Sed tristique pretium blandit. Phasellus volutpat quam porta mi accumsan ultricies.
-                        
-                        Aliquam vehicula nulla vel tortor sodales, ac consectetur libero ullamcorper. Morbi pulvinar interdum posuere. Proin porttitor mollis risus, pharetra molestie ante ultrices ut. Morbi efficitur, massa in maximus interdum, purus lorem vehicula nibh, a vestibulum felis urna eget massa. Praesent scelerisque egestas ante, venenatis convallis libero condimentum a. Proin vel convallis enim. Vestibulum felis dui, vestibulum id metus eget, dapibus posuere diam. Ut posuere pharetra aliquam. Sed ultrices vitae sapien a mattis.
+                        {{dataSource.descricao}}
                     </pre>
                 </div>
 

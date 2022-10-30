@@ -12,14 +12,25 @@
             </div>
             <div class="app-page-bottomsheet-content">
                 <mat-form-field class="app-page-form-full" appearance="outline">
+                    <mat-label>Período de Inscrição</mat-label>
+                    <mat-date-range-input [rangePicker]="picker0">
+                        <input matStartDate #dateRangeStart formControlName="periodoInicio" placeholder="Data inicial">
+                        <input matEndDate #dateRangeEnd formControlName="periodoFim" placeholder="Data final">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker0></mat-date-range-picker>
+                </mat-form-field>
+            </div>
+            <div class="app-page-bottomsheet-content">
+                <mat-form-field class="app-page-form-full" appearance="outline">
                     <mat-label>Descrição</mat-label>
-                    <input matInput required="true" type="text" formControlName="descricao" />
+                    <textarea rows="5" matInput required="true" type="text" formControlName="descricao"></textarea>
                 </mat-form-field>
             </div>
             <div class="app-page-bottomsheet-content">
                 <mat-form-field class="app-page-form-full" appearance="outline">
                     <mat-label>Carga Horária</mat-label>
-                    <input matInput required="true" type="text" formControlName="horas" />
+                    <input matInput required="true" type="number" formControlName="horas" />
                 </mat-form-field>
             </div>
             <mat-form-field class="app-page-form-full" appearance="outline">
@@ -32,15 +43,13 @@
             </mat-form-field>
 
             <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Upload de Banner</mat-label>
-                    <input matInput required="true" type="text" formControlName="horas" />
-                </mat-form-field>
+                <mat-label>Upload de Imagem</mat-label>
+                <input required="true" type="file" (change)="inputFileChanged($event)" />
             </div>
 
             <div class="app-page-bottomsheet-actions">
                 <button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
-                <button class="btn btn-primary-small" [disabled]="!formControl.valid" color="primary" (click)="save(formControl.value)">
+                <button class="btn btn-primary-small" [disabled]="!formControl.valid || !fileData" color="primary" (click)="save()">
                     Criar
                 </button>
             </div>

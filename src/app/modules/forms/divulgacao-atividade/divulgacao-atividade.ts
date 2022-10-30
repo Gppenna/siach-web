@@ -3,6 +3,8 @@ import { Component, EventEmitter, Output, ViewChild, OnInit } from '@angular/cor
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppStateService } from 'src/app/app.state';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DateUtils } from 'src/app/utils/date-utils';
 
 @Component({
   selector: 'divulgacao-atividade',
@@ -25,17 +27,20 @@ export class DivulgacaoAtividadeSheet {
   @Output()
   cancel = new EventEmitter<any>();
   itenData: any;
+  
+  fileData: any;
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<DivulgacaoAtividadeSheet>,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private readonly snackBar: MatSnackBar,
   ) {}
 
   dependencies: any = {
-    grupoBarema: {
+    atividadeBarema: {
       type: 'GET',
       api: environment.apiUrl,
-      path: 'grupo-barema/table'
+      path: 'atividade-barema/table'
     }
   };
 
@@ -52,24 +57,53 @@ export class DivulgacaoAtividadeSheet {
     this.cancel.emit();
   }
 
-  save(value:any) {
+  save() {
+    let objFormData = new FormData();
+    objFormData.append('titulo', this.formControl.get('titulo')?.value);
+    objFormData.append('descricao', this.formControl.get('descricao')?.value);
+    objFormData.append('horas', this.formControl.get('horas')?.value);
+    objFormData.append('idAtividadeBarema', this.formControl.get('idAtividadeBarema')?.value);
+    objFormData.append('periodoInicio', DateUtils.toBRDate(this.formControl.get('periodoInicio')?.value));
+    objFormData.append('periodoFim', DateUtils.toBRDate(this.formControl.get('periodoFim')?.value));
+    objFormData.append('imagem', this.fileData);
+
     this.loading = true;
     const request = {
       type: 'POST',
       api: environment.apiUrl,
-      path: `atividade-barema/criar`,
-      body: value,
+      path: `atividade-complementar/criar`,
+      body: objFormData,
     };
     console.log('save :: ', this.itenData);
     this.httpRequest.emit(request);
   }
 
   initFormControl(data?: any) {
+    
     this.formControl = this.formBuilder.group({
+      periodoInicio: '',
+      periodoFim: '',
+      titulo: '',
       descricao: '',
-      minimoHoras: '',
-      idGrupoBarema : ''
+      horas: '',
+      idAtividadeBarema : '',
+      imagem: undefined
     });
     console.log(this.formControl);
+  }
+
+  inputFileChanged(event: any) {
+    const file: File = event.target.files[0];
+    if (file && (file.type === 'image/png' || file.type === 'image/jpeg')) {
+      this.fileData = file;
+      console.log('inputFileChanged', file);
+    }
+    else {
+      this.snackBar.open('Formato de arquivo inválido, utilize os formatos de imagem JPEG ou PNG', 'Ok', {
+        duration: 6000,
+        panelClass: ['red-snackbar']
+      });
+      return;
+    }
   }
 }

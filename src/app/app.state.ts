@@ -125,7 +125,10 @@ export class AppStateService {
   private registrar(form:any) : Observable<any> {
     return of(this.http.post(`${environment.apiUrl}register`, form).subscribe((response:any) => {
       console.log("registrar", response);
-      this.snackBar.open('Cadastro realizado com sucesso!', 'Ok')
+      this.snackBar.open('Cadastro realizado com sucesso!', 'Ok', {
+        duration: 6000,
+        panelClass: ['green-snackbar']
+      });
       this.router.navigate(['/login']);
     }));
   }
