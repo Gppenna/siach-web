@@ -373,7 +373,7 @@ pre {
                 position: relative;
                 margin-bottom: 1.3rem;
                 h1 {
-                    color: #000!important;
+                    color: #000;
                 }
                 &:before {
                     content: "";
@@ -475,5 +475,23 @@ pre {
     }
     td mat-icon {
         color: var(--bs-body-color-span-night-eye);
+    }
+    .mat-bottom-sheet-container {
+        background-color: rgb(31, 31, 31);
+        * {
+            color: #fff;
+        }
+    }
+    .btn-primary-small {
+        background-color: rgb(96, 111, 143);
+    }
+    .btn-danger-small {
+        background-color: #c45747;
+    }
+    .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+        opacity: 1;
+    }
+    .cdk-overlay-dark-backdrop {
+        background: rgba(0, 0, 0, 1);
     }
 }
