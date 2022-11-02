@@ -34,6 +34,7 @@ import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
 import { SolicitacaoModule } from './modules/solicitacao/solicitacao.module';
 import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatNativeDateModule,
     MomentModule,
     SolicitacaoModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatIconModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

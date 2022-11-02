@@ -7,9 +7,14 @@ import { SolicitacaoComponent } from './solicitacao.component';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { SolicitacaoViewComponent } from './solicitacao-view/solicitacao-view.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component: SolicitacaoViewComponent,
+  },
   {
     path: 'criar',
     component: SolicitacaoComponent,
@@ -17,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SolicitacaoComponent],
+  declarations: [SolicitacaoComponent, SolicitacaoViewComponent],
   imports: [
     RouterModule.forChild(routes),
     MatDividerModule,

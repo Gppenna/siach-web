@@ -5,6 +5,9 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppStateService } from 'src/app/app.state';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateUtils } from 'src/app/utils/date-utils';
+import FileSaver, { saveAs } from 'file-saver';
+
+
 
 @Component({
   selector: 'solicitacao',
@@ -15,6 +18,9 @@ export class SolicitacaoSheet {
   error: any = undefined;
   actionComplete = false;
   formControl: FormGroup;
+  new = true;
+
+  actualFile:any = undefined;
 
   baremaSelect:any = [];
 
@@ -61,7 +67,11 @@ export class SolicitacaoSheet {
     objFormData.append('horas', this.formControl.get('horas')?.value);
     objFormData.append('idAtividadeBarema', this.formControl.get('idAtividadeBarema')?.value);
     objFormData.append('comprovante', this.fileData);
-
+    objFormData.append('comprovanteNome', this.fileData.name);
+    if(this.formControl.get('id')?.value) {
+      objFormData.append('id', this.formControl.get('id')?.value);
+    }
+    
     this.loading = true;
     const request = {
       type: 'POST',
@@ -76,25 +86,47 @@ export class SolicitacaoSheet {
   initFormControl(data?: any) {
     console.log(data, "data");
     this.formControl = this.formBuilder.group({
+      id: data? data.id : '',
       titulo: data? data.titulo : '',
       horas: data? data.horas : '',
       idAtividadeBarema : data? data.atividadeBarema.id.toString() : '',
     });
     if(data) {
-      let blob=new Blob([data.comprovante]);
-      console.log(blob, 'teste');
+      this.new = false;
+      fetch("data:application/pdf;base64," + data.comprovante)
+      .then(function(resp) {return resp.blob()})
+      .then((blob) => {
+        this.actualFile = {file: blob, name: data.comprovanteNome};
+        this.fileData = new File([blob], data.comprovanteNome, {type:"application/pdf"});
+      });
     }
     console.log(this.formControl);
   }
 
+  downloadActual() {
+    FileSaver.saveAs(this.actualFile.file, this.actualFile.name);
+  }
+
   inputFileChanged(event: any) {
     const file: File = event.target.files[0];
-    if (file) {
-      this.fileData = file;
+    if (file && (file.type === 'application/pdf')) {
       console.log('inputFileChanged', file);
+      this.fileData = file; 
+      this.actualFile = {name: file.name}
+      file.arrayBuffer().then((arrayBuffer) => {
+        let base64 = btoa(
+          new Uint8Array(arrayBuffer)
+            .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+        fetch("data:application/pdf;base64," + base64)
+          .then(function(resp) {return resp.blob()})
+          .then((blob) => {
+            this.actualFile['file'] = blob;
+          });
+    });
     }
     else {
-      this.snackBar.open('Arquivo inválido', 'Ok', {
+      this.snackBar.open('Formato de arquivo inválido, por favor utilize PDF', 'Ok', {
         duration: 6000,
         panelClass: ['red-snackbar']
       });

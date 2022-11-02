@@ -188,6 +188,16 @@ h4 {
     color: #E27060;
 }
 
+.danger-card {
+    background-color: #E27060;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 0.5rem;
+    width: fit-content;
+    filter: opacity(0.8);
+}
+
 .mat-snack-bar-container {
     background: #5F8ED3 !important;
 }
@@ -242,7 +252,7 @@ h4 {
 }
 
 .nunito {
-    font-family: "Nunito";
+    font-family: "Nunito"!important;
 }
 
 .solicitacaoForm {
@@ -268,6 +278,7 @@ h4 {
 }
 
 .btn-primary-small {
+    cursor: pointer;
     background-color: #5F8ED3;
     color: #fff;
     font-family: "Nunito";
@@ -279,6 +290,20 @@ h4 {
     align-items: center;
     border-radius: 15px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary-download {
+    cursor: pointer;
+    background-color: #5F8ED3;
+    color: #fff;
+    font-family: "Nunito";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    width: fit-content;
+    padding: 0.3rem;
 }
 
 .btn-new {
@@ -303,6 +328,11 @@ h4 {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    border: 1px solid #D6D5D5;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .card-img {
@@ -422,6 +452,26 @@ pre {
     }
 }
 
+.app-page-messages {
+    display: flex;
+    text-align: center;
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20vh;
+}
+
+.app-page-messages h5 {
+    color: rgb(179, 179, 179)!important;
+}
+
+.app-page-messages .mat-icon {
+    transform: scale(2);
+    margin-bottom: 2rem;
+    color: rgb(179, 179, 179)!important;
+}
+
 // DARK THEME
 .dark-theme {
     *:hover {
@@ -457,6 +507,7 @@ pre {
     }
     .card-container {
         background-color: rgb(31, 31, 31);
+        border: 1px solid rgb(31, 31, 31);
     }
     .mat-dialog-container {
         background-color: rgb(31, 31, 31);
@@ -477,7 +528,8 @@ pre {
      ::-webkit-scrollbar-thumb:hover {
         background: #555;
     }
-    .btn-new {
+    .btn-new,
+    .btn-primary {
         background-color: rgb(96 111 143);
     }
     th,
@@ -508,5 +560,20 @@ pre {
     }
     .cdk-overlay-dark-backdrop {
         background: rgba(0, 0, 0, 1);
+    }
+    .userCard {
+        background-color: rgb(31, 31, 31)!important;
+    }
+    mat-icon {
+        color: #fff!important;
+    }
+    mat-option {
+        background: var(--bs-body-bg-night-eye);
+    }
+    .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+        background: rgb(31, 31, 31)!important;
+    }
+    .mat-simple-snack-bar-content {
+        color: #fff;
     }
 }

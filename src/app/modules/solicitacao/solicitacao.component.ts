@@ -1,8 +1,8 @@
-import { DateUtils } from 'src/app/utils/date-utils';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { AppStateService } from 'src/app/app.state';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitacao',
@@ -12,10 +12,12 @@ import { environment } from 'src/environments/environment';
 export class SolicitacaoComponent implements OnInit {
 
   userData:any = undefined;
-  dataSource:any = undefined;
+  dataSource:any = [];
+
   constructor(
     public appStateService: AppStateService,
-    public dialog: MatDialog
+    private readonly snackBar: MatSnackBar,
+    private readonly router: Router,
     ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,27 @@ export class SolicitacaoComponent implements OnInit {
       path: 'solicitacao/table/rascunho'};
     this.execute('http-request', requestSol).subscribe((response:any) => {
       this.dataSource = response;
+      setTimeout(function(){ document.querySelector('.bottom')
+      .scrollIntoView({
+        behavior: 'smooth'
+      });}, 500);
+    });
+  }
+
+  ativar() {
+    const requestSol = {
+      type: 'PUT',
+      api: environment.apiUrl,
+      path: 'solicitacao/ativar',
+      body: this.dataSource.map((element:any) => element.id)
+    };
+    this.execute('http-request', requestSol).subscribe((response:any) => {
+      this.loadSolicitacoes();
+      this.snackBar.open('Solicitações enviadas com sucesso!', 'Ok', {
+        duration: 6000,
+        panelClass: ['green-snackbar']
+      });
+      this.router.navigate(['/solicitacao']);
     });
   }
 

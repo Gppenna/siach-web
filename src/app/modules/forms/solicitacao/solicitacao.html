@@ -1,6 +1,6 @@
 <div class="app-page-container-bottomsheet">
     <div class="app-page-bottomsheet-header py-3">
-        <h1>Nova Solicitação</h1>
+        <h1>{{new ? 'Nova' : 'Editar'}} Solicitação</h1>
     </div>
     <ng-template [ngIf]="!loading && !actionComplete && !error">
         <div class="row">
@@ -28,8 +28,17 @@
                     </mat-form-field>
 
                     <div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
-                        <mat-label style="font-size: 20px;" class="nunito mb-3">Upload de Certificado</mat-label>
-                        <input required="true" type="file" (change)="inputFileChanged($event)" />
+                        <mat-label style="font-size: 20px;" class="nunito mb-3">Seu Certificado</mat-label>
+
+                        <div class="mb-3">
+                            <label for="file" class="btn-primary-download">Escolher Arquivo</label>
+                            <input id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none;" />
+                        </div>
+                        <div class="d-grid cursor-pointer" style="max-width: 90%; overflow-wrap: break-word; grid-template-columns: 10% 90%" (click)="downloadActual()" *ngIf="actualFile">
+                            <mat-icon>cloud_download</mat-icon>
+                            <span>{{actualFile.name}}</span>
+                        </div>
+
                     </div>
                 </form>
             </div>
@@ -37,10 +46,10 @@
             <div class="col-4 solicitacaoHoras">
                 <h2 style="font-weight: 500; text-align:center;">Suas Horas Totais</h2>
                 <div class="app-page-bottomsheet-actions">
-                    <button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
                     <button class="btn btn-primary-small" [disabled]="!formControl.valid || !fileData" color="primary" (click)="save()">
-                        Criar
+                        {{new ? 'Criar' : 'Editar'}}
                     </button>
+                    <button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -53,7 +62,7 @@
     </ng-template>
 
     <ng-template [ngIf]="!loading && actionComplete">
-        <p>Solicitação: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> realizada com sucesso</p>
+        <p>Rascunho: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> {{new ? 'criado' : 'editada'}} com sucesso</p>
         <div class="app-page-bottomsheet-actions">
             <button class="btn btn-primary-small" (click)="onCancel($event)">
                 Ok
