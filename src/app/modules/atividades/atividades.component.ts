@@ -55,7 +55,7 @@ export class AtividadesComponent implements OnInit {
 
   novaDivulgacaoAtividade() {
     this.execute('open-bottom-sheet', {
-      type: 'divulgacaoAtividade'
+      type: 'divulgacaoAtividadeSheet'
     });
   }
 }

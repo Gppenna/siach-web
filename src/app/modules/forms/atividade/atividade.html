@@ -40,7 +40,7 @@
     </ng-template>
 
     <ng-template [ngIf]="!loading && actionComplete">
-        <p>Grupo: <strong> {{formControl.value.grupo? formControl.value.grupo : ''}}</strong> foi adicionado com sucesso</p>
+        <p>Atividade: <strong> {{formControl.value.descricao? formControl.value.descricao : ''}}</strong> foi adicionada com sucesso</p>
         <div class="app-page-bottomsheet-actions">
             <button class="btn btn-primary-small" (click)="onCancel($event)">
                 Ok
@@ -49,8 +49,8 @@
     </ng-template>
 
     <ng-template [ngIf]="!loading && error">
-        <p>Grupo
-            <strong>{{formControl.value.description}}</strong> não foi adicionado <br />
+        <p>Atividade
+            <strong>{{formControl.value.description}}</strong> não foi adicionada <br />
             <small>{{ error.message }}</small>
         </p>
         <div class="app-page-bottomsheet-actions">

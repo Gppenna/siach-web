@@ -1,5 +1,5 @@
 <div [class.dark-theme]="execute('actual_theme')">
-    <app-toolbar [ngClass]="appStateService.isUserLoggedIn() ? '': 'hide'">
+    <app-toolbar [ngClass]="isLogged() ? '': 'hide'">
     </app-toolbar>
     <section class="main-container">
         <div class="app-container">

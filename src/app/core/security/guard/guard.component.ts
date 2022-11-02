@@ -3,9 +3,10 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { AppStateService } from 'src/app/app.state';
 
+
 @Injectable()
 export class GuardComponent implements CanActivate {
-  USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUser';
+  USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
 
   constructor( private readonly router: Router, public appStateService: AppStateService) { }
 
@@ -14,27 +15,32 @@ export class GuardComponent implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
     console.log(state, route, 'rotas');
-    if(this.appStateService.isUserLoggedIn()) {
-      if(
-        state.url === '/login' ||
-        state.url === '/registrar' ||
-        (state.url === '/admin' && this.appStateService.getAuthority() !== '1')
-        ) {
-        this.router.navigate(['/inicio']);
+    this.appStateService.isUserLoggedIn().subscribe((user:any) => {
+      console.log(user, 'user');
+      if(user.email != null) {
+        sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, user.email);
+        if(
+          state.url === '/login' ||
+          state.url === '/registrar' ||
+          (state.url === '/admin' && this.appStateService.getAuthority() !== '1')
+          ) {
+          this.router.navigate(['/inicio']);
+        }
       }
-      return true;
-    }
-    if(state.url === '/login') {
-      this.router.navigate(['/login']);
-    }
-    else if(state.url === '/registrar') {
-      this.router.navigate(['/registrar']);
-    }
-    else {
-      this.router.navigate(['/login']);
-    }
-    
-    return false;
+      else {
+        sessionStorage.removeItem(this.USER_EMAIL_SESSION_ATTRIBUTE);
+        if(state.url === '/login') {
+          this.router.navigate(['/login']);
+        }
+        else if(state.url === '/registrar') {
+          this.router.navigate(['/registrar']);
+        }
+        else {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
+    return sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE) != null ? true : false;
   }
 
 }

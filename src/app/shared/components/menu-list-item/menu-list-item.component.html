@@ -2,7 +2,7 @@
     <a mat-list-item class="menu-list-item" (click)="onItemSelected(item)">
         <span *ngIf="item.displayName" class="mat-display-1 nm menu">{{ item.displayName }}</span>
         <mat-icon *ngIf="item.icon" style="cursor: pointer;" class="menu">{{ item.icon }}</mat-icon>
-        <mat-icon class="menu" *ngIf="item.children && item.children.length && !item.icon" [@indicatorRotate]="expanded ? 'expanded' : 'collapsed'">
+        <mat-icon class="menu" *ngIf="item.children && item.children.length && !item.icon" [@indicatorRotate]="item.expanded ? 'expanded' : 'collapsed'">
             expand_more
         </mat-icon>
         <button class="menu" *ngIf="item.button && item.action === 'toggle_dark_theme'" mat-icon-button (click)="execute('toggle_dark_theme')" matTooltip="Alternar tema escuro">
@@ -11,8 +11,8 @@
             </mat-icon>
         </button>
     </a>
-    <div class="menu-list-expanded" *ngIf="expanded">
-        <app-menu-list-item class="child" [ngClass]="(this.appStateService.getAuthority() !== '1' && child.admin) ? 'd-none' : ''" *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
+    <div class="menu-list-expanded" *ngIf="item.expanded">
+        <app-menu-list-item class="child" [ngClass]="(this.appStateService.getAuthority() !== '1' && child.admin) ? 'd-none' : ''" *ngFor="let child of item.children" [parent]="item" [item]="child" [depth]="depth + 1">
         </app-menu-list-item>
     </div>
 </div>

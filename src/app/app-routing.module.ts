@@ -33,6 +33,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'solicitacao',
+    canActivate: [GuardComponent],
+    loadChildren: () =>
+      import('./modules/solicitacao/solicitacao.module').then(
+        (m) => m.SolicitacaoModule
+      ),
+  },
+  {
     path: 'login',
     loadChildren: () =>
       import('./modules/login/login.module').then(

@@ -65,13 +65,13 @@ export class AdminComponent implements OnInit {
 
   novoGrupo() {
     this.execute('open-bottom-sheet', {
-      type: 'grupo'
+      type: 'grupoSheet'
     });
   }
 
   novaAtividade() {
     this.execute('open-bottom-sheet', {
-      type: 'atividade'
+      type: 'atividadeSheet'
     });
   }
 

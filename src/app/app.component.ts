@@ -5,6 +5,7 @@ import { AppStateService } from './app.state';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AtividadeSheet } from './modules/forms/atividade/atividade';
 import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/divulgacao-atividade';
+import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +13,14 @@ import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/d
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
   title = 'siach-web';
 
   private components: { [key: string]: any } = {
-    grupo: GrupoSheet,
-    atividade: AtividadeSheet,
-    divulgacaoAtividade: DivulgacaoAtividadeSheet
+    grupoSheet: GrupoSheet,
+    atividadeSheet: AtividadeSheet,
+    divulgacaoAtividadeSheet: DivulgacaoAtividadeSheet,
+    solicitacaoSheet: SolicitacaoSheet
   };
 
   @ViewChild('drawer') drawer: MatSidenav;
@@ -61,6 +64,10 @@ export class AppComponent {
       sheet: sheet,
       value: value,
     });
+  }
+
+  isLogged() {
+    return sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE) != null ? true : false;
   }
 
   get state() {

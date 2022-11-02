@@ -151,7 +151,8 @@ a {
 }
 
 span.highlight {
-    color: #2B468B;
+    color: #3a5cb2;
+    font-weight: 500;
 }
 
 span.highlight-light {
@@ -244,6 +245,15 @@ h4 {
     font-family: "Nunito";
 }
 
+.solicitacaoForm {
+    border-right: 1px solid rgb(223, 223, 223);
+}
+
+.strong {
+    font-weight: 600;
+    filter: opacity(0.8);
+}
+
 .btn-primary {
     background-color: #5F8ED3;
     font-family: "Nunito";
@@ -293,7 +303,6 @@ h4 {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    cursor: pointer;
 }
 
 .card-img {
@@ -365,13 +374,19 @@ pre {
                 padding: 0px;
                 min-width: 40vw;
                 min-height: 15vh;
+                form,
+                .solicitacaoHoras {
+                    margin-top: 1.3rem;
+                }
             }
         }
         &-bottomsheet {
             &-header {
                 width: 100%;
                 position: relative;
-                margin-bottom: 1.3rem;
+                form {
+                    margin-top: 1.3rem;
+                }
                 h1 {
                     color: #000;
                 }

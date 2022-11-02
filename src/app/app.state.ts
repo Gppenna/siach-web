@@ -25,7 +25,7 @@ export class AppStateService {
   USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
   USER_AUTHORITY_SESSION_ATTRIBUTE = 'authenticatedUserAuthority';
   USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUserName';
-  USER_COURSE_SESSION_ATTRIBUTE = 'authenticatedUserCourse'
+  USER_COURSE_SESSION_ATTRIBUTE = 'authenticatedUserCourse';
   
   static commands = {
     INITILIZE: 'initialize',
@@ -48,7 +48,7 @@ export class AppStateService {
   private initialState: any = {
     loadingGlobal: false,
     initialized: false,
-    user: undefined,
+    userLogged: false,
     ready: false,
     menu: undefined,
   };
@@ -168,10 +168,12 @@ export class AppStateService {
     }));
   }
 
-  isUserLoggedIn() {
-    let user = sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE);
-    if (user === null) return false
-    return true
+  isUserLoggedIn(): Observable<any> {
+    const request = {
+      type: 'GET',
+      api: environment.apiUrl,
+      path: 'logged-user'};
+    return this.execute({ type: 'http-request', data: request });
   }
 
   private initialize(): Observable<any> {

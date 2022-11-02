@@ -36,7 +36,7 @@
             <mat-form-field class="app-page-form-full" appearance="outline">
                 <mat-label>Atividade Associada</mat-label>
                 <mat-select formControlName="idAtividadeBarema">
-                    <mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.id}}">
+                    <mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.id}}" [title]="item.descricao">
                         {{item.descricao}}
                     </mat-option>
                 </mat-select>
@@ -62,7 +62,7 @@
     </ng-template>
 
     <ng-template [ngIf]="!loading && actionComplete">
-        <p>Grupo: <strong> {{formControl.value.grupo? formControl.value.grupo : ''}}</strong> foi adicionado com sucesso</p>
+        <p>Divulgação de Atividade: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> foi adicionado com sucesso</p>
         <div class="app-page-bottomsheet-actions">
             <button class="btn btn-primary-small" (click)="onCancel($event)">
                 Ok
@@ -71,7 +71,7 @@
     </ng-template>
 
     <ng-template [ngIf]="!loading && error">
-        <p>Grupo
+        <p>Divulgação de Atividade
             <strong>{{formControl.value.description}}</strong> não foi adicionado <br />
             <small>{{ error.message }}</small>
         </p>

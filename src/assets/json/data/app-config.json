@@ -12,11 +12,11 @@
             "displayName": "Solicitações",
             "children": [{
                     "displayName": "Criar",
-                    "route": "/solicitacoes/criar"
+                    "route": "/solicitacao/criar"
                 },
                 {
                     "displayName": "Visualizar",
-                    "route": "/solicitacoes"
+                    "route": "/solicitacao"
                 }
             ]
         },

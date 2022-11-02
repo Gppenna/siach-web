@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="card-container my-4" (click)="openDetails(atividade)" *ngFor="let atividade of dataSource">
+        <div class="card-container my-4" style="cursor: pointer;" (click)="openDetails(atividade)" *ngFor="let atividade of dataSource">
             <div class="d-flex">
                 <div style="padding: 1rem;width: 40%;">
                     <span class="mat-small highlight">Data: {{atividade.periodoInicio | date : 'dd/MM/yyyy'}} - {{atividade.periodoFim | date : 'dd/MM/yyyy'}}</span>

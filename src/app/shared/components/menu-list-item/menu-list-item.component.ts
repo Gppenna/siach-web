@@ -25,11 +25,11 @@ import { AppStateService } from 'src/app/app.state';
   ],
 })
 export class MenuListItemComponent implements OnInit {
-  expanded: boolean = false;
-  @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
-  @Input() item: any;
+  @Input() item: any = {expanded: false};
+  @HostBinding('attr.aria-expanded') ariaExpanded = this.item.expanded;
+  
   @Input() depth: number;
-
+  @Input() parent:any;
 
   constructor(private router: Router, public appStateService: AppStateService) {
     if (this.depth === undefined) {
@@ -47,10 +47,11 @@ export class MenuListItemComponent implements OnInit {
     if(!item.hasOwnProperty('action')) {
       if (!item.children || !item.children.length) {
         this.router.navigate([item.route]);
-        this.expanded = !this.expanded;
+        item.expanded = !item.expanded;
+        this.parent.expanded = !this.parent.expanded;
       }
       else if (item.children && item.children.length) {
-        this.expanded = !this.expanded;
+        item.expanded = !item.expanded;
       }
     }
   }

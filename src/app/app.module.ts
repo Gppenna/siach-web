@@ -31,13 +31,17 @@ import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/d
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
+import { SolicitacaoModule } from './modules/solicitacao/solicitacao.module';
+import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     GrupoSheet,
     AtividadeSheet,
-    DivulgacaoAtividadeSheet
+    DivulgacaoAtividadeSheet,
+    SolicitacaoSheet
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,9 @@ import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MomentModule
+    MomentModule,
+    SolicitacaoModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
