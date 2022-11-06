@@ -18,6 +18,7 @@ export class GuardComponent implements CanActivate {
     this.appStateService.isUserLoggedIn().subscribe((user:any) => {
       console.log(user, 'user');
       if(user.email != null) {
+        this.appStateService.state.userData = user;
         sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, user.email);
         if(
           state.url === '/login' ||

@@ -22,13 +22,15 @@ export class AdminComponent implements OnInit {
     [
       { columnDef: 'numero', header: 'Número' },
       { columnDef: 'descricao',  header: 'Grupo' },
-      { columnDef: 'minimoHoras',  header: 'Máximo de Horas' },
+      { columnDef: 'minimoHoras',  header: 'Carga Horária' },
+      { columnDef: 'edit',  header: '' },
 
     ];
   columnsExpanded =
     [
       { columnDef: 'descricao',  header: 'Atividade' },
       { columnDef: 'minimoHoras',  header: 'Carga Horária' },
+      { columnDef: 'edit',  header: '' },
 
     ];
 
@@ -61,6 +63,36 @@ export class AdminComponent implements OnInit {
 
   execute(type: string, data?: any) {
     return this.appStateService.execute({ type: type, data: data });
+  }
+  
+  editCH() {
+    this.execute('open-bottom-sheet', {
+      type: 'chSheet',
+      data: this.appStateService.state?.userData?.curso,
+      reload: true
+    });
+  }
+
+  editGrupo(element:any) {
+    this.execute('open-bottom-sheet', {
+      type: 'grupoSheet',
+      data: element,
+      backSearch: {
+        func: () => this.loadDependencies(),
+        parameter: {},
+      },
+    });
+  }
+
+  editAtividade(element:any) {
+    this.execute('open-bottom-sheet', {
+      type: 'atividadeSheet',
+      data: element,
+      backSearch: {
+        func: () => this.loadDependencies(),
+        parameter: {},
+      },
+    });
   }
 
   novoGrupo() {

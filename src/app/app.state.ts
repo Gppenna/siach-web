@@ -51,6 +51,7 @@ export class AppStateService {
     userLogged: false,
     ready: false,
     menu: undefined,
+    userData: undefined
   };
   private state$: BehaviorSubject<any> = new BehaviorSubject<any>(
     this.initialState

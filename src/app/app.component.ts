@@ -6,6 +6,7 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AtividadeSheet } from './modules/forms/atividade/atividade';
 import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/divulgacao-atividade';
 import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
+import { ChSheet } from './modules/forms/ch/ch';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ export class AppComponent {
     grupoSheet: GrupoSheet,
     atividadeSheet: AtividadeSheet,
     divulgacaoAtividadeSheet: DivulgacaoAtividadeSheet,
-    solicitacaoSheet: SolicitacaoSheet
+    solicitacaoSheet: SolicitacaoSheet,
+    chSheet: ChSheet
   };
 
   @ViewChild('drawer') drawer: MatSidenav;

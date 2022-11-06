@@ -1,6 +1,6 @@
 <div class="app-page-container-bottomsheet">
     <div class="app-page-bottomsheet-header py-3">
-        <h1>Nova Atividade</h1>
+        <h1>{{new ? 'Nova' : 'Editar'}} Atividade</h1>
     </div>
     <ng-template [ngIf]="!loading && !actionComplete && !error">
         <form [formGroup]="formControl" style="font-size: 16px;">
@@ -28,7 +28,7 @@
             <div class="app-page-bottomsheet-actions">
                 <button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
                 <button class="btn btn-primary-small" [disabled]="!formControl.valid" color="primary" (click)="save(formControl.value)">
-                    Criar
+                    {{new ? 'Criar' : 'Editar'}}
                 </button>
             </div>
         </form>
@@ -40,7 +40,7 @@
     </ng-template>
 
     <ng-template [ngIf]="!loading && actionComplete">
-        <p>Atividade: <strong> {{formControl.value.descricao? formControl.value.descricao : ''}}</strong> foi adicionada com sucesso</p>
+        <p>Atividade: <strong> {{formControl.value.descricao? formControl.value.descricao : ''}}</strong> foi {{new ? 'adicionada' : 'editada'}} com sucesso</p>
         <div class="app-page-bottomsheet-actions">
             <button class="btn btn-primary-small" (click)="onCancel($event)">
                 Ok
@@ -50,7 +50,7 @@
 
     <ng-template [ngIf]="!loading && error">
         <p>Atividade
-            <strong>{{formControl.value.description}}</strong> não foi adicionada <br />
+            <strong>{{formControl.value.description}}</strong> não foi {{new ? 'adicionada' : 'editada'}} <br />
             <small>{{ error.message }}</small>
         </p>
         <div class="app-page-bottomsheet-actions">

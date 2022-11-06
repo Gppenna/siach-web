@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { SolicitacaoViewComponent } from './solicitacao-view/solicitacao-view.component';
+import { SolicitacaoViewDetalheComponent } from './solicitacao-view-detalhe/solicitacao-view-detalhe.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 const routes: Routes = [
@@ -19,16 +22,22 @@ const routes: Routes = [
     path: 'criar',
     component: SolicitacaoComponent,
   },
+  {
+    path: 'detalhe/:id',
+    component: SolicitacaoViewDetalheComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [SolicitacaoComponent, SolicitacaoViewComponent],
+  declarations: [SolicitacaoComponent, SolicitacaoViewComponent, SolicitacaoViewDetalheComponent],
   imports: [
     RouterModule.forChild(routes),
     MatDividerModule,
     CommonModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
+
   ],
   providers: [MatDatepickerModule],
   entryComponents: [SolicitacaoComponent],

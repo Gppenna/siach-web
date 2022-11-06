@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AppStateService } from 'src/app/app.state';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +16,7 @@ export class SolicitacaoViewComponent implements OnInit {
   dataSourcePendente:any[] = [];
   constructor(
     public appStateService: AppStateService,
+    private readonly router: Router,
     public dialog: MatDialog
     ) { }
 
@@ -48,18 +50,28 @@ export class SolicitacaoViewComponent implements OnInit {
   }
 
   openDetails(solicitacao:any) {
-    
+    this.router.navigate(['/solicitacao/detalhe/'+solicitacao.id]);
   }
 
   statusColor(solicitacao:any) {
-    switch(solicitacao.solicitacaoProgressoList[solicitacao.solicitacaoProgressoList.length-1].status.id) {
+    let last = solicitacao.solicitacaoProgressoList[0];
+    solicitacao.solicitacaoProgressoList.forEach((element:any) => {
+      if(element.dataCadastro) {
+        last = element;
+      }
+    });
+    switch(last.status.id) {
       case 1:
+        solicitacao.statusNow = last.status.descricao;
         return 'enviado';
       case 2:
+        solicitacao.statusNow = last.status.descricao;
         return 'analise';
       case 3:
+        solicitacao.statusNow = last.status.descricao;
         return 'finalizado';
       default:
+        solicitacao.statusNow = last.status.descricao;
         return 'enviado';
     }
   }

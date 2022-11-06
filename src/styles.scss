@@ -180,6 +180,94 @@ h4 {
     font-size: 16px;
 }
 
+.chip-large {
+    border-radius: 40px;
+    max-width: 200px;
+    text-align: center;
+    max-height: fit-content;
+    padding: 5px;
+    color: #fff;
+    font-family: "Nunito";
+    font-size: 18px;
+}
+
+.mat-progress-bar {
+    height: 10px!important;
+}
+
+.progress-sphere {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background: #c3def5;
+    position: absolute;
+    z-index: 999;
+}
+
+span.middle {
+    transform: translate(-35%, 0);
+}
+
+span.left {
+    transform: translate(-21%, 0);
+}
+
+span.right {
+    transform: translate(-50%, 0);
+}
+
+.progress-container>span {
+    position: absolute;
+}
+
+span.active {
+    color: #1e88e5;
+}
+
+div.active {
+    background: #1e88e5;
+}
+
+.left {
+    left: 0;
+    top: 25%;
+    transform: translate(0%, -15%);
+}
+
+.middle {
+    left: 50%;
+    top: 25%;
+    transform: translate(-25%, -15%);
+}
+
+.right {
+    left: 99%;
+    top: 25%;
+    transform: translate(-50%, -15%);
+}
+
+.inactive {
+    top: -35px!important;
+    text-align: center;
+    color: #B2B1B1;
+}
+
+.mat-header-cell {
+    font-size: 18px;
+}
+
+.mat-cell,
+.mat-footer-cell {
+    font-size: 16px;
+}
+
+.progress-container {
+    position: relative;
+    width: 40%!important;
+    color: #c3def5;
+    font-size: 16px;
+}
+
 .chip.primary {
     background-color: #5F8ED3;
 }

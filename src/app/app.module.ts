@@ -35,6 +35,7 @@ import { SolicitacaoModule } from './modules/solicitacao/solicitacao.module';
 import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
+import { ChSheet } from './modules/forms/ch/ch';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatIconModule } from '@angular/material/icon';
     GrupoSheet,
     AtividadeSheet,
     DivulgacaoAtividadeSheet,
-    SolicitacaoSheet
+    SolicitacaoSheet,
+    ChSheet
   ],
   imports: [
     BrowserModule,

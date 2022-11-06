@@ -14,6 +14,8 @@ export class AtividadeSheet {
   actionComplete = false;
   formControl: FormGroup;
 
+  new = true;
+
   baremaSelect:any = [];
 
   USER_COURSE_SESSION_ATTRIBUTE = 'authenticatedUserCourse';
@@ -65,10 +67,14 @@ export class AtividadeSheet {
   }
 
   initFormControl(data?: any) {
+    if(data) {
+      this.new = false;
+    }
     this.formControl = this.formBuilder.group({
-      descricao: '',
-      minimoHoras: '',
-      idGrupoBarema : ''
+      id: data? data.id : '',
+      descricao: data? data.descricao : '',
+      minimoHoras: data? data.minimoHoras : '',
+      idGrupoBarema : data? data.idGrupoBarema.toString() : ''
     });
     console.log(this.formControl);
   }
