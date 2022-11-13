@@ -2,6 +2,8 @@ import { environment } from './../../../environments/environment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { AppStateService } from 'src/app/app.state';
+import { MatDialog } from '@angular/material/dialog';
+import { AdminModalComponent } from './admin-modal/admin-modal.component';
 
 @Component({
   selector: 'app-admin',
@@ -31,7 +33,7 @@ export class AdminComponent implements OnInit {
       { columnDef: 'descricao',  header: 'Atividade' },
       { columnDef: 'minimoHoras',  header: 'Carga Horária' },
       { columnDef: 'edit',  header: '' },
-
+      { columnDef: 'delete',  header: '' },
     ];
 
   columnsExpandedToDisplay:any = undefined;
@@ -40,7 +42,7 @@ export class AdminComponent implements OnInit {
   columnsToDisplayWithExpand:any = undefined;
   expandedElement: any | null;
 
-  constructor(public appStateService: AppStateService) { }
+  constructor(public appStateService: AppStateService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.columnsExpandedToDisplay = this.columnsExpanded? this.columnsExpanded.map(c => c.columnDef) : null;
@@ -92,6 +94,19 @@ export class AdminComponent implements OnInit {
         func: () => this.loadDependencies(),
         parameter: {},
       },
+    });
+  }
+
+  deleteAtividade(element:any) {
+    const dialogRef = this.dialog.open(AdminModalComponent, {
+      width: '879px',
+      backdropClass: 'blurBackground',
+      data: {
+        dataSource: element
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 

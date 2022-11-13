@@ -36,6 +36,8 @@ import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { ChSheet } from './modules/forms/ch/ch';
+import { PerfilModule } from './modules/perfil/perfil.module';
+import { PerfilComponent } from './modules/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,8 @@ import { ChSheet } from './modules/forms/ch/ch';
     MomentModule,
     SolicitacaoModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    PerfilModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

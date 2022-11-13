@@ -1,0 +1,45 @@
+<section class="d-flex flex-column mt-5">
+    <div>
+        <div>
+            <div>
+                <h1>Seu Perfil</h1>
+            </div>
+            <div class="d-grid p-5" style="grid-template-columns: 30% 70%;">
+                <div class="m-auto">
+                    <div>
+                        <img style="width: 150px;" src="../../../../assets/images/enzo.jpg" alt="Avatar de Perfil">
+                    </div>
+
+                    <h2 class="nunito text-center mt-3" style="font-weight: 500; color: #000">{{userData.nome}}</h2>
+                </div>
+                <div class="row userCard m-3" *ngIf="userData">
+                    <div class="col d-flex flex-column nunito justify-content-around">
+                        <div class="row">
+                            <span class="col-4 strong">Nome:</span>
+                            <span class="col-6">{{userData.nome}}</span>
+                        </div>
+                        <div class="row">
+                            <span class="col-4 strong">Curso:</span>
+                            <span class="col-6">{{userData.curso.descricao}}</span>
+                        </div>
+                    </div>
+                    <div class="col d-flex flex-column gap-3 nunito justify-content-around">
+                        <div class="row">
+                            <span class="col-4 strong">Matrícula:</span>
+                            <span class="col-6">{{userData.matricula}}</span>
+                        </div>
+                        <div class="row">
+                            <span class="col-4 strong">E-mail:</span>
+                            <span class="col-6">{{userData.email}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h1>Suas Horas</h1>
+            </div>
+        </div>
+
+    </div>
+
+</section>

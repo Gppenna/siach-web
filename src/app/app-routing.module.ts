@@ -17,6 +17,14 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'perfil',
+    canActivate: [GuardComponent],
+    loadChildren: () =>
+      import('./modules/perfil/perfil.module').then(
+        (m) => m.PerfilModule
+      ),
+  },
+  {
     path: 'admin',
     canActivate: [GuardComponent],
     loadChildren: () =>

@@ -447,6 +447,12 @@ pre {
     font-size: 16px;
 }
 
+.userCard {
+    background: #F1F1F1;
+    border-radius: 30px;
+    padding: 1rem 2rem;
+}
+
 .mat-dialog-container {
     max-height: 90vh!important;
 }
@@ -651,6 +657,8 @@ pre {
     }
     .userCard {
         background-color: rgb(31, 31, 31)!important;
+        padding: 2rem;
+        border-radius: 30px;
     }
     mat-icon {
         color: #fff!important;
