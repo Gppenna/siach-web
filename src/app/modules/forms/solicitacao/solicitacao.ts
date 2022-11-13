@@ -23,7 +23,7 @@ export class SolicitacaoSheet {
   actualFile:any = undefined;
 
   baremaSelect:any = [];
-
+  USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
   @Output()
   initialize = new EventEmitter<any>();
   @Output()
@@ -68,6 +68,7 @@ export class SolicitacaoSheet {
     objFormData.append('idAtividadeBarema', this.formControl.get('idAtividadeBarema')?.value);
     objFormData.append('comprovante', this.fileData);
     objFormData.append('comprovanteNome', this.fileData.name);
+    objFormData.append('email', sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE))
     if(this.formControl.get('id')?.value) {
       objFormData.append('id', this.formControl.get('id')?.value);
     }
