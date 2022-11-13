@@ -25,11 +25,7 @@ export class SolicitacaoComponent implements OnInit {
   }
 
   loadDependencies() {
-    const request = {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: 'logged-user'};
-    this.execute('http-request', request).subscribe((response:any) => {
+    this.appStateService.isUserLoggedIn().subscribe((response:any) => {
       this.userData = response;
     });
 

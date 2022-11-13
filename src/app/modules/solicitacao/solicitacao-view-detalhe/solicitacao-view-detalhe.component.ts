@@ -49,11 +49,7 @@ export class SolicitacaoViewDetalheComponent {
       this.loadProgress(response);
     })
 
-    const requestUser = {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: 'logged-user'};
-    this.execute('http-request', requestUser).subscribe((response:any) => {
+    this.appStateService.isUserLoggedIn().subscribe((response:any) => {
       this.userData = response;
     });
 

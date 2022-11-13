@@ -134,21 +134,19 @@ export class AppStateService {
     }));
   }
 
-  private getUserInfo(name:any) {
-    this.httpRequest({type: 'GET', api: environment.apiUrl, path: 'user', query: `name=${name}` }).subscribe((request:any) => {
-      this.setState({
-        user: request
-      });
-      sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, request.nome);
-      sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.idCurso);
-    })
+  private getUserInfo(name:any): Observable<any> {
+    return this.httpRequest({type: 'GET', api: environment.apiUrl, path: 'user', query: `name=${name}` });
   }
 
   private login(credentials:any): Observable<any> {
     return of(this.authenticationService.authenticate(credentials).subscribe((response:any) => {
-      console.log("autenticado?", response, this.router);
-
-      this.getUserInfo(response.name);
+      this.getUserInfo(response.name).subscribe((request:any) => {
+        this.setState({
+          user: request
+        });
+        sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, request.nome);
+        sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.idCurso);
+      });
       if(this.router.url === '/login') {
         this.router.navigate(['/inicio']);
       }
@@ -170,11 +168,7 @@ export class AppStateService {
   }
 
   isUserLoggedIn(): Observable<any> {
-    const request = {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: 'logged-user'};
-    return this.execute({ type: 'http-request', data: request });
+    return this.getUserInfo(sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE));
   }
 
   private initialize(): Observable<any> {
