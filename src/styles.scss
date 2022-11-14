@@ -447,10 +447,69 @@ pre {
     font-size: 16px;
 }
 
+.perfil-nome {
+    font-weight: 500!important;
+    color: #000;
+}
+
 .userCard {
     background: #F1F1F1;
     border-radius: 30px;
     padding: 1rem 2rem;
+}
+
+.progresso-barra {
+    color: #5F8ED3;
+    font-size: 16px
+}
+
+.sphere-progress {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    z-index: 1;
+}
+
+.sphere-progress-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: fit-content;
+    gap: 1rem;
+}
+
+.mat-progress-bar-fill::after {
+    background-color: #5F8ED3!important;
+    border-radius: 30px;
+}
+
+.mat-progress-bar-buffer {
+    background-color: #C4C4C4;
+}
+
+.sphere-progress-center {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 100%;
+    z-index: 2;
+    background: #fff;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #5F8ED3;
+}
+
+.w-47 {
+    width: 47%;
+}
+
+.mat-progress-bar {
+    border-radius: 30px;
 }
 
 .mat-dialog-container {
@@ -671,5 +730,15 @@ pre {
     }
     .mat-simple-snack-bar-content {
         color: #fff;
+    }
+    .progresso-barra {
+        color: rgb(157, 179, 225)!important;
+    }
+    .sphere-progress-center {
+        background: rgb(31, 31, 31);
+    }
+    .perfil-nome {
+        font-weight: 500!important;
+        color: var(--bs-body-color-heading-night-eye);
     }
 }

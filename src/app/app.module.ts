@@ -38,6 +38,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ChSheet } from './modules/forms/ch/ch';
 import { PerfilModule } from './modules/perfil/perfil.module';
 import { PerfilComponent } from './modules/perfil/perfil.component';
+import { BarraProgressoComponent } from './modules/barra-progresso/barra-progresso.component';
+ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,7 @@ import { PerfilComponent } from './modules/perfil/perfil.component';
     AtividadeSheet,
     DivulgacaoAtividadeSheet,
     SolicitacaoSheet,
-    ChSheet
+    ChSheet,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { PerfilComponent } from './modules/perfil/perfil.component';
     SolicitacaoModule,
     MatTooltipModule,
     MatIconModule,
-    PerfilModule
+    PerfilModule,
+    MatProgressBarModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

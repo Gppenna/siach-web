@@ -1,0 +1,17 @@
+<ng-template [ngIf]="dataSource">
+    <div *ngFor="let atividade of dataSource | keyvalue">
+        <span class="nunito">{{$any(atividade.value).descricao}}</span>
+        <div class="progresso-barra">
+            <div class="position-relative">
+                <mat-progress-bar aria-label="Barra de progresso" mode="determinate" [value]="100*$any(atividade.value).horasContabilizadas/$any(atividade.value).horasLimite">
+                </mat-progress-bar>
+                <div class="position-absolute nunito" [ngStyle]="{'left': (100*$any(atividade.value).horasContabilizadas/$any(atividade.value).horasLimite)+'%'}">
+                    {{(100*$any(atividade.value).horasContabilizadas/$any(atividade.value).horasLimite).toPrecision(3)}}%
+                </div>
+            </div>
+            <div class="nunito">{{$any(atividade.value).horasLimite}}h</div>
+        </div>
+
+
+    </div>
+</ng-template>

@@ -10,11 +10,13 @@ import { environment } from 'src/environments/environment';
 export class PerfilComponent implements OnInit {
 
   dataSource:any[] = [];
-  userData:any;
+
+  totalHoras = 0;
 
   constructor( public appStateService: AppStateService) { }
 
   ngOnInit(): void {
+    
     this.loadDependencies();
   }
 
@@ -25,13 +27,30 @@ export class PerfilComponent implements OnInit {
       path: 'solicitacao/table/finalizado'};
     this.execute('http-request', request).subscribe((response:any) => {
       this.dataSource = response;
-      this.userData = this.appStateService.state.userData;
+      this.totalHorasCalc(response);
       console.log(this.dataSource, this.userData, 'AAAAA');
     })
   }
 
+  totalHorasCalc(response:any) {
+    let totalHoras = 0;
+    response.forEach((element:any) => {
+      Object.keys(element.perfilGrupo).forEach((key, index) => {
+        totalHoras += element.perfilGrupo[key].horasContabilizadas;
+      })
+      
+    });
+    this.totalHoras = totalHoras;
+
+    console.log(this.totalHoras, 'hrs', this.appStateService.state)
+  }
+
   execute(type: string, data?: any) {
     return this.appStateService.execute({ type: type, data: data });
+  }
+  
+  get userData() {
+    return this.appStateService.state.userData;
   }
 
 }

@@ -1,3 +1,4 @@
+import { SharedModule } from './../../shared/shared.module';
 import { PerfilComponent } from './perfil.component';
 
 import { NgModule } from '@angular/core';
@@ -7,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-
+import { BarraProgressoComponent } from '../barra-progresso/barra-progresso.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     MatDividerModule,
     CommonModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    SharedModule
   ],
   providers: [MatDatepickerModule],
   entryComponents: [PerfilComponent],
