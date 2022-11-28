@@ -15,12 +15,12 @@
                     <div class="app-page-bottomsheet-content">
                         <mat-form-field class="app-page-form-full" appearance="outline">
                             <mat-label>Carga Horária</mat-label>
-                            <input matInput required="true" type="number" formControlName="horas" />
+                            <input matInput (change)="changeCh()" required="true" type="number" formControlName="horas" />
                         </mat-form-field>
                     </div>
                     <mat-form-field class="app-page-form-full" appearance="outline">
                         <mat-label>Atividade Associada</mat-label>
-                        <mat-select formControlName="idAtividadeBarema">
+                        <mat-select formControlName="idAtividadeBarema" (selectionChange)="totalLocalCalc($event)">
                             <mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.id}}" [title]="item.descricao">
                                 {{item.descricao}}
                             </mat-option>
@@ -43,8 +43,28 @@
                 </form>
             </div>
 
-            <div class="col-4 solicitacaoHoras">
-                <h2 style="font-weight: 500; text-align:center;">Suas Horas Totais</h2>
+            <div class="col-4 solicitacaoHoras mx-auto d-flex flex-column justify-content-between">
+                <div>
+                    <h2 style="font-weight: 500; text-align:center;">Suas Horas Totais</h2>
+                    <div>
+                        <div class="sphere-progress-container mx-auto">
+                            <span class="nunito">Total</span>
+                            <div style="zoom:0.8" class="sphere-progress" [ngStyle]="{'background': 'conic-gradient(#5FD3B1 calc(('+(100*(addHoras+totalHorasCalc())/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), #D3DCE9 calc(('+(100*(addHoras+totalHorasCalc())/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1% + 0.3%))'}">
+                                <div class="sphere-progress" [ngStyle]="{'background': 'conic-gradient(#2B468B calc(('+(100*totalHorasCalc()/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), transparent calc(('+(100*totalHorasCalc()/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1% + 0.3%))'}">
+                                    <div class="sphere-progress-center translate-middle">
+                                        <span style="font-size: 24px;" class="mb-2">{{(100*totalHorasCalc()/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span>
+                                        <span class="nunito" style="font-size: 16px;">{{totalHorasCalc()}}h  /  {{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div *ngFor="let data of totalLocal" class="pb-5 py-3" style="zoom:0.9">
+                            <app-barra-progresso [dataSource]="data.perfilAtividadeList"></app-barra-progresso>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="app-page-bottomsheet-actions">
                     <button class="btn btn-primary-small" [disabled]="!formControl.valid || !fileData" color="primary" (click)="save()">
                         {{new ? 'Criar' : 'Editar'}}

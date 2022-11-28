@@ -10,7 +10,7 @@
                         <img style="width: 150px;" src="../../../../assets/images/enzo.jpg" alt="Avatar de Perfil">
                     </div>
 
-                    <h2 class="nunito text-center mt-3 perfil-nome" style="">{{userData.nome}}</h2>
+                    <h2 class="nunito text-center mt-3 perfil-nome">{{userData.nome}}</h2>
                 </div>
                 <div class="row userCard m-3">
                     <div class="col d-flex flex-column nunito justify-content-around">
@@ -40,16 +40,16 @@
                 <div class="d-grid" style="grid-template-columns: 23% 77%;">
                     <div class="sphere-progress-container">
                         <span class="nunito">Total</span>
-                        <div class="sphere-progress" [ngStyle]="{'background': 'conic-gradient(#2B468B calc(('+(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), #D3DCE9 0)'}">
+                        <div class="sphere-progress" [ngStyle]="{'background': 'conic-gradient(#2B468B calc(('+(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), #D3DCE9 calc(('+(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1% + 0.3%))'}">
                             <div class="sphere-progress-center translate-middle">
                                 <span style="font-size: 24px;" class="mb-2">{{(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span>
                                 <span class="nunito" style="font-size: 16px;">{{totalHoras}}h  /  {{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span>
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <div *ngFor="let data of dataSource" class="py-3 w-47">
-                            <app-barra-progresso [dataSource]="data.perfilGrupo"></app-barra-progresso>
+                    <div class="d-grid justify-content-between" style="grid-template-columns: 45% 50%;">
+                        <div *ngFor="let data of dataSource" class="py-3">
+                            <app-barra-progresso [dataSource]="data.perfilGrupo" [dataSourceSecondary]="data.perfilAtividadeList"></app-barra-progresso>
                         </div>
                     </div>
                 </div>

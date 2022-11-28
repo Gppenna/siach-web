@@ -1,0 +1,11 @@
+<section class="d-flex flex-column">
+    <div class="d-flex justify-content-between">
+        <h2 style="font-weight: 500;">Atividades: {{header}}</h2>
+        <div class="d-flex justify-content-end">
+            <mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
+        </div>
+    </div>
+
+    <mat-divider></mat-divider>
+    <app-barra-progresso class="d-flex gap-3 flex-column m-auto py-3" [dataSource]="dataSource" style="width: 95%;"></app-barra-progresso>
+</section>

@@ -33,7 +33,7 @@ export class AtividadesComponent implements OnInit {
         element.imagem = 'data:image/jpg;base64,' + element.imagem;
       });
       this.dataSource = response;
-    })
+    });
   }
 
   execute(type: string, data?: any) {

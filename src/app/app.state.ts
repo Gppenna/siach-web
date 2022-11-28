@@ -145,7 +145,7 @@ export class AppStateService {
           user: request
         });
         sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, request.nome);
-        sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.idCurso);
+        sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.curso.id);
       });
       if(this.router.url === '/login') {
         this.router.navigate(['/inicio']);

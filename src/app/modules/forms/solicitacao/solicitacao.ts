@@ -31,12 +31,17 @@ export class SolicitacaoSheet {
   @Output()
   cancel = new EventEmitter<any>();
   itenData: any;
+
+  totalLocal:any;
   
   fileData: any;
+
+  addHoras = 0;
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<SolicitacaoSheet>,
     private formBuilder: FormBuilder,
+    public appStateService: AppStateService,
     private readonly snackBar: MatSnackBar,
   ) {}
 
@@ -45,10 +50,45 @@ export class SolicitacaoSheet {
       type: 'GET',
       api: environment.apiUrl,
       path: 'atividade-barema/table'
+    },
+    totalHorasDependency: {
+      type: 'GET',
+      api: environment.apiUrl,
+      path: 'solicitacao/table/finalizado'
     }
   };
 
   dependenciesData: any;
+
+  totalHorasCalc() {
+    let totalHoras = 0;
+    this.dependenciesData.totalHorasDependency.forEach((element:any) => {
+      Object.keys(element.perfilGrupo).forEach((key, index) => {
+        totalHoras += element.perfilGrupo[key].horasContabilizadas;
+      })
+      
+    });
+    return totalHoras;
+  }
+
+  changeCh() {
+    this.addHoras = this.formControl.value.horas;
+  }
+
+  totalLocalCalc(data:any) {
+    console.log(data)
+    const request = {
+      type: 'GET',
+      api: environment.apiUrl,
+      path: `solicitacao/table/finalizado/${data.value}`};
+    this.execute('http-request', request).subscribe((response:any) => {
+      this.totalLocal = response;
+    })
+  }
+
+  execute(type: string, data?: any) {
+    return this.appStateService.execute({ type: type, data: data });
+  }
 
   onConnectedToParent() {
     this.initialize.emit();

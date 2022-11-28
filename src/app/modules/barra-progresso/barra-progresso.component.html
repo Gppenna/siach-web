@@ -1,6 +1,6 @@
 <ng-template [ngIf]="dataSource">
     <div *ngFor="let atividade of dataSource | keyvalue">
-        <span class="nunito">{{$any(atividade.value).descricao}}</span>
+        <span class="nunito d-flex gap-2">{{$any(atividade.value).descricao}} <mat-icon *ngIf="dataSourceSecondary" class="cursor-pointer" (click)="openGrupo(dataSourceSecondary)">search</mat-icon></span>
         <div class="progresso-barra">
             <div class="position-relative">
                 <mat-progress-bar aria-label="Barra de progresso" mode="determinate" [value]="100*$any(atividade.value).horasContabilizadas/$any(atividade.value).horasLimite">
