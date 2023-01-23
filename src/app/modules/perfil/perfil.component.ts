@@ -24,7 +24,7 @@ export class PerfilComponent implements OnInit {
     const request = {
       type: 'GET',
       api: environment.apiUrl,
-      path: 'solicitacao/table/finalizado'};
+      path: 'solicitacao/perfil/finalizado'};
     this.execute('http-request', request).subscribe((response:any) => {
       this.dataSource = response;
       this.totalHorasCalc(response);

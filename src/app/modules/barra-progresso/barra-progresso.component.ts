@@ -11,6 +11,9 @@ export class BarraProgressoComponent implements OnInit {
 
   @Input()
   dataSource:any = undefined;
+  
+  @Input()
+  adicional = 0;
 
   @Input()
   dataSourceSecondary:any = undefined;

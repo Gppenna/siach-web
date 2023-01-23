@@ -1,5 +1,5 @@
 import { environment } from '../../../../environments/environment';
-import { Component, EventEmitter, Output, ViewChild, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppStateService } from 'src/app/app.state';
@@ -20,6 +20,7 @@ export class SolicitacaoSheet {
   formControl: FormGroup;
   new = true;
 
+  stopFlag = false;
   actualFile:any = undefined;
 
   baremaSelect:any = [];
@@ -32,11 +33,20 @@ export class SolicitacaoSheet {
   cancel = new EventEmitter<any>();
   itenData: any;
 
-  totalLocal:any;
+  totalLocalFinalizado:any;
+  totalLocalRascunho:any;
   
   fileData: any;
 
+  subHorasRascunho = 0;
+
   addHoras = 0;
+  addHorasRascunho = 0;
+  addHorasFlag = false;
+
+  totalHoras = 0;
+  totalHorasRascunho = 0;
+  exectotalHorasCalc = true;
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<SolicitacaoSheet>,
@@ -54,36 +64,114 @@ export class SolicitacaoSheet {
     totalHorasDependency: {
       type: 'GET',
       api: environment.apiUrl,
-      path: 'solicitacao/table/finalizado'
+      path: 'solicitacao/perfil/finalizado'
+    },
+    totalHorasRascunhoDependency: {
+      type: 'GET',
+      api: environment.apiUrl,
+      path: 'solicitacao/perfil/rascunho'
     }
   };
 
   dependenciesData: any;
 
   totalHorasCalc() {
-    let totalHoras = 0;
-    this.dependenciesData.totalHorasDependency.forEach((element:any) => {
-      Object.keys(element.perfilGrupo).forEach((key, index) => {
-        totalHoras += element.perfilGrupo[key].horasContabilizadas;
-      })
-      
-    });
-    return totalHoras;
+    if(this.exectotalHorasCalc) {
+      this.dependenciesData.totalHorasDependency.forEach((element:any) => {
+        Object.keys(element.perfilGrupo).forEach((key, index) => {
+          this.totalHoras += element.perfilGrupo[key].horasContabilizadas;
+        })
+        
+      });
+      this.dependenciesData.totalHorasRascunhoDependency.forEach((element:any) => {
+        Object.keys(element.perfilGrupo).forEach((key, index) => {
+          this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadas;
+          this.addHorasFlag = true;
+        })
+        
+      });
+      this.exectotalHorasCalc = false;
+      console.log(this.totalHoras, this.totalHorasRascunho , 'horas')
+    }
+    
+  }
+
+  getHorasContabilizadas() {
+    let horasContabilizadas = 0;
+    let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+    horasContabilizadas += atividadeFinalizado.horasContabilizadas;
+    if(this.totalLocalRascunho) {
+      let atividadeRascunho = this.totalLocalRascunho[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+      horasContabilizadas += atividadeRascunho.horasContabilizadas;
+    }
+    return horasContabilizadas;
+  }
+  
+  getHoraLimite() {
+    let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+    return atividadeFinalizado.horasLimite;
   }
 
   changeCh() {
-    this.addHoras = this.formControl.value.horas;
+    console.log(this.getHorasContabilizadas(), 'horascontabilizadas')
+    if((this.getHorasContabilizadas() + this.formControl.value.horas - this.subHorasRascunho) <= this.getHoraLimite()) {
+      this.addHoras = this.formControl.value.horas;
+      console.log(this.addHoras, 'addhoras')
+    }
+    else {
+      this.addHoras = this.getHoraLimite() - this.getHorasContabilizadas() + this.subHorasRascunho;
+    }
+  }
+
+  horasRestantes() {
+    if(this.totalLocalFinalizado) {
+      let horasRestantes = 0;
+      let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+      horasRestantes += atividadeFinalizado.horasContabilizadas;
+      if(this.totalLocalRascunho) {
+        let atividadeRascunho = this.totalLocalRascunho[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+        horasRestantes += atividadeRascunho.horasContabilizadas;
+      }
+
+      return atividadeFinalizado.horasLimite - horasRestantes + this.subHorasRascunho;
+    }
+    return 0;
   }
 
   totalLocalCalc(data:any) {
-    console.log(data)
     const request = {
       type: 'GET',
       api: environment.apiUrl,
-      path: `solicitacao/table/finalizado/${data.value}`};
-    this.execute('http-request', request).subscribe((response:any) => {
-      this.totalLocal = response;
-    })
+      path: `solicitacao/perfil/finalizado/${data}`};
+    this.execute('http-request', request).subscribe((responseFinalizado:any) => {
+      this.totalLocalFinalizado = responseFinalizado;
+      this.stopFlag = false;
+      this.addHoras = 0;
+      this.addHorasRascunho = 0;
+
+      const requestRascunho = {
+        type: 'GET',
+        api: environment.apiUrl,
+        path: `solicitacao/perfil/rascunho/${data}`};
+      this.execute('http-request', requestRascunho).subscribe((responseRascunho:any) => {
+        this.totalLocalRascunho = responseRascunho;
+        this.checkLimiteHoras();
+        this.changeCh();
+        this.addHorasRascunho = this.totalLocalRascunho[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema].horasContabilizadas;
+        console.log(this.addHoras, this.addHorasRascunho, "adds");
+      });
+    });
+  }
+
+  checkLimiteHoras() {
+    if(this.getHorasContabilizadas() === this.getHoraLimite() && this.new) {
+      this.stopFlag = true;
+      this.snackBar.open('Você já aproveitou todas as horas possíveis a esta atividade!', 'Ok', {
+        duration: 6000,
+        panelClass: ['red-snackbar']
+      });
+    }
+    
   }
 
   execute(type: string, data?: any) {
@@ -124,26 +212,6 @@ export class SolicitacaoSheet {
     this.httpRequest.emit(request);
   }
 
-  initFormControl(data?: any) {
-    console.log(data, "data");
-    this.formControl = this.formBuilder.group({
-      id: data? data.id : '',
-      titulo: data? data.titulo : '',
-      horas: data? data.horas : '',
-      idAtividadeBarema : data? data.atividadeBarema.id.toString() : '',
-    });
-    if(data) {
-      this.new = false;
-      fetch("data:application/pdf;base64," + data.comprovante)
-      .then(function(resp) {return resp.blob()})
-      .then((blob) => {
-        this.actualFile = {file: blob, name: data.comprovanteNome};
-        this.fileData = new File([blob], data.comprovanteNome, {type:"application/pdf"});
-      });
-    }
-    console.log(this.formControl);
-  }
-
   downloadActual() {
     FileSaver.saveAs(this.actualFile.file, this.actualFile.name);
   }
@@ -172,6 +240,27 @@ export class SolicitacaoSheet {
         panelClass: ['red-snackbar']
       });
       return;
+    }
+  }
+
+  initFormControl(data?: any) {
+    console.log(data, "data");
+    this.formControl = this.formBuilder.group({
+      id: data? data.id : '',
+      titulo: data? data.titulo : '',
+      horas: data? data.horas : '',
+      idAtividadeBarema : data? data.atividadeBarema.id.toString() : '',
+    });
+    if(data) {
+      this.totalLocalCalc(data.atividadeBarema.id);
+      this.subHorasRascunho = data.horas;
+      this.new = false;
+      fetch("data:application/pdf;base64," + data.comprovante)
+      .then(function(resp) {return resp.blob()})
+      .then((blob) => {
+        this.actualFile = {file: blob, name: data.comprovanteNome};
+        this.fileData = new File([blob], data.comprovanteNome, {type:"application/pdf"});
+      });
     }
   }
 }
