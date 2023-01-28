@@ -21,6 +21,7 @@ export class SolicitacaoSheet {
   new = true;
 
   stopFlag = false;
+  stopFlagExceed = false;
   actualFile:any = undefined;
 
   baremaSelect:any = [];
@@ -124,6 +125,9 @@ export class SolicitacaoSheet {
   }
 
   horasRestantes() {
+    if(this.formControl.value.coringaFlag) {
+      return this.getHoraLimite();
+    }
     if(this.totalLocalFinalizado) {
       let horasRestantes = 0;
       let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
@@ -194,6 +198,9 @@ export class SolicitacaoSheet {
     objFormData.append('titulo', this.formControl.get('titulo')?.value);
     objFormData.append('horas', this.formControl.get('horas')?.value);
     objFormData.append('idAtividadeBarema', this.formControl.get('idAtividadeBarema')?.value);
+    if(this.formControl.get('coringaFlag')?.value) {
+      objFormData.append('statusInterno', 'E');
+    }
     objFormData.append('comprovante', this.fileData);
     objFormData.append('comprovanteNome', this.fileData.name);
     objFormData.append('email', sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE))
@@ -249,11 +256,17 @@ export class SolicitacaoSheet {
       id: data? data.id : '',
       titulo: data? data.titulo : '',
       horas: data? data.horas : '',
+      coringaFlag: data? (data.statusInterno === "E" ? true : false) : false,
       idAtividadeBarema : data? data.atividadeBarema.id.toString() : '',
     });
     if(data) {
       this.totalLocalCalc(data.atividadeBarema.id);
-      this.subHorasRascunho = data.horas;
+      if(data.statusInterno !== "E") {
+        this.subHorasRascunho = data.horas;
+      }
+      else {
+        this.stopFlagExceed = true;
+      }
       this.new = false;
       fetch("data:application/pdf;base64," + data.comprovante)
       .then(function(resp) {return resp.blob()})

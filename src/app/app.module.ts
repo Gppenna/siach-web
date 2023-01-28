@@ -40,6 +40,7 @@ import { PerfilModule } from './modules/perfil/perfil.module';
 import { PerfilComponent } from './modules/perfil/perfil.component';
 import { BarraProgressoComponent } from './modules/barra-progresso/barra-progresso.component';
  import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { BarraProgressoComponent } from './modules/barra-progresso/barra-progres
     MatTooltipModule,
     MatIconModule,
     PerfilModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

@@ -21,18 +21,30 @@
                         </mat-select>
                     </mat-form-field>
                     <div class="app-page-bottomsheet-content">
-                        <span *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag)" class="sucessColor">Você ainda possui até {{horasRestantes()}} horas restantes para aproveitar na atividade selecionada.</span>
-                        <span *ngIf="(stopFlag)" class="warnColor">Você não possui horas restantes para aproveitar na atividade selecionada.</span>
-                        <mat-form-field class="app-page-form-full" appearance="outline" [ngClass]="formControl.value.idAtividadeBarema === '' || stopFlag? 'field-blocked' : ''">
+                        <span *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" class="sucessColor">Você ainda possui até {{horasRestantes()}} horas restantes para aproveitar na atividade selecionada.</span>
+                        <ng-template [ngIf]="stopFlag || stopFlagExceed">
+                            <div class="d-flex flex-column" style="margin-bottom: 1rem;">
+                                <span class="warnColor w-100">Você não possui horas restantes para aproveitar na atividade selecionada.</span>
+                                <div class="w-100"> 
+                                    <span class="warnColor" style="margin-right: 1rem;">Deseja seguir com a solicitação apenas para contar no histórico?</span>
+                                    <mat-checkbox formControlName="coringaFlag">
+                                    </mat-checkbox>
+                                </div>
+                                
+                            </div>
+                            
+                        </ng-template>
+                        
+                        <mat-form-field class="app-page-form-full" appearance="outline" [ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''">
                             <mat-label>Carga Horária</mat-label>
-                            <input matInput [min]="0" [max]="horasRestantes()" [readonly]="formControl.value.idAtividadeBarema === '' || stopFlag" (change)="changeCh()" required="true" type="number" formControlName="horas" />
+                            <input matInput [min]="0" [max]="horasRestantes()" [readonly]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)" (change)="changeCh()" required="true" type="number" formControlName="horas" />
                         </mat-form-field>
                     </div>
 
                     <div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
                         <mat-label style="font-size: 20px;" class="nunito mb-3">Seu Certificado</mat-label>
 
-                        <div class="mb-3" [ngClass]="formControl.value.idAtividadeBarema === '' || stopFlag? 'field-blocked' : ''">
+                        <div class="mb-3" [ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''">
                             <label for="file" class="btn-primary-download">Escolher Arquivo</label>
                             <input id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none;" />
                         </div>
