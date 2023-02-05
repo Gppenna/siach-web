@@ -34,15 +34,13 @@ export class SolicitacaoSheet {
   cancel = new EventEmitter<any>();
   itenData: any;
 
-  totalLocalFinalizado:any;
-  totalLocalRascunho:any;
+  totalLocal:any;
   
   fileData: any;
 
   subHorasRascunho = 0;
 
   addHoras = 0;
-  addHorasRascunho = 0;
   addHorasFlag = false;
 
   totalHoras = 0;
@@ -65,12 +63,7 @@ export class SolicitacaoSheet {
     totalHorasDependency: {
       type: 'GET',
       api: environment.apiUrl,
-      path: 'solicitacao/perfil/finalizado'
-    },
-    totalHorasRascunhoDependency: {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: 'solicitacao/perfil/rascunho'
+      path: 'perfil'
     }
   };
 
@@ -78,19 +71,19 @@ export class SolicitacaoSheet {
 
   totalHorasCalc() {
     if(this.exectotalHorasCalc) {
+
       this.dependenciesData.totalHorasDependency.forEach((element:any) => {
         Object.keys(element.perfilGrupo).forEach((key, index) => {
           this.totalHoras += element.perfilGrupo[key].horasContabilizadas;
-        })
-        
-      });
-      this.dependenciesData.totalHorasRascunhoDependency.forEach((element:any) => {
-        Object.keys(element.perfilGrupo).forEach((key, index) => {
-          this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadas;
+  
+          this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadasRascunho;
+        });
+        if (this.totalHorasRascunho > 0) {
           this.addHorasFlag = true;
-        })
+        }
         
       });
+
       this.exectotalHorasCalc = false;
       console.log(this.totalHoras, this.totalHorasRascunho , 'horas')
     }
@@ -99,22 +92,18 @@ export class SolicitacaoSheet {
 
   getHorasContabilizadas() {
     let horasContabilizadas = 0;
-    let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-    horasContabilizadas += atividadeFinalizado.horasContabilizadas;
-    if(this.totalLocalRascunho) {
-      let atividadeRascunho = this.totalLocalRascunho[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-      horasContabilizadas += atividadeRascunho.horasContabilizadas;
-    }
+    let atividade = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+    horasContabilizadas += atividade.horasContabilizadas + atividade.horasContabilizadasRascunho;
+
     return horasContabilizadas;
   }
   
   getHoraLimite() {
-    let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+    let atividadeFinalizado = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
     return atividadeFinalizado.horasLimite;
   }
 
   changeCh() {
-    console.log(this.getHorasContabilizadas(), 'horascontabilizadas')
     if((this.getHorasContabilizadas() + this.formControl.value.horas - this.subHorasRascunho) <= this.getHoraLimite()) {
       this.addHoras = this.formControl.value.horas;
       console.log(this.addHoras, 'addhoras')
@@ -128,16 +117,12 @@ export class SolicitacaoSheet {
     if(this.formControl.value.coringaFlag) {
       return this.getHoraLimite();
     }
-    if(this.totalLocalFinalizado) {
+    if(this.totalLocal) {
       let horasRestantes = 0;
-      let atividadeFinalizado = this.totalLocalFinalizado[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-      horasRestantes += atividadeFinalizado.horasContabilizadas;
-      if(this.totalLocalRascunho) {
-        let atividadeRascunho = this.totalLocalRascunho[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-        horasRestantes += atividadeRascunho.horasContabilizadas;
-      }
+      let atividade = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+      horasRestantes += atividade.horasContabilizadas + atividade.horasContabilizadasRascunho;
 
-      return atividadeFinalizado.horasLimite - horasRestantes + this.subHorasRascunho;
+      return atividade.horasLimite - horasRestantes + this.subHorasRascunho;
     }
     return 0;
   }
@@ -146,28 +131,18 @@ export class SolicitacaoSheet {
     const request = {
       type: 'GET',
       api: environment.apiUrl,
-      path: `solicitacao/perfil/finalizado/${data}`};
-    this.execute('http-request', request).subscribe((responseFinalizado:any) => {
-      this.totalLocalFinalizado = responseFinalizado;
+      path: `perfil/${data}`};
+    this.execute('http-request', request).subscribe((response:any) => {
+      this.totalLocal = response;
       this.stopFlag = false;
       this.addHoras = 0;
-      this.addHorasRascunho = 0;
-
-      const requestRascunho = {
-        type: 'GET',
-        api: environment.apiUrl,
-        path: `solicitacao/perfil/rascunho/${data}`};
-      this.execute('http-request', requestRascunho).subscribe((responseRascunho:any) => {
-        this.totalLocalRascunho = responseRascunho;
-        this.checkLimiteHoras();
-        this.changeCh();
-        this.addHorasRascunho = this.totalLocalRascunho[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema].horasContabilizadas;
-        console.log(this.addHoras, this.addHorasRascunho, "adds");
-      });
+      this.checkLimiteHoras();
+      this.changeCh();
     });
   }
 
   checkLimiteHoras() {
+    console.log(this.getHorasContabilizadas(), this.getHoraLimite(), 'horasRestantesLimite');
     if(this.getHorasContabilizadas() === this.getHoraLimite() && this.new) {
       this.stopFlag = true;
       this.snackBar.open('Você já aproveitou todas as horas possíveis a esta atividade!', 'Ok', {

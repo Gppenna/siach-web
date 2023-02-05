@@ -1,62 +1,130 @@
 <section class="d-flex flex-column mt-5">
+  <div>
     <div>
-        <div>
-            <div>
-                <h1>Seu Perfil</h1>
-            </div>
-            <div class="d-grid p-5" style="grid-template-columns: 30% 70%;" *ngIf="userData">
-                <div class="m-auto">
-                    <div>
-                        <img style="width: 150px;" src="../../../../assets/images/enzo.jpg" alt="Avatar de Perfil">
-                    </div>
+      <div>
+        <h1>Seu Perfil</h1>
+      </div>
+      <div
+        class="d-grid p-5"
+        style="grid-template-columns: 30% 70%"
+        *ngIf="userData"
+      >
+        <div class="m-auto">
+          <div>
+            <img
+              style="width: 150px"
+              src="../../../../assets/images/enzo.jpg"
+              alt="Avatar de Perfil"
+            />
+          </div>
 
-                    <h2 class="nunito text-center mt-3 perfil-nome">{{userData.nome}}</h2>
-                </div>
-                <div class="row userCard m-3">
-                    <div class="col d-flex flex-column nunito justify-content-around">
-                        <div class="row">
-                            <span class="col-4 strong">Nome:</span>
-                            <span class="col-6">{{userData.nome}}</span>
-                        </div>
-                        <div class="row">
-                            <span class="col-4 strong">Curso:</span>
-                            <span class="col-6">{{userData.curso.descricao}}</span>
-                        </div>
-                    </div>
-                    <div class="col d-flex flex-column gap-3 nunito justify-content-around">
-                        <div class="row">
-                            <span class="col-4 strong">Matrícula:</span>
-                            <span class="col-6">{{userData.matricula}}</span>
-                        </div>
-                        <div class="row">
-                            <span class="col-4 strong">E-mail:</span>
-                            <span class="col-6">{{userData.email}}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <h1>Suas Horas</h1>
-                <div class="d-grid" style="grid-template-columns: 23% 77%;">
-                    <div class="sphere-progress-container">
-                        <span class="nunito">Total</span>
-                        <div class="sphere-progress" [ngStyle]="{'background': 'conic-gradient(#2B468B calc(('+(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), #D3DCE9 calc(('+(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1% + 0.3%))'}">
-                            <div class="sphere-progress-center translate-middle">
-                                <span style="font-size: 24px;" class="mb-2">{{(100*totalHoras/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span>
-                                <span class="nunito" style="font-size: 16px;">{{totalHoras}}h  /  {{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-grid justify-content-between" style="grid-template-columns: 45% 50%;">
-                        <div *ngFor="let data of dataSource" class="py-3">
-                            <app-barra-progresso [dataSource]="data.perfilGrupo" [dataSourceSecondary]="data.perfilAtividadeList"></app-barra-progresso>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+          <h2 class="nunito text-center mt-3 perfil-nome">
+            {{ userData.nome }}
+          </h2>
         </div>
-
+        <div class="row userCard m-3">
+          <div class="col d-flex flex-column nunito justify-content-around">
+            <div class="row">
+              <span class="col-4 strong">Nome:</span>
+              <span class="col-6">{{ userData.nome }}</span>
+            </div>
+            <div class="row">
+              <span class="col-4 strong">Curso:</span>
+              <span class="col-6">{{ userData.curso.descricao }}</span>
+            </div>
+          </div>
+          <div
+            class="col d-flex flex-column gap-3 nunito justify-content-around"
+          >
+            <div class="row">
+              <span class="col-4 strong">Matrícula:</span>
+              <span class="col-6">{{ userData.matricula }}</span>
+            </div>
+            <div class="row">
+              <span class="col-4 strong">E-mail:</span>
+              <span class="col-6">{{ userData.email }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1>Suas Horas</h1>
+        <div class="d-grid" style="grid-template-columns: 23% 77%">
+          <div class="sphere-progress-container mx-auto">
+            <span
+              class="nunito d-flex justify-content-center align-items-center"
+              >Total
+              <mat-icon
+                class="opacity-75"
+                style="font-size: 1rem"
+                matTooltip="A barra azul representa horas já aproveitadas, enquanto a barra verde representa horas em análise ou em rascunhos pendentes de envio."
+                >help</mat-icon
+              ></span
+            >
+            <div
+              class="sphere-progress"
+              [ngStyle]="{
+                background:
+                  'conic-gradient(#5FD3B1 calc((' +
+                  (100 * (totalHoras + totalHorasRascunho)) /
+                    appStateService.state?.userData?.curso.minimoHorasCurso +
+                  ')*1%), #D3DCE9 calc((' +
+                  (100 * (totalHoras + totalHorasRascunho)) /
+                    appStateService.state?.userData?.curso.minimoHorasCurso +
+                  ')*1% + 0.3%))'
+              }"
+            >
+              <div
+                class="sphere-progress"
+                [ngStyle]="{
+                  background:
+                    'conic-gradient(#2B468B calc((' +
+                    (100 * totalHoras) /
+                      appStateService.state?.userData?.curso.minimoHorasCurso +
+                    ')*1%), transparent calc((' +
+                    (100 * totalHoras) /
+                      appStateService.state?.userData?.curso.minimoHorasCurso +
+                    ')*1% + 0.3%))'
+                }"
+              >
+                <div class="sphere-progress-center translate-middle">
+                  <span
+                    style="font-size: 24px"
+                    class="mb-2"
+                    [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+                    >{{
+                      (
+                        (100 * (totalHoras + totalHorasRascunho)) /
+                        appStateService.state?.userData?.curso.minimoHorasCurso
+                      ).toPrecision(3)
+                    }}%</span
+                  >
+                  <span
+                    class="nunito"
+                    style="font-size: 16px"
+                    [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+                    >{{ totalHoras + totalHorasRascunho }}h /
+                    {{
+                      appStateService.state?.userData?.curso.minimoHorasCurso
+                    }}h</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="d-grid justify-content-between"
+            style="grid-template-columns: 45% 50%"
+          >
+            <div *ngFor="let data of dataSource" class="py-3">
+              <app-barra-progresso
+                [dataSource]="data.perfilGrupo"
+                [dataSourceSecondary]="data.perfilAtividadeList"
+              ></app-barra-progresso>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
+  </div>
 </section>

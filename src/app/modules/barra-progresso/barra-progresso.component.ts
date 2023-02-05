@@ -21,6 +21,11 @@ export class BarraProgressoComponent implements OnInit {
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    
+  }
+
+  log(data:any) {
+    console.log(this.adicional, this.dataSource, 'barra progresso', data);
   }
 
   openGrupo(data:any) {

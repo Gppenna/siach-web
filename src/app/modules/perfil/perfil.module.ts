@@ -10,6 +10,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BarraProgressoComponent } from '../barra-progresso/barra-progresso.component';
 import { BarraProgressoModalComponent } from './barra-progresso-modal/barra-progresso-modal.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatDividerModule,
     CommonModule,
+    MatTooltipModule,
     MatDialogModule,
     MatIconModule,
     SharedModule,

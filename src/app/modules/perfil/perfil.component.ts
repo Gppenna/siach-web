@@ -12,7 +12,8 @@ export class PerfilComponent implements OnInit {
   dataSource:any[] = [];
 
   totalHoras = 0;
-
+  totalHorasRascunho = 0;
+  addHorasFlag = false;
   constructor( public appStateService: AppStateService) { }
 
   ngOnInit(): void {
@@ -24,25 +25,25 @@ export class PerfilComponent implements OnInit {
     const request = {
       type: 'GET',
       api: environment.apiUrl,
-      path: 'solicitacao/perfil/finalizado'};
+      path: 'perfil'};
     this.execute('http-request', request).subscribe((response:any) => {
       this.dataSource = response;
       this.totalHorasCalc(response);
-      console.log(this.dataSource, this.userData, 'AAAAA');
-    })
+    });
+
+
   }
 
   totalHorasCalc(response:any) {
-    let totalHoras = 0;
     response.forEach((element:any) => {
       Object.keys(element.perfilGrupo).forEach((key, index) => {
-        totalHoras += element.perfilGrupo[key].horasContabilizadas;
+        this.totalHoras += element.perfilGrupo[key].horasContabilizadas;
+
+        this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadasRascunho;
       })
       
     });
-    this.totalHoras = totalHoras;
-
-    console.log(this.totalHoras, 'hrs', this.appStateService.state)
+    console.log(this.totalHoras, 'hrs', this.totalHorasRascunho)
   }
 
   execute(type: string, data?: any) {
