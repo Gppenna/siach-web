@@ -1,16 +1,16 @@
 // src\styles.scss
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 // Plus imports for other components in your app.
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
 @include mat-core();
-// import our custom theme               
-@import "./theme.scss";
-// import custom component themes        
-@import "./custom-component-themes.scss";
+// import our custom theme
+@import './theme.scss';
+// import custom component themes
+@import './custom-component-themes.scss';
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -21,57 +21,58 @@
 // CSS class whatever you want. In this example, any component inside of an element with
 // `.dark-theme` will be affected by this alternate dark theme instead of the default theme.
 :root {
-    --bs-body-color-span-night-eye: hsla(0, 0%, 75%, 1);
-    --bs-body-color-heading-night-eye: hsla(0, 0%, 90%, 1);
-    --bs-blue-night-eye: hsla(216, 60%, 52%, 1);
-    --bs-indigo-night-eye: hsla(263, 60%, 51%, 1);
-    --bs-purple-night-eye: hsla(261, 51%, 51%, 1);
-    --bs-pink-night-eye: hsla(330, 60%, 52%, 1);
-    --bs-red-night-eye: hsla(354, 60%, 54%, 1);
-    --bs-orange-night-eye: hsla(27, 60%, 54%, 1);
-    --bs-yellow-night-eye: hsla(44, 100%, 20%, 1);
-    --bs-green-night-eye: hsla(152, 60%, 31%, 1);
-    --bs-teal-night-eye: hsla(162, 60%, 46%, 1);
-    --bs-cyan-night-eye: hsla(190, 60%, 50%, 1);
-    --bs-white-night-eye: hsla(240, 8%, 12%, 1);
-    --bs-gray-night-eye: hsla(208, 7%, 46%, 1);
-    --bs-gray-dark-night-eye: hsla(210, 10%, 23%, 1);
-    --bs-gray-100-night-eye: hsla(0, 0%, 12%, 1);
-    --bs-gray-200-night-eye: hsla(0, 0%, 17%, 1);
-    --bs-gray-300-night-eye: hsla(0, 0%, 21%, 1);
-    --bs-gray-400-night-eye: hsla(210, 14%, 27%, 1);
-    --bs-gray-500-night-eye: hsla(210, 11%, 39%, 1);
-    --bs-gray-600-night-eye: hsla(208, 7%, 46%, 1);
-    --bs-gray-700-night-eye: hsla(210, 9%, 31%, 1);
-    --bs-gray-800-night-eye: hsla(210, 10%, 23%, 1);
-    --bs-gray-900-night-eye: hsla(0, 0%, 15%, 1);
-    --bs-primary-night-eye: hsla(216, 60%, 52%, 1);
-    --bs-secondary-night-eye: hsla(208, 7%, 46%, 1);
-    --bs-success-night-eye: hsla(152, 60%, 31%, 1);
-    --bs-info-night-eye: hsla(190, 60%, 50%, 1);
-    --bs-warning-night-eye: hsla(44, 100%, 20%, 1);
-    --bs-danger-night-eye: hsla(354, 60%, 54%, 1);
-    --bs-light-night-eye: hsla(0, 0%, 12%, 1);
-    --bs-dark-night-eye: hsla(0, 0%, 15%, 1);
-    --bs-primary-rgb-night-eye: 59, 118, 206;
-    --bs-secondary-rgb-night-eye: 109, 118, 126;
-    --bs-success-rgb-night-eye: 32, 126, 82;
-    --bs-info-rgb-night-eye: 51, 179, 204;
-    --bs-warning-rgb-night-eye: 102, 75, 0;
-    --bs-danger-rgb-night-eye: 208, 67, 81;
-    --bs-light-rgb-night-eye: 31, 31, 31;
-    --bs-dark-rgb-night-eye: 38, 38, 38;
-    --bs-white-rgb-night-eye: 28, 28, 33;
-    --bs-black-rgb-night-eye: 0, 0, 0;
-    --bs-body-rgb-night-eye: 38, 38, 38;
-    --bs-font-sans-serif-night-eye: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --bs-font-monospace-night-eye: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --bs-gradient-night-eye: linear-gradient(180deg, hsla(240, 8%, 12%, 0.15), hsla(240, 8%, 12%, 0));
-    --bs-body-font-size-night-eye: 1rem;
-    --bs-body-font-weight-night-eye: 400;
-    --bs-body-line-height-night-eye: 1.5;
-    --bs-body-color-night-eye: hsla(0, 0%, 15%, 1);
-    --bs-body-bg-night-eye: hsla(240, 8%, 12%, 1);
+	--bs-body-color-span-night-eye: hsla(0, 0%, 75%, 1);
+	--bs-body-color-heading-night-eye: hsla(0, 0%, 90%, 1);
+	--bs-blue-night-eye: hsla(216, 60%, 52%, 1);
+	--bs-indigo-night-eye: hsla(263, 60%, 51%, 1);
+	--bs-purple-night-eye: hsla(261, 51%, 51%, 1);
+	--bs-pink-night-eye: hsla(330, 60%, 52%, 1);
+	--bs-red-night-eye: hsla(354, 60%, 54%, 1);
+	--bs-orange-night-eye: hsla(27, 60%, 54%, 1);
+	--bs-yellow-night-eye: hsla(44, 100%, 20%, 1);
+	--bs-green-night-eye: hsla(152, 60%, 31%, 1);
+	--bs-teal-night-eye: hsla(162, 60%, 46%, 1);
+	--bs-cyan-night-eye: hsla(190, 60%, 50%, 1);
+	--bs-white-night-eye: hsla(240, 8%, 12%, 1);
+	--bs-gray-night-eye: hsla(208, 7%, 46%, 1);
+	--bs-gray-dark-night-eye: hsla(210, 10%, 23%, 1);
+	--bs-gray-100-night-eye: hsla(0, 0%, 12%, 1);
+	--bs-gray-200-night-eye: hsla(0, 0%, 17%, 1);
+	--bs-gray-300-night-eye: hsla(0, 0%, 21%, 1);
+	--bs-gray-400-night-eye: hsla(210, 14%, 27%, 1);
+	--bs-gray-500-night-eye: hsla(210, 11%, 39%, 1);
+	--bs-gray-600-night-eye: hsla(208, 7%, 46%, 1);
+	--bs-gray-700-night-eye: hsla(210, 9%, 31%, 1);
+	--bs-gray-800-night-eye: hsla(210, 10%, 23%, 1);
+	--bs-gray-900-night-eye: hsla(0, 0%, 15%, 1);
+	--bs-primary-night-eye: hsla(216, 60%, 52%, 1);
+	--bs-secondary-night-eye: hsla(208, 7%, 46%, 1);
+	--bs-success-night-eye: hsla(152, 60%, 31%, 1);
+	--bs-info-night-eye: hsla(190, 60%, 50%, 1);
+	--bs-warning-night-eye: hsla(44, 100%, 20%, 1);
+	--bs-danger-night-eye: hsla(354, 60%, 54%, 1);
+	--bs-light-night-eye: hsla(0, 0%, 12%, 1);
+	--bs-dark-night-eye: hsla(0, 0%, 15%, 1);
+	--bs-primary-rgb-night-eye: 59, 118, 206;
+	--bs-secondary-rgb-night-eye: 109, 118, 126;
+	--bs-success-rgb-night-eye: 32, 126, 82;
+	--bs-info-rgb-night-eye: 51, 179, 204;
+	--bs-warning-rgb-night-eye: 102, 75, 0;
+	--bs-danger-rgb-night-eye: 208, 67, 81;
+	--bs-light-rgb-night-eye: 31, 31, 31;
+	--bs-dark-rgb-night-eye: 38, 38, 38;
+	--bs-white-rgb-night-eye: 28, 28, 33;
+	--bs-black-rgb-night-eye: 0, 0, 0;
+	--bs-body-rgb-night-eye: 38, 38, 38;
+	--bs-font-sans-serif-night-eye: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+	--bs-font-monospace-night-eye: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	--bs-gradient-night-eye: linear-gradient(180deg, hsla(240, 8%, 12%, 0.15), hsla(240, 8%, 12%, 0));
+	--bs-body-font-size-night-eye: 1rem;
+	--bs-body-font-weight-night-eye: 400;
+	--bs-body-line-height-night-eye: 1.5;
+	--bs-body-color-night-eye: hsla(0, 0%, 15%, 1);
+	--bs-body-bg-night-eye: hsla(240, 8%, 12%, 1);
 }
 
 // Override typography for all Angular Material, including mat-base-typography and all components.
@@ -82,676 +83,707 @@
 
 html,
 body {
-    height: 100%;
-    box-sizing: border-box;
+	height: 100%;
+	box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-    box-sizing: inherit;
+	box-sizing: inherit;
 }
 
 body {
-    margin: 0;
-    font-family: "Nunito";
+	margin: 0;
+	font-family: 'Nunito';
 }
 
 .nm {
-    margin: 0!important;
+	margin: 0 !important;
 }
 
 np {
-    padding: 0!important;
+	padding: 0 !important;
 }
 
 .mat-toolbar {
-    background-color: #fff;
-    border-bottom: 1px solid #DFDADA;
-    color: #5F8ED3;
+	background-color: #fff;
+	border-bottom: 1px solid #dfdada;
+	color: #5f8ed3;
 }
 
 .field-blocked {
-    pointer-events: none;
-    opacity: 0.7;
+	pointer-events: none;
+	opacity: 0.7;
 }
 
 .mat-toolbar * {
-    color: inherit;
+	color: inherit;
 }
 
 .child .mat-list-item-content {
-    display: block;
+	display: block;
 }
 
 .mat-list-item-content {
-    display: flex;
-    height: inherit;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 2px solid transparent;
-    span.mat-display-1:hover,
-    span.mat-display-1:focus {
-        padding-bottom: 0px;
-        border-bottom: 2px solid #5F8ED3;
-    }
+	display: flex;
+	height: inherit;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 2px solid transparent;
+	span.mat-display-1:hover,
+	span.mat-display-1:focus {
+		padding-bottom: 0px;
+		border-bottom: 2px solid #5f8ed3;
+	}
 }
 
 a {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .blurBackground {
-    background: rgba(244, 244, 244, 0.6);
-    backdrop-filter: blur(4px);
+	background: rgba(244, 244, 244, 0.6);
+	backdrop-filter: blur(4px);
 }
 
 .child span {
-    border-bottom: none!important;
-    padding-bottom: 0px!important;
+	border-bottom: none !important;
+	padding-bottom: 0px !important;
 }
 
 .mat-list-item-content span {
-    padding-bottom: 2px;
+	padding-bottom: 2px;
 }
 
 span.highlight {
-    color: #3a5cb2;
-    font-weight: 500;
+	color: #3a5cb2;
+	font-weight: 500;
 }
 
 span.highlight-light {
-    color: #5F8ED3;
+	color: #5f8ed3;
 }
 
 span.menu {
-    color: inherit;
+	color: inherit;
 }
 
 h1,
 h2,
 h3,
 h4 {
-    color: #646464;
+	color: #646464;
 }
 
 .chip {
-    border-radius: 10px;
-    max-width: fit-content;
-    max-height: fit-content;
-    padding: 5px;
-    color: #fff;
-    font-family: "Nunito";
-    font-size: 16px;
+	border-radius: 10px;
+	max-width: fit-content;
+	max-height: fit-content;
+	padding: 5px;
+	color: #fff;
+	font-family: 'Nunito';
+	font-size: 16px;
 }
 
 .chip-large {
-    border-radius: 40px;
-    max-width: 200px;
-    text-align: center;
-    max-height: fit-content;
-    padding: 5px;
-    color: #fff;
-    font-family: "Nunito";
-    font-size: 18px;
+	border-radius: 40px;
+	max-width: 200px;
+	text-align: center;
+	max-height: fit-content;
+	padding: 5px;
+	color: #fff;
+	font-family: 'Nunito';
+	font-size: 18px;
 }
 
 .mat-progress-bar {
-    height: 10px!important;
+	height: 10px !important;
 }
 
 .progress-sphere {
-    width: 30px;
-    height: 30px;
-    border-radius: 30px;
-    background: #c3def5;
-    position: absolute;
-    z-index: 999;
+	width: 30px;
+	height: 30px;
+	border-radius: 30px;
+	background: #c3def5;
+	position: absolute;
+	z-index: 999;
 }
 
 span.middle {
-    transform: translate(-35%, 0);
+	transform: translate(-35%, 0);
 }
 
 span.left {
-    transform: translate(-21%, 0);
+	transform: translate(-21%, 0);
 }
 
 span.right {
-    transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
 }
 
-.progress-container>span {
-    position: absolute;
+.progress-container > span {
+	position: absolute;
 }
 
 span.active {
-    color: #1e88e5;
+	color: #1e88e5;
 }
 
 div.active {
-    background: #1e88e5;
+	background: #1e88e5;
 }
 
 .left {
-    left: 0;
-    top: 25%;
-    transform: translate(0%, -15%);
+	left: 0;
+	top: 25%;
+	transform: translate(0%, -15%);
 }
 
 .middle {
-    left: 50%;
-    top: 25%;
-    transform: translate(-25%, -15%);
+	left: 50%;
+	top: 25%;
+	transform: translate(-25%, -15%);
 }
 
 .right {
-    left: 99%;
-    top: 25%;
-    transform: translate(-50%, -15%);
+	left: 99%;
+	top: 25%;
+	transform: translate(-50%, -15%);
 }
 
 .inactive {
-    top: -35px!important;
-    text-align: center;
-    color: #B2B1B1;
+	top: -35px !important;
+	text-align: center;
+	color: #b2b1b1;
 }
 
 .mat-header-cell {
-    font-size: 18px;
+	font-size: 18px;
 }
 
 .mat-cell,
 .mat-footer-cell {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 .progress-container {
-    position: relative;
-    width: 40%!important;
-    color: #c3def5;
-    font-size: 16px;
+	position: relative;
+	width: 40% !important;
+	color: #c3def5;
+	font-size: 16px;
 }
 
 .chip.primary {
-    background-color: #5F8ED3;
+	background-color: #5f8ed3;
 }
 
 .danger {
-    color: #E27060;
+	color: #e27060;
 }
 
 .danger-card {
-    background-color: #E27060;
-    color: #fff;
-    border-radius: 10px;
-    font-size: 18px;
-    padding: 0.5rem;
-    width: fit-content;
-    filter: opacity(0.8);
+	background-color: #e27060;
+	color: #fff;
+	border-radius: 10px;
+	font-size: 18px;
+	padding: 0.5rem;
+	width: fit-content;
+	filter: opacity(0.8);
 }
 
 .mat-snack-bar-container {
-    background: #5F8ED3 !important;
+	background: #5f8ed3 !important;
 }
 
 .mat-simple-snackbar-action {
-    color: #fff;
+	color: #fff;
 }
 
 .green-snackbar {
-    background: #5FD3B1!important;
+	background: #5fd3b1 !important;
 }
 
 .red-snackbar {
-    background: #E27060!important;
+	background: #e27060 !important;
 }
 
 .btn-no-style {
-    border: none;
-    background: transparent;
+	border: none;
+	background: transparent;
 }
 
 .btn-danger {
-    background-color: #E27060;
-    font-family: "Nunito";
-    width: 200px;
-    height: 45px;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: #e27060;
+	font-family: 'Nunito';
+	width: 200px;
+	height: 45px;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btn-danger-small {
-    background-color: #E27060;
-    font-family: "Nunito";
-    color: #fff;
-    width: 120px;
-    height: 45px;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: #e27060;
+	font-family: 'Nunito';
+	color: #fff;
+	width: 120px;
+	height: 45px;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btn-danger-small:hover,
 .btn-primary-small:hover {
-    color: #fff;
+	color: #fff;
 }
 
 .nunito {
-    font-family: "Nunito"!important;
+	font-family: 'Nunito' !important;
 }
 
 .solicitacaoForm {
-    border-right: 1px solid rgb(223, 223, 223);
+	border-right: 1px solid rgb(223, 223, 223);
 }
 
 .strong {
-    font-weight: 600;
-    filter: opacity(0.8);
+	font-weight: 600;
+	filter: opacity(0.8);
 }
 
 .btn-primary {
-    background-color: #5F8ED3;
-    font-family: "Nunito";
-    width: 200px;
-    height: 45px;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color: #5f8ed3;
+	font-family: 'Nunito';
+	width: 200px;
+	height: 45px;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary-small {
-    cursor: pointer;
-    background-color: #5F8ED3;
-    color: #fff;
-    font-family: "Nunito";
-    width: 120px;
-    height: 45px;
-    font-size: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	cursor: pointer;
+	background-color: #5f8ed3;
+	color: #fff;
+	font-family: 'Nunito';
+	width: 120px;
+	height: 45px;
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary-download {
-    cursor: pointer;
-    background-color: #5F8ED3;
-    color: #fff;
-    font-family: "Nunito";
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: fit-content;
-    padding: 0.3rem;
+	cursor: pointer;
+	background-color: #5f8ed3;
+	color: #fff;
+	font-family: 'Nunito';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	width: fit-content;
+	padding: 0.3rem;
 }
 
 .btn-new {
-    color: #fff;
-    background-color: #2B468BE5;
-    font-family: "Nunito";
-    width: 170px;
-    height: 35px;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 15px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	color: #fff;
+	background-color: #2b468be5;
+	font-family: 'Nunito';
+	width: 170px;
+	height: 35px;
+	font-size: 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .btn-new:hover {
-    color: #fff;
+	color: #fff;
+}
+
+.spinner-inside {
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	left: 85%;
+	top: 2%;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+	stroke: #fff !important;
+}
+
+.btn-load {
+	color: #fff;
+	background-color: #2b468be5;
+	font-family: 'Nunito';
+	width: 170px;
+	height: 35px;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 15px;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-load:hover {
+	color: #fff;
 }
 
 .card-container {
-    background: #FFFFFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-    border: 1px solid #D6D5D5;
+	background: #ffffff;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	border: 1px solid #d6d5d5;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .card-img {
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    opacity: 0.5;
-    -webkit-mask-image: linear-gradient(to right, transparent 10%, black 80%);
-    transition: all 0.5s ease-in-out;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	opacity: 0.5;
+	-webkit-mask-image: linear-gradient(to right, transparent 10%, black 80%);
+	transition: all 0.5s ease-in-out;
 }
 
 .card-img:hover {
-    opacity: 1;
+	opacity: 1;
 }
 
 .hide {
-    display: none;
+	display: none;
 }
 
 pre {
-    white-space: pre-line;
-    word-break: break-all;
-    overflow: auto;
-    font-size: 16px;
+	white-space: pre-line;
+	word-break: break-all;
+	overflow: auto;
+	font-size: 16px;
 }
 
 .perfil-nome {
-    font-weight: 500!important;
-    color: #000;
+	font-weight: 500 !important;
+	color: #000;
 }
 
 .userCard {
-    background: #F1F1F1;
-    border-radius: 30px;
-    padding: 1rem 2rem;
+	background: #f1f1f1;
+	border-radius: 30px;
+	padding: 1rem 2rem;
 }
 
 .progresso-barra {
-    color: #5F8ED3;
-    font-size: 16px
+	color: #5f8ed3;
+	font-size: 16px;
 }
 
 .sphere-progress {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 100%;
-    z-index: 1;
+	position: relative;
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	z-index: 1;
 }
 
 .sphere-progress-container {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    width: fit-content;
-    gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: fit-content;
+	gap: 1rem;
 }
 
 .sucessColor {
-    color: #5FD3B1!important;
+	color: #5fd3b1 !important;
 }
 
 .warnColor {
-    color:#E27060!important;
+	color: #e27060 !important;
 }
 
 .mat-progress-bar-fill::after {
-    background-color: #5F8ED3;
-    border-radius: 30px;
+	background-color: #5f8ed3;
+	border-radius: 30px;
 }
 
 .mat-progress-bar-buffer {
-    background-color: #C4C4C4;
+	background-color: #c4c4c4;
 }
 
 .sphere-progress-center {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    border-radius: 100%;
-    z-index: 2;
-    background: #fff;
-    left: 50%;
-    top: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: #5F8ED3;
+	position: absolute;
+	width: 160px;
+	height: 160px;
+	border-radius: 100%;
+	z-index: 2;
+	background: #fff;
+	left: 50%;
+	top: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	color: #5f8ed3;
 }
 
 .w-47 {
-    width: 47%;
+	width: 47%;
 }
 
 .mat-progress-bar {
-    border-radius: 30px;
+	border-radius: 30px;
 }
 
 .mat-dialog-container {
-    max-height: 90vh!important;
+	max-height: 90vh !important;
 }
 
 .card-container h2,
 .card-container h3,
 .card-container h4 {
-    color: #000;
+	color: #000;
 }
 
 .logo {
-    height: 50px!important;
+	height: 50px !important;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+	width: 10px;
 }
 
- ::-webkit-scrollbar-track {
-    background: #fff;
+::-webkit-scrollbar-track {
+	background: #fff;
 }
 
- ::-webkit-scrollbar-thumb {
-    background: #999;
+::-webkit-scrollbar-thumb {
+	background: #999;
 }
 
- ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
 }
 
 .mat-bottom-sheet-container {
-    overflow-y: auto!important;
-    overflow-x: hidden!important;
+	overflow-y: auto !important;
+	overflow-x: hidden !important;
 }
 
 .app {
-    &-page {
-        &-container {
-            padding: 1.3rem 2rem;
-            max-width: 1200px;
-            margin: 0px auto;
-            &-bottomsheet {
-                padding: 0px;
-                min-width: 40vw;
-                min-height: 15vh;
-                form,
-                .solicitacaoHoras {
-                    margin-top: 1.3rem;
-                }
-            }
-        }
-        &-bottomsheet {
-            &-header {
-                width: 100%;
-                position: relative;
-                form {
-                    margin-top: 1.3rem;
-                }
-                h1 {
-                    color: #000;
-                }
-                &:before {
-                    content: "";
-                    position: absolute;
-                    bottom: 0px;
-                    left: -2rem;
-                    right: -2rem;
-                    height: 1px;
-                    background-color: rgb(223, 223, 223);
-                }
-                // border-bottom: 1px solid gray;
-            }
-            &-actions {
-                display: flex;
-                justify-content: flex-end;
-                zoom: 0.9;
-                button {
-                    margin-left: 1rem;
-                }
-            }
-            &-content {
-                position: relative;
-            }
-        }
-        &-form {
-            &-full {
-                width: 100%;
-                color: #000;
-            }
-        }
-    }
+	&-page {
+		&-container {
+			padding: 1.3rem 2rem;
+			max-width: 1200px;
+			margin: 0px auto;
+			&-bottomsheet {
+				padding: 0px;
+				min-width: 40vw;
+				min-height: 15vh;
+				form,
+				.solicitacaoHoras {
+					margin-top: 1.3rem;
+				}
+			}
+		}
+		&-bottomsheet {
+			&-header {
+				width: 100%;
+				position: relative;
+				form {
+					margin-top: 1.3rem;
+				}
+				h1 {
+					color: #000;
+				}
+				&:before {
+					content: '';
+					position: absolute;
+					bottom: 0px;
+					left: -2rem;
+					right: -2rem;
+					height: 1px;
+					background-color: rgb(223, 223, 223);
+				}
+				// border-bottom: 1px solid gray;
+			}
+			&-actions {
+				display: flex;
+				justify-content: flex-end;
+				zoom: 0.9;
+				button {
+					margin-left: 1rem;
+				}
+			}
+			&-content {
+				position: relative;
+			}
+		}
+		&-form {
+			&-full {
+				width: 100%;
+				color: #000;
+			}
+		}
+	}
 }
 
 .app-page-messages {
-    display: flex;
-    text-align: center;
-    margin-top: 2rem;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 20vh;
+	display: flex;
+	text-align: center;
+	margin-top: 2rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 20vh;
 }
 
 .app-page-messages h5 {
-    color: rgb(179, 179, 179)!important;
+	color: rgb(179, 179, 179) !important;
 }
 
 .app-page-messages .mat-icon {
-    transform: scale(2);
-    margin-bottom: 2rem;
-    color: rgb(179, 179, 179)!important;
+	transform: scale(2);
+	margin-bottom: 2rem;
+	color: rgb(179, 179, 179) !important;
 }
 
 // DARK THEME
 .dark-theme {
-    *:hover {
-        transition: all 100s ease-in-out;
-    }
-    span {
-        color: var(--bs-body-color-span-night-eye);
-    }
-    h1,
-    h2,
-    h3,
-    h4 {
-        color: var(--bs-body-color-heading-night-eye);
-    }
-    .mat-toolbar {
-        background-color: rgb(31, 31, 31);
-        color: rgb(155, 184, 228)!important;
-        border-bottom: 1px solid rgb(59, 59, 59);
-    }
-    .app-container,
-    .main-container {
-        background-color: var(--bs-body-bg-night-eye);
-    }
-    span.highlight {
-        color: rgb(157, 179, 225);
-    }
-    .menu,
-    .menu mat-icon {
-        color: rgb(157, 179, 225);
-    }
-    .logo {
-        filter: invert(100%);
-    }
-    .card-container {
-        background-color: rgb(31, 31, 31);
-        border: 1px solid rgb(31, 31, 31);
-    }
-    .mat-dialog-container {
-        background-color: rgb(31, 31, 31);
-    }
-    pre {
-        color: #fff;
-    }
-     ::-webkit-scrollbar {
-        width: 10px;
-        border-radius: 50%;
-    }
-     ::-webkit-scrollbar-track {
-        background-color: rgb(31, 31, 31);
-    }
-     ::-webkit-scrollbar-thumb {
-        background: #999;
-    }
-     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
-    .btn-new,
-    .btn-primary {
-        background-color: rgb(96 111 143);
-    }
-    th,
-    tr,
-    td {
-        background-color: rgb(31, 31, 31);
-        color: var(--bs-body-color-span-night-eye);
-        border-bottom-color: hsla(0, 0%, 75%, 1);
-        border-top-color: hsla(0, 0%, 75%, 1);
-    }
-    td mat-icon {
-        color: var(--bs-body-color-span-night-eye);
-    }
-    .mat-bottom-sheet-container {
-        background-color: rgb(31, 31, 31);
-        * {
-            color: #fff;
-        }
-    }
-    .btn-primary-small {
-        background-color: rgb(96, 111, 143);
-    }
-    .btn-danger-small {
-        background-color: #c45747;
-    }
-    .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
-        opacity: 1;
-    }
-    .cdk-overlay-dark-backdrop {
-        background: rgba(0, 0, 0, 1);
-    }
-    .userCard {
-        background-color: rgb(31, 31, 31)!important;
-        padding: 2rem;
-        border-radius: 30px;
-    }
-    mat-icon {
-        color: #fff!important;
-    }
-    mat-option {
-        background: var(--bs-body-bg-night-eye);
-    }
-    .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
-        background: rgb(31, 31, 31)!important;
-    }
-    .mat-simple-snack-bar-content {
-        color: #fff;
-    }
-    .progresso-barra {
-        color: rgb(157, 179, 225)!important;
-    }
-    .sphere-progress-center {
-        background: rgb(31, 31, 31);
-    }
-    .perfil-nome {
-        font-weight: 500!important;
-        color: var(--bs-body-color-heading-night-eye);
-    }
+	*:hover {
+		transition: all 100s ease-in-out;
+	}
+	span {
+		color: var(--bs-body-color-span-night-eye);
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		color: var(--bs-body-color-heading-night-eye);
+	}
+	.mat-toolbar {
+		background-color: rgb(31, 31, 31);
+		color: rgb(155, 184, 228) !important;
+		border-bottom: 1px solid rgb(59, 59, 59);
+	}
+	.app-container,
+	.main-container {
+		background-color: var(--bs-body-bg-night-eye);
+	}
+	span.highlight {
+		color: rgb(157, 179, 225);
+	}
+	.menu,
+	.menu mat-icon {
+		color: rgb(157, 179, 225);
+	}
+	.logo {
+		filter: invert(100%);
+	}
+	.card-container {
+		background-color: rgb(31, 31, 31);
+		border: 1px solid rgb(31, 31, 31);
+	}
+	.mat-dialog-container {
+		background-color: rgb(31, 31, 31);
+	}
+	pre {
+		color: #fff;
+	}
+	::-webkit-scrollbar {
+		width: 10px;
+		border-radius: 50%;
+	}
+	::-webkit-scrollbar-track {
+		background-color: rgb(31, 31, 31);
+	}
+	::-webkit-scrollbar-thumb {
+		background: #999;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: #555;
+	}
+	.btn-new,
+	.btn-primary {
+		background-color: rgb(96 111 143);
+	}
+	th,
+	tr,
+	td {
+		background-color: rgb(31, 31, 31);
+		color: var(--bs-body-color-span-night-eye);
+		border-bottom-color: hsla(0, 0%, 75%, 1);
+		border-top-color: hsla(0, 0%, 75%, 1);
+	}
+	td mat-icon {
+		color: var(--bs-body-color-span-night-eye);
+	}
+	.mat-bottom-sheet-container {
+		background-color: rgb(31, 31, 31);
+		* {
+			color: #fff;
+		}
+	}
+	.btn-primary-small {
+		background-color: rgb(96, 111, 143);
+	}
+	.btn-danger-small {
+		background-color: #c45747;
+	}
+	.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+		opacity: 1;
+	}
+	.cdk-overlay-dark-backdrop {
+		background: rgba(0, 0, 0, 1);
+	}
+	.userCard {
+		background-color: rgb(31, 31, 31) !important;
+		padding: 2rem;
+		border-radius: 30px;
+	}
+	mat-icon {
+		color: #fff !important;
+	}
+	mat-option {
+		background: var(--bs-body-bg-night-eye);
+	}
+	.mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+		background: rgb(31, 31, 31) !important;
+	}
+	.mat-simple-snack-bar-content {
+		color: #fff;
+	}
+	.progresso-barra {
+		color: rgb(157, 179, 225) !important;
+	}
+	.sphere-progress-center {
+		background: rgb(31, 31, 31);
+	}
+	.perfil-nome {
+		font-weight: 500 !important;
+		color: var(--bs-body-color-heading-night-eye);
+	}
 }
