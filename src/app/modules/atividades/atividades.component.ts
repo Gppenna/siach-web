@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AtividadesModalComponent } from './atividades-modal/atividades-modal.component';
 import { FiltroUtil } from 'src/app/utils/filtro-util';
 import { HttpUtils } from 'src/app/utils/http-utils';
+import { FormGroup } from '@angular/forms';
 
 @Component({
 	selector: 'app-atividades',
@@ -18,6 +19,8 @@ export class AtividadesComponent implements OnInit {
 
 	image: any = undefined;
 	dataSource: any;
+	atividadeBaremaList: any = [];
+	grupoBaremaList:any = [];
 	constructor(public appStateService: AppStateService, public dialog: MatDialog) {}
 
 	ngOnInit(): void {
@@ -26,7 +29,7 @@ export class AtividadesComponent implements OnInit {
 
 	private newFilter() {
 		return {
-			limit: 10,
+			limit: 5,
 			page: 0,
 			atividadeBaremaId: undefined as any,
 			grupoBaremaId: undefined as any,
@@ -37,7 +40,7 @@ export class AtividadesComponent implements OnInit {
 	freshFilter() {
 		this.dataSource = { itens: [], currentPage: 0, totalItens: 0 };
 		this.filtro.page = 0;
-		this.filtro.limit = 10;
+		this.filtro.limit = 5;
 		this.loadDependencies();
 	}
 
@@ -57,6 +60,22 @@ export class AtividadesComponent implements OnInit {
 			});
 			this.dataSource = response;
 			this.loading = false;
+		});
+
+		this.execute('http-request', {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: 'atividade-barema/table'
+		}).subscribe((response: any) => {
+			this.atividadeBaremaList = response;
+		});
+
+		this.execute('http-request', {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: 'grupo-barema/table'
+		}).subscribe((response: any) => {
+			this.grupoBaremaList = response;
 		});
 	}
 

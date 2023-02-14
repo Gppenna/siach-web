@@ -14,6 +14,28 @@
 				</button>
 			</div>
 		</div>
+		<div>
+			<div class="mr-3"> 
+				<mat-form-field appearance="outline" style="font-size: 16px; width: 500px">
+					<mat-label>Atividade</mat-label>
+					<mat-select [(ngModel)]="filtro.atividadeBaremaId" (selectionChange)="freshFilter()">
+						<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.id }}" [title]="item.descricao" [matTooltip]="item.descricao">
+							{{ item.descricao }}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			<div>
+				<mat-form-field appearance="outline" style="font-size: 16px; width: 500px">
+					<mat-label>Grupo</mat-label>
+					<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
+						<mat-option *ngFor="let item of grupoBaremaList" value="{{ item.id }}"> {{ item.numero }} - {{ item.descricao }} </mat-option>
+					</mat-select>
+				</mat-form-field>
+			</div>
+			
+		</div>
+
 		<ng-template [ngIf]="dataSource">
 			<div class="card-container my-4" style="cursor: pointer" (click)="openDetails(atividade)" *ngFor="let atividade of dataSource.itens">
 				<div class="d-flex">
@@ -23,9 +45,13 @@
 						>
 						<div style="padding: 1rem">
 							<div class="px-2">
-								<div class="d-flex justify-content-between w-75 mb-3">
-									<h2 class="nm">{{ atividade.titulo }}</h2>
-									<div class="chip primary">{{ atividade.horas }} horas</div>
+								<div class="row">
+									<div class="col-8">
+										<h2 class="nm">{{ atividade.titulo }}</h2>
+									</div>
+									<div class="col">
+										<div class="chip primary">{{ atividade.horas }} horas</div>
+									</div>
 								</div>
 
 								<h3>{{ atividade.grupoBarema?.descricao }}</h3>

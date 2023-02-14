@@ -8,6 +8,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AtividadesModalComponent } from './atividades-modal/atividades-modal.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
 	{
@@ -18,7 +21,11 @@ const routes: Routes = [
 
 @NgModule({
 	declarations: [AtividadesComponent, AtividadesModalComponent],
-	imports: [RouterModule.forChild(routes), MatDividerModule, CommonModule, MatDialogModule, MatIconModule, MatProgressSpinnerModule],
+	imports: [
+		RouterModule.forChild(routes),
+		MatDividerModule,
+		SharedModule
+	],
 	providers: [MatDatepickerModule],
 	entryComponents: [AtividadesComponent],
 })

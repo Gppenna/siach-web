@@ -11,6 +11,8 @@
 @import './theme.scss';
 // import custom component themes
 @import './custom-component-themes.scss';
+
+@import "~bootstrap/scss/mixins";
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
