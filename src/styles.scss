@@ -1,6 +1,7 @@
 // src\styles.scss
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
+@import "~@coreui/coreui/scss/coreui";
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 // Include the common styles for Angular Material. We include this here so that you only
@@ -10,6 +11,7 @@
 // import our custom theme
 @import './theme.scss';
 // import custom component themes
+
 @import './custom-component-themes.scss';
 
 @import "~bootstrap/scss/mixins";
@@ -87,6 +89,7 @@ html,
 body {
 	height: 100%;
 	box-sizing: border-box;
+	background-color: #fff;
 }
 
 *,
