@@ -14,38 +14,61 @@
 				</button>
 			</div>
 		</div>
-		<div>
-			<div class="mr-3"> 
-				<mat-form-field appearance="outline" style="font-size: 16px; width: 500px">
-					<mat-label>Atividade</mat-label>
-					<mat-select [(ngModel)]="filtro.atividadeBaremaId" (selectionChange)="freshFilter()">
-						<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.id }}" [title]="item.descricao" [matTooltip]="item.descricao">
-							{{ item.descricao }}
-						</mat-option>
-					</mat-select>
-				</mat-form-field>
+		<div class="row mt-5 mx-0 align-items-center">
+			<div class="d-flex np align-items-center mr-3" style="width: fit-content; opacity: 0.7">
+				<button mat-icon-button (click)="showFilter = !showFilter; filtro = this.newFilter()">
+					<mat-icon [matTooltip]="showFilter ? 'Esconder filtros' : 'Mostrar filtros'">{{ showFilter ? 'filter_list_off' : 'filter_list' }}</mat-icon>
+				</button>
 			</div>
-			<div>
-				<mat-form-field appearance="outline" style="font-size: 16px; width: 500px">
-					<mat-label>Grupo</mat-label>
-					<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
-						<mat-option *ngFor="let item of grupoBaremaList" value="{{ item.id }}"> {{ item.numero }} - {{ item.descricao }} </mat-option>
-					</mat-select>
-				</mat-form-field>
+			<div class="np d-flex align-items-center" style="width: 90%; gap: 1rem">
+				<ng-template [ngIf]="showFilter">
+					<div>
+						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
+							<mat-label>Atividade</mat-label>
+							<mat-select [(ngModel)]="filtro.atividadeBaremaId" (selectionChange)="freshFilter()">
+								<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.id }}" [matTooltip]="item.descricao">
+									{{ item.descricao }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
+							<mat-label>Grupo</mat-label>
+							<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
+								<mat-option *ngFor="let item of grupoBaremaList" [matTooltip]="item.descricao" value="{{ item.id }}">
+									{{ item.numero }} - {{ item.descricao }}
+								</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div>
+						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 200px">
+							<mat-label>Carga Horária Mínima</mat-label>
+							<input matInput min="1" type="number" (input)="freshFilterDelay()" [(ngModel)]="filtro.cargaHoraria" />
+						</mat-form-field>
+					</div>
+					<ng-template [ngIf]="filtro.atividadeBaremaId !== undefined || filtro.grupoBaremaId !== undefined || filtro.cargaHoraria !== undefined">
+						<div>
+							<button mat-icon-button (click)="filtro = this.newFilter(); freshFilter()">
+								<mat-icon [matTooltip]="'Limpar filtros'" style="color: #e27060">delete</mat-icon>
+							</button>
+						</div>
+					</ng-template>
+				</ng-template>
 			</div>
-			
 		</div>
 
 		<ng-template [ngIf]="dataSource">
 			<div class="card-container my-4" style="cursor: pointer" (click)="openDetails(atividade)" *ngFor="let atividade of dataSource.itens">
 				<div class="d-flex">
-					<div style="padding: 1rem; width: 40%">
+					<div style="padding: 1rem; width: 60%">
 						<span class="mat-small highlight"
 							>Data: {{ atividade.periodoInicio | date : 'dd/MM/yyyy' }} - {{ atividade.periodoFim | date : 'dd/MM/yyyy' }}</span
 						>
 						<div style="padding: 1rem">
-							<div class="px-2">
-								<div class="row">
+							<div class="p-2">
+								<div class="row mb-2">
 									<div class="col-8">
 										<h2 class="nm">{{ atividade.titulo }}</h2>
 									</div>
@@ -69,7 +92,7 @@
 					<div class="card-img" style="width: 60%" [ngStyle]="{ 'background-image': 'url(' + atividade.imagem + ')' }"></div>
 				</div>
 			</div>
-			<div class="align-items-center d-flex gap-3 justify-content-center">
+			<div class="align-items-center d-flex gap-3 justify-content-center mt-3">
 				<button [disabled]="loading" class="btn btn-load position-relative" style="width: 230px !important" (click)="loadMore()">
 					<span> Mostrar Mais </span>
 					<ng-template [ngIf]="loading">

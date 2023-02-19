@@ -16,18 +16,19 @@ import { FormGroup } from '@angular/forms';
 export class AtividadesComponent implements OnInit {
 	filtro = this.newFilter();
 	loading = false;
-
+	showFilter = true;
+	isExecuting = false;
 	image: any = undefined;
 	dataSource: any;
 	atividadeBaremaList: any = [];
-	grupoBaremaList:any = [];
+	grupoBaremaList: any = [];
 	constructor(public appStateService: AppStateService, public dialog: MatDialog) {}
 
 	ngOnInit(): void {
 		this.loadDependencies();
 	}
 
-	private newFilter() {
+	newFilter() {
 		return {
 			limit: 5,
 			page: 0,
@@ -35,6 +36,16 @@ export class AtividadesComponent implements OnInit {
 			grupoBaremaId: undefined as any,
 			cargaHoraria: undefined as any,
 		};
+	}
+
+	freshFilterDelay() {
+		if (!this.isExecuting) {
+			this.isExecuting = true;
+			setTimeout(() => {
+				this.freshFilter();
+				this.isExecuting = false;
+			}, 1000);
+		}
 	}
 
 	freshFilter() {
@@ -65,7 +76,7 @@ export class AtividadesComponent implements OnInit {
 		this.execute('http-request', {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'atividade-barema/table'
+			path: 'atividade-barema/table',
 		}).subscribe((response: any) => {
 			this.atividadeBaremaList = response;
 		});
@@ -73,7 +84,7 @@ export class AtividadesComponent implements OnInit {
 		this.execute('http-request', {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'grupo-barema/table'
+			path: 'grupo-barema/table',
 		}).subscribe((response: any) => {
 			this.grupoBaremaList = response;
 		});

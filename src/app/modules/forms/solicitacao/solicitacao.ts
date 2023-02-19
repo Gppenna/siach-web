@@ -7,248 +7,258 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateUtils } from 'src/app/utils/date-utils';
 import FileSaver, { saveAs } from 'file-saver';
 
-
-
 @Component({
-  selector: 'solicitacao',
-  templateUrl: 'solicitacao.html',
+	selector: 'solicitacao',
+	templateUrl: 'solicitacao.html',
 })
 export class SolicitacaoSheet {
-  loading = true;
-  error: any = undefined;
-  actionComplete = false;
-  formControl: FormGroup;
-  new = true;
+	loading = true;
+	error: any = undefined;
+	actionComplete = false;
+	formControl: FormGroup;
+	new = true;
 
-  stopFlag = false;
-  stopFlagExceed = false;
-  actualFile:any = undefined;
+	stopFlag = false;
+	stopFlagExceed = false;
+	actualFile: any = undefined;
 
-  baremaSelect:any = [];
-  USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
-  @Output()
-  initialize = new EventEmitter<any>();
-  @Output()
-  httpRequest = new EventEmitter<any>();
-  @Output()
-  cancel = new EventEmitter<any>();
-  itenData: any;
+	baremaSelect: any = [];
+	USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
+	@Output()
+	initialize = new EventEmitter<any>();
+	@Output()
+	httpRequest = new EventEmitter<any>();
+	@Output()
+	cancel = new EventEmitter<any>();
+	itenData: any;
 
-  totalLocal:any;
-  
-  fileData: any;
+	totalLocal: any;
 
-  subHorasRascunho = 0;
+	fileData: any;
 
-  addHoras = 0;
-  addHorasFlag = false;
+	subHorasRascunho = 0;
 
-  totalHoras = 0;
-  totalHorasRascunho = 0;
-  exectotalHorasCalc = true;
+	addHoras = 0;
+	addHorasFlag = false;
 
-  constructor(
-    private _bottomSheetRef: MatBottomSheetRef<SolicitacaoSheet>,
-    private formBuilder: FormBuilder,
-    public appStateService: AppStateService,
-    private readonly snackBar: MatSnackBar,
-  ) {}
+	totalHoras = 0;
+	totalHorasRascunho = 0;
+	exectotalHorasCalc = true;
 
-  dependencies: any = {
-    atividadeBarema: {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: 'atividade-barema/table'
-    },
-    totalHorasDependency: {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: 'perfil'
-    }
-  };
+	constructor(
+		private _bottomSheetRef: MatBottomSheetRef<SolicitacaoSheet>,
+		private formBuilder: FormBuilder,
+		public appStateService: AppStateService,
+		private readonly snackBar: MatSnackBar,
+	) {}
 
-  dependenciesData: any;
+	dependencies: any = {
+		atividadeBarema: {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: 'atividade-barema/table',
+		},
+		totalHorasDependency: {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: 'perfil',
+		},
+	};
 
-  totalHorasCalc() {
-    if(this.exectotalHorasCalc) {
+	dependenciesData: any;
 
-      this.dependenciesData.totalHorasDependency.forEach((element:any) => {
-        Object.keys(element.perfilGrupo).forEach((key, index) => {
-          this.totalHoras += element.perfilGrupo[key].horasContabilizadas;
-  
-          this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadasRascunho;
-        });
-        if (this.totalHorasRascunho > 0) {
-          this.addHorasFlag = true;
-        }
-        
-      });
+	colorsCalc(numerador: any, denominador: any, normalize?: any) {
+		let arit = (100 * numerador) / denominador;
+		if (normalize) {
+			arit += normalize;
+		}
+		return 'calc(' + arit + '%)';
+	}
 
-      this.exectotalHorasCalc = false;
-      console.log(this.totalHoras, this.totalHorasRascunho , 'horas')
-    }
-    
-  }
+	conicGradientFactory(initialColor: any, finalColor: any, numerador: any, denominador: any) {
+		let gradientString = 'conic-gradient(';
+		let firstColorString = initialColor + ' ' + this.colorsCalc(numerador, denominador) + ',';
+		let finalColorString = finalColor + ' ' + this.colorsCalc(numerador, denominador, 0.3) + ')';
+		gradientString += firstColorString + finalColorString;
 
-  getHorasContabilizadas() {
-    let horasContabilizadas = 0;
-    let atividade = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-    horasContabilizadas += atividade.horasContabilizadas + atividade.horasContabilizadasRascunho;
+		return gradientString;
+	}
 
-    return horasContabilizadas;
-  }
-  
-  getHoraLimite() {
-    let atividadeFinalizado = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-    return atividadeFinalizado.horasLimite;
-  }
+	totalHorasCalc() {
+		if (this.exectotalHorasCalc) {
+			this.dependenciesData.totalHorasDependency.forEach((element: any) => {
+				Object.keys(element.perfilGrupo).forEach((key, index) => {
+					this.totalHoras += element.perfilGrupo[key].horasContabilizadas;
 
-  changeCh() {
-    if((this.getHorasContabilizadas() + this.formControl.value.horas - this.subHorasRascunho) <= this.getHoraLimite()) {
-      this.addHoras = this.formControl.value.horas;
-      console.log(this.addHoras, 'addhoras')
-    }
-    else {
-      this.addHoras = this.getHoraLimite() - this.getHorasContabilizadas() + this.subHorasRascunho;
-    }
-  }
+					this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadasRascunho;
+				});
+				if (this.totalHorasRascunho > 0) {
+					this.addHorasFlag = true;
+				}
+			});
 
-  horasRestantes() {
-    if(this.formControl.value.coringaFlag) {
-      return this.getHoraLimite();
-    }
-    if(this.totalLocal) {
-      let horasRestantes = 0;
-      let atividade = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
-      horasRestantes += atividade.horasContabilizadas + atividade.horasContabilizadasRascunho;
+			this.exectotalHorasCalc = false;
+			console.log(this.totalHoras, this.totalHorasRascunho, 'horas');
+		}
+	}
 
-      return atividade.horasLimite - horasRestantes + this.subHorasRascunho;
-    }
-    return 0;
-  }
+	getHorasContabilizadas() {
+		let horasContabilizadas = 0;
+		let atividade = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+		horasContabilizadas += atividade.horasContabilizadas + atividade.horasContabilizadasRascunho;
 
-  totalLocalCalc(data:any) {
-    const request = {
-      type: 'GET',
-      api: environment.apiUrl,
-      path: `perfil/${data}`};
-    this.execute('http-request', request).subscribe((response:any) => {
-      this.totalLocal = response;
-      this.stopFlag = false;
-      this.addHoras = 0;
-      this.checkLimiteHoras();
-      this.changeCh();
-    });
-  }
+		return horasContabilizadas;
+	}
 
-  checkLimiteHoras() {
-    console.log(this.getHorasContabilizadas(), this.getHoraLimite(), 'horasRestantesLimite');
-    if(this.getHorasContabilizadas() === this.getHoraLimite() && this.new) {
-      this.stopFlag = true;
-      this.snackBar.open('Você já aproveitou todas as horas possíveis a esta atividade!', 'Ok', {
-        duration: 6000,
-        panelClass: ['red-snackbar']
-      });
-    }
-    
-  }
+	getHoraLimite() {
+		let atividadeFinalizado = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+		return atividadeFinalizado.horasLimite;
+	}
 
-  execute(type: string, data?: any) {
-    return this.appStateService.execute({ type: type, data: data });
-  }
+	changeCh() {
+		if (this.getHorasContabilizadas() + this.formControl.value.horas - this.subHorasRascunho <= this.getHoraLimite()) {
+			this.addHoras = this.formControl.value.horas;
+			console.log(this.addHoras, 'addhoras');
+		} else {
+			this.addHoras = this.getHoraLimite() - this.getHorasContabilizadas() + this.subHorasRascunho;
+		}
+	}
 
-  onConnectedToParent() {
-    this.initialize.emit();
-  }
+	horasRestantes() {
+		if (this.formControl.value.coringaFlag) {
+			return this.getHoraLimite();
+		}
+		if (this.totalLocal) {
+			let horasRestantes = 0;
+			let atividade = this.totalLocal[0].perfilAtividadeList[this.formControl.value.idAtividadeBarema];
+			horasRestantes += atividade.horasContabilizadas + atividade.horasContabilizadasRascunho;
 
-  onCancel(event: MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    this._bottomSheetRef.dismiss();
-    this.cancel.emit();
-  }
+			return atividade.horasLimite - horasRestantes + this.subHorasRascunho;
+		}
+		return 0;
+	}
 
-  save() {
-    let objFormData = new FormData();
-    objFormData.append('titulo', this.formControl.get('titulo')?.value);
-    objFormData.append('horas', this.formControl.get('horas')?.value);
-    objFormData.append('idAtividadeBarema', this.formControl.get('idAtividadeBarema')?.value);
-    if(this.formControl.get('coringaFlag')?.value) {
-      objFormData.append('statusInterno', 'E');
-    }
-    objFormData.append('comprovante', this.fileData);
-    objFormData.append('comprovanteNome', this.fileData.name);
-    objFormData.append('email', sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE))
-    if(this.formControl.get('id')?.value) {
-      objFormData.append('id', this.formControl.get('id')?.value);
-    }
-    
-    this.loading = true;
-    const request = {
-      type: 'POST',
-      api: environment.apiUrl,
-      path: `solicitacao/criar`,
-      body: objFormData,
-    };
-    console.log('save :: ', objFormData);
-    this.httpRequest.emit(request);
-  }
+	totalLocalCalc(data: any) {
+		const request = {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: `perfil/${data}`,
+		};
+		this.execute('http-request', request).subscribe((response: any) => {
+			this.totalLocal = response;
+			this.stopFlag = false;
+			this.addHoras = 0;
+			this.checkLimiteHoras();
+			this.changeCh();
+		});
+	}
 
-  downloadActual() {
-    FileSaver.saveAs(this.actualFile.file, this.actualFile.name);
-  }
+	checkLimiteHoras() {
+		console.log(this.getHorasContabilizadas(), this.getHoraLimite(), 'horasRestantesLimite');
+		if (this.getHorasContabilizadas() === this.getHoraLimite() && this.new) {
+			this.stopFlag = true;
+			this.snackBar.open('Você já aproveitou todas as horas possíveis a esta atividade!', 'Ok', {
+				duration: 6000,
+				panelClass: ['red-snackbar'],
+			});
+		}
+	}
 
-  inputFileChanged(event: any) {
-    const file: File = event.target.files[0];
-    if (file && (file.type === 'application/pdf')) {
-      console.log('inputFileChanged', file);
-      this.fileData = file; 
-      this.actualFile = {name: file.name}
-      file.arrayBuffer().then((arrayBuffer) => {
-        let base64 = btoa(
-          new Uint8Array(arrayBuffer)
-            .reduce((data, byte) => data + String.fromCharCode(byte), '')
-        );
-        fetch("data:application/pdf;base64," + base64)
-          .then(function(resp) {return resp.blob()})
-          .then((blob) => {
-            this.actualFile['file'] = blob;
-          });
-    });
-    }
-    else {
-      this.snackBar.open('Formato de arquivo inválido, por favor utilize PDF', 'Ok', {
-        duration: 6000,
-        panelClass: ['red-snackbar']
-      });
-      return;
-    }
-  }
+	execute(type: string, data?: any) {
+		return this.appStateService.execute({ type: type, data: data });
+	}
 
-  initFormControl(data?: any) {
-    console.log(data, "data");
-    this.formControl = this.formBuilder.group({
-      id: data? data.id : '',
-      titulo: data? data.titulo : '',
-      horas: data? data.horas : '',
-      coringaFlag: data? (data.statusInterno === "E" ? true : false) : false,
-      idAtividadeBarema : data? data.atividadeBarema.id.toString() : '',
-    });
-    if(data) {
-      this.totalLocalCalc(data.atividadeBarema.id);
-      if(data.statusInterno !== "E") {
-        this.subHorasRascunho = data.horas;
-      }
-      else {
-        this.stopFlagExceed = true;
-      }
-      this.new = false;
-      fetch("data:application/pdf;base64," + data.comprovante)
-      .then(function(resp) {return resp.blob()})
-      .then((blob) => {
-        this.actualFile = {file: blob, name: data.comprovanteNome};
-        this.fileData = new File([blob], data.comprovanteNome, {type:"application/pdf"});
-      });
-    }
-  }
+	onConnectedToParent() {
+		this.initialize.emit();
+	}
+
+	onCancel(event: MouseEvent) {
+		event.preventDefault();
+		event.stopPropagation();
+		this._bottomSheetRef.dismiss();
+		this.cancel.emit();
+	}
+
+	save() {
+		let objFormData = new FormData();
+		objFormData.append('titulo', this.formControl.get('titulo')?.value);
+		objFormData.append('horas', this.formControl.get('horas')?.value);
+		objFormData.append('idAtividadeBarema', this.formControl.get('idAtividadeBarema')?.value);
+		if (this.formControl.get('coringaFlag')?.value) {
+			objFormData.append('statusInterno', 'E');
+		}
+		objFormData.append('comprovante', this.fileData);
+		objFormData.append('comprovanteNome', this.fileData.name);
+		objFormData.append('email', sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE));
+		if (this.formControl.get('id')?.value) {
+			objFormData.append('id', this.formControl.get('id')?.value);
+		}
+
+		this.loading = true;
+		const request = {
+			type: 'POST',
+			api: environment.apiUrl,
+			path: `solicitacao/criar`,
+			body: objFormData,
+		};
+		console.log('save :: ', objFormData);
+		this.httpRequest.emit(request);
+	}
+
+	downloadActual() {
+		FileSaver.saveAs(this.actualFile.file, this.actualFile.name);
+	}
+
+	inputFileChanged(event: any) {
+		const file: File = event.target.files[0];
+		if (file && file.type === 'application/pdf') {
+			console.log('inputFileChanged', file);
+			this.fileData = file;
+			this.actualFile = { name: file.name };
+			file.arrayBuffer().then((arrayBuffer) => {
+				let base64 = btoa(new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+				fetch('data:application/pdf;base64,' + base64)
+					.then(function (resp) {
+						return resp.blob();
+					})
+					.then((blob) => {
+						this.actualFile['file'] = blob;
+					});
+			});
+		} else {
+			this.snackBar.open('Formato de arquivo inválido, por favor utilize PDF', 'Ok', {
+				duration: 6000,
+				panelClass: ['red-snackbar'],
+			});
+			return;
+		}
+	}
+
+	initFormControl(data?: any) {
+		console.log(data, 'data');
+		this.formControl = this.formBuilder.group({
+			id: data ? data.id : '',
+			titulo: data ? data.titulo : '',
+			horas: data ? data.horas : '',
+			coringaFlag: data ? (data.statusInterno === 'E' ? true : false) : false,
+			idAtividadeBarema: data ? data.atividadeBarema.id.toString() : '',
+		});
+		if (data) {
+			this.totalLocalCalc(data.atividadeBarema.id);
+			if (data.statusInterno !== 'E') {
+				this.subHorasRascunho = data.horas;
+			} else {
+				this.stopFlagExceed = true;
+			}
+			this.new = false;
+			fetch('data:application/pdf;base64,' + data.comprovante)
+				.then(function (resp) {
+					return resp.blob();
+				})
+				.then((blob) => {
+					this.actualFile = { file: blob, name: data.comprovanteNome };
+					this.fileData = new File([blob], data.comprovanteNome, { type: 'application/pdf' });
+				});
+		}
+	}
 }

@@ -1,7 +1,7 @@
 // src\styles.scss
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@import "~@coreui/coreui/scss/coreui";
+@import '~@coreui/coreui/scss/coreui';
 @import '~@angular/material/theming';
 // Plus imports for other components in your app.
 // Include the common styles for Angular Material. We include this here so that you only
@@ -14,7 +14,7 @@
 
 @import './custom-component-themes.scss';
 
-@import "~bootstrap/scss/mixins";
+@import '~bootstrap/scss/mixins';
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
@@ -107,8 +107,84 @@ body {
 	margin: 0 !important;
 }
 
-np {
+.np {
 	padding: 0 !important;
+}
+
+.col-xl,
+.col-xl-auto,
+.col-xl-12,
+.col-xl-11,
+.col-xl-10,
+.col-xl-9,
+.col-xl-8,
+.col-xl-7,
+.col-xl-6,
+.col-xl-5,
+.col-xl-4,
+.col-xl-3,
+.col-xl-2,
+.col-xl-1,
+.col-lg,
+.col-lg-auto,
+.col-lg-12,
+.col-lg-11,
+.col-lg-10,
+.col-lg-9,
+.col-lg-8,
+.col-lg-7,
+.col-lg-6,
+.col-lg-5,
+.col-lg-4,
+.col-lg-3,
+.col-lg-2,
+.col-lg-1,
+.col-md,
+.col-md-auto,
+.col-md-12,
+.col-md-11,
+.col-md-10,
+.col-md-9,
+.col-md-8,
+.col-md-7,
+.col-md-6,
+.col-md-5,
+.col-md-4,
+.col-md-3,
+.col-md-2,
+.col-md-1,
+.col-sm,
+.col-sm-auto,
+.col-sm-12,
+.col-sm-11,
+.col-sm-10,
+.col-sm-9,
+.col-sm-8,
+.col-sm-7,
+.col-sm-6,
+.col-sm-5,
+.col-sm-4,
+.col-sm-3,
+.col-sm-2,
+.col-sm-1,
+.col,
+.col-auto,
+.col-12,
+.col-11,
+.col-10,
+.col-9,
+.col-8,
+.col-7,
+.col-6,
+.col-5,
+.col-4,
+.col-3,
+.col-2,
+.col-1 {
+	position: relative;
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
 }
 
 .mat-toolbar {
@@ -732,8 +808,75 @@ pre {
 		background: #555;
 	}
 	.btn-new,
+	.chip.primary,
+	.btn-load,
 	.btn-primary {
 		background-color: rgb(96 111 143);
+	}
+	// mat-icon-stepper selected color change
+	.mat-step-header .mat-step-icon-selected,
+	.mat-step-header .mat-step-icon-state-done,
+	.mat-step-header .mat-step-icon-state-edit {
+		background-color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	mat-label {
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	.mat-select-arrow {
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	//input outline color
+	.mat-form-field-appearance-outline .mat-form-field-outline {
+		color: rgba(255, 255, 255, 0.7) !important;
+		// opacity: 1!important;
+	}
+
+	//mat-input focused color
+	.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	// mat-input error outline color
+	.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	input {
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	.mat-progress-bar-buffer {
+		background-color: rgb(91 91 91) !important;
+	}
+
+	// mat-input carent color
+	.mat-input-element {
+		caret-color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	// mat-input error carent color
+	.mat-form-field-invalid .mat-input-element,
+	.mat-warn .mat-input-element {
+		caret-color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	// mat-label normal state style
+	.mat-form-field-label {
+		color: rgba(0, 0, 0, 0.6) !important;
+		// color: $mainColor!important;
+	}
+
+	// mat-label focused style
+	.mat-form-field.mat-focused .mat-form-field-label {
+		color: rgba(255, 255, 255, 0.7) !important;
+	}
+
+	// mat-label error style
+	.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+		color: rgba(255, 255, 255, 0.7) !important;
 	}
 	th,
 	tr,
@@ -771,6 +914,10 @@ pre {
 	}
 	mat-icon {
 		color: #fff !important;
+	}
+	.dark-theme .mat-option.mat-selected,
+	.dark-theme .mat-option.mat-active {
+		background: rgb(31, 31, 31) !important;
 	}
 	mat-option {
 		background: var(--bs-body-bg-night-eye);

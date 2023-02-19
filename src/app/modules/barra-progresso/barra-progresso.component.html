@@ -1,88 +1,39 @@
 <ng-template [ngIf]="dataSource">
-  <div *ngFor="let atividade of dataSource | keyvalue">
-    <span class="nunito d-flex gap-2"
-      >{{ $any(atividade.value).descricao }}
-      <mat-icon
-        *ngIf="dataSourceSecondary"
-        class="cursor-pointer"
-        (click)="openGrupo(dataSourceSecondary)"
-        >search</mat-icon
-      ></span
-    >
-    <div class="progresso-barra">
-      <div class="position-relative">
-        <div class="position-absolute w-100">
-          <mat-progress-bar
-            aria-label="Barra de progresso"
-            mode="determinate"
-            [value]="
-              (100 * $any(atividade.value).horasContabilizadas) /
-              $any(atividade.value).horasLimite
-            "
-          >
-          </mat-progress-bar>
-          <div
-            *ngIf="adicional === 0"
-            class="position-absolute nunito"
-            [ngStyle]="{
-              left:
-                (100 * $any(atividade.value).horasContabilizadas) /
-                  $any(atividade.value).horasLimite +
-                '%'
-            }"
-          >
-            {{
-              (
-                (100 * $any(atividade.value).horasContabilizadas) /
-                $any(atividade.value).horasLimite
-              ).toPrecision(3)
-            }}%
-          </div>
-        </div>
+	<div *ngFor="let atividade of dataSource | keyvalue" class="mt-3">
+		<span class="nunito d-flex gap-2"
+			>{{ $any(atividade.value).descricao }}
+			<mat-icon *ngIf="dataSourceSecondary" class="cursor-pointer" (click)="openGrupo(dataSourceSecondary)">search</mat-icon></span
+		>
+		<div class="progresso-barra">
+			<div class="position-relative">
+				<div class="position-absolute w-100">
+					<mat-progress-bar aria-label="Barra de progresso" mode="determinate" [value]="calcValueContabilizado(atividade)"> </mat-progress-bar>
+					<div
+						*ngIf="adicional === 0"
+						class="position-absolute nunito"
+						[ngStyle]="{
+							left: calcValueContabilizado(atividade) + '%'
+						}"
+					>
+						{{ calcValueContabilizado(atividade).toPrecision(3) }}%
+					</div>
+				</div>
 
-        <div
-          class="position-absolute w-100"
-          *ngIf="$any(atividade.value).horasContabilizadasRascunho > 0"
-        >
-          <mat-progress-bar
-            class="adicional"
-            aria-label="Barra de progresso"
-            mode="determinate"
-            [value]="
-              (100 *
-                ($any(atividade.value).horasContabilizadas +
-                  $any(atividade.value).horasContabilizadasRascunho +
-                  adicional)) /
-              $any(atividade.value).horasLimite
-            "
-          >
-          </mat-progress-bar>
-          <div
-            style="color: #5fd3b1 !important"
-            class="position-absolute nunito"
-            [ngStyle]="{
-              left:
-                (100 *
-                  ($any(atividade.value).horasContabilizadas +
-                    $any(atividade.value).horasContabilizadasRascunho +
-                    adicional)) /
-                  $any(atividade.value).horasLimite +
-                '%'
-            }"
-          >
-            {{
-              (
-                (100 *
-                  ($any(atividade.value).horasContabilizadas +
-                    $any(atividade.value).horasContabilizadasRascunho +
-                    adicional)) /
-                $any(atividade.value).horasLimite
-              ).toPrecision(3)
-            }}%
-          </div>
-        </div>
-      </div>
-      <div class="nunito">{{ $any(atividade.value).horasLimite }}h</div>
-    </div>
-  </div>
+				<div class="position-absolute w-100" *ngIf="$any(atividade.value).horasContabilizadasRascunho > 0 || adicional > 0">
+					<mat-progress-bar class="adicional" aria-label="Barra de progresso" mode="determinate" [value]="calcValueContabilizadoRascunho(atividade)">
+					</mat-progress-bar>
+					<div
+						style="color: #5fd3b1 !important"
+						class="position-absolute nunito"
+						[ngStyle]="{
+							left: calcValueContabilizadoRascunho(atividade) + '%'
+						}"
+					>
+						{{ calcValueContabilizadoRascunho(atividade).toPrecision(3) }}%
+					</div>
+				</div>
+			</div>
+			<div class="nunito">{{ $any(atividade.value).horasLimite }}h</div>
+		</div>
+	</div>
 </ng-template>

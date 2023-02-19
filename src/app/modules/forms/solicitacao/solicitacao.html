@@ -1,230 +1,157 @@
 <div class="app-page-container-bottomsheet">
-  <div class="app-page-bottomsheet-header py-3">
-    <h1>
-      {{new ? 'Nova' : 'Editar'}} Solicitação {{new ? '' : 'Pendente de Envio'}}
-    </h1>
-  </div>
-  <ng-template [ngIf]="!loading && !actionComplete && !error">
-    <div class="row">
-      <div class="solicitacaoForm col-7">
-        <form [formGroup]="formControl" style="font-size: 16px">
-          <div class="app-page-bottomsheet-content">
-            <mat-form-field class="app-page-form-full" appearance="outline">
-              <mat-label>Título da Atividade</mat-label>
-              <input
-                matInput
-                required="true"
-                type="text"
-                formControlName="titulo"
-              />
-            </mat-form-field>
-          </div>
-          <mat-form-field class="app-page-form-full" appearance="outline">
-            <mat-label>Atividade Associada</mat-label>
-            <mat-select
-              [disabled]="!new"
-              formControlName="idAtividadeBarema"
-              (selectionChange)="totalLocalCalc($event.value)"
-            >
-              <mat-option
-                *ngFor="let item of dependenciesData.atividadeBarema"
-                value="{{item.id}}"
-                [title]="item.descricao"
-              >
-                {{item.descricao}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <div class="app-page-bottomsheet-content">
-            <span
-              *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)"
-              class="sucessColor"
-              >Você ainda possui até {{horasRestantes()}} horas restantes para
-              aproveitar na atividade selecionada.</span
-            >
-            <ng-template [ngIf]="stopFlag || stopFlagExceed">
-              <div class="d-flex flex-column" style="margin-bottom: 1rem">
-                <span class="warnColor w-100"
-                  >Você não possui horas restantes para aproveitar na atividade
-                  selecionada.</span
-                >
-                <div class="w-100">
-                  <span class="warnColor" style="margin-right: 1rem"
-                    >Deseja seguir com a solicitação apenas para contar no
-                    histórico?</span
-                  >
-                  <mat-checkbox formControlName="coringaFlag"> </mat-checkbox>
-                </div>
-              </div>
-            </ng-template>
+	<div class="app-page-bottomsheet-header py-3">
+		<h1>{{new ? 'Nova' : 'Editar'}} Solicitação {{new ? '' : 'Pendente de Envio'}}</h1>
+	</div>
+	<ng-template [ngIf]="!loading && !actionComplete && !error">
+		<div class="row">
+			<div class="solicitacaoForm col-7">
+				<form [formGroup]="formControl" style="font-size: 16px">
+					<div class="app-page-bottomsheet-content">
+						<mat-form-field class="app-page-form-full" appearance="outline">
+							<mat-label>Título da Atividade</mat-label>
+							<input matInput required="true" type="text" formControlName="titulo" />
+						</mat-form-field>
+					</div>
+					<mat-form-field class="app-page-form-full" appearance="outline">
+						<mat-label>Atividade Associada</mat-label>
+						<mat-select [disabled]="!new" formControlName="idAtividadeBarema" (selectionChange)="totalLocalCalc($event.value)">
+							<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.id}}" [title]="item.descricao">
+								{{item.descricao}}
+							</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<div class="app-page-bottomsheet-content">
+						<span *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" class="sucessColor"
+							>Você ainda possui até {{horasRestantes()}} horas restantes para aproveitar na atividade selecionada.</span
+						>
+						<ng-template [ngIf]="stopFlag || stopFlagExceed">
+							<div class="d-flex flex-column" style="margin-bottom: 1rem">
+								<span class="warnColor w-100">Você não possui horas restantes para aproveitar na atividade selecionada.</span>
+								<div class="w-100">
+									<span class="warnColor" style="margin-right: 1rem">Deseja seguir com a solicitação apenas para contar no histórico?</span>
+									<mat-checkbox formControlName="coringaFlag"> </mat-checkbox>
+								</div>
+							</div>
+						</ng-template>
 
-            <mat-form-field
-              class="app-page-form-full"
-              appearance="outline"
-              [ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
-            >
-              <mat-label>Carga Horária</mat-label>
-              <input
-                matInput
-                [min]="0"
-                [max]="horasRestantes()"
-                [readonly]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)"
-                (change)="changeCh()"
-                required="true"
-                type="number"
-                formControlName="horas"
-              />
-            </mat-form-field>
-          </div>
+						<mat-form-field
+							class="app-page-form-full"
+							appearance="outline"
+							[ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
+						>
+							<mat-label>Carga Horária</mat-label>
+							<input
+								matInput
+								[min]="0"
+								[max]="horasRestantes()"
+								[readonly]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)"
+								(change)="changeCh()"
+								required="true"
+								type="number"
+								formControlName="horas"
+							/>
+						</mat-form-field>
+					</div>
 
-          <div
-            class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3"
-          >
-            <mat-label style="font-size: 20px" class="nunito mb-3"
-              >Seu Certificado</mat-label
-            >
+					<div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
+						<mat-label style="font-size: 20px" class="nunito mb-3">Seu Certificado</mat-label>
 
-            <div
-              class="mb-3"
-              [ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
-            >
-              <label for="file" class="btn-primary-download"
-                >Escolher Arquivo</label
-              >
-              <input
-                id="file"
-                required="true"
-                type="file"
-                (change)="inputFileChanged($event)"
-                style="display: none"
-              />
-            </div>
-            <div
-              class="d-grid cursor-pointer"
-              style="
-                max-width: 90%;
-                overflow-wrap: break-word;
-                grid-template-columns: 10% 90%;
-              "
-              (click)="downloadActual()"
-              *ngIf="actualFile"
-            >
-              <mat-icon>cloud_download</mat-icon>
-              <span>{{actualFile.name}}</span>
-            </div>
-          </div>
-        </form>
-      </div>
+						<div
+							class="mb-3"
+							[ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
+						>
+							<label for="file" class="btn-primary-download">Escolher Arquivo</label>
+							<input id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none" />
+						</div>
+						<div
+							class="d-grid cursor-pointer"
+							style="max-width: 90%; overflow-wrap: break-word; grid-template-columns: 10% 90%"
+							(click)="downloadActual()"
+							*ngIf="actualFile"
+						>
+							<mat-icon>cloud_download</mat-icon>
+							<span>{{actualFile.name}}</span>
+						</div>
+					</div>
+				</form>
+			</div>
 
-      <div
-        class="col-4 solicitacaoHoras mx-auto d-flex flex-column justify-content-between"
-      >
-        <div>
-          <h2 style="font-weight: 500; text-align: center">
-            Suas Horas Totais
-          </h2>
-          <div>
-            <div class="sphere-progress-container mx-auto">
-              <span
-                class="nunito d-flex justify-content-center align-items-center"
-                >Total
-                <mat-icon
-                  class="opacity-75"
-                  style="font-size: 1rem"
-                  matTooltip="A barra azul representa horas já aproveitadas, enquanto a barra verde representa horas em análise ou em rascunhos pendentes de envio."
-                  >help</mat-icon
-                ></span
-              >
-              {{totalHorasCalc()}}
-              <div
-                style="zoom: 0.8"
-                class="sphere-progress"
-                [ngStyle]="{'background': 'conic-gradient(#5FD3B1 calc(('+(100*((addHoras-subHorasRascunho)+(totalHoras + totalHorasRascunho))/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), #D3DCE9 calc(('+(100*((addHoras-subHorasRascunho)+(totalHoras + totalHorasRascunho))/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1% + 0.3%))'}"
-              >
-                <div
-                  class="sphere-progress"
-                  [ngStyle]="{'background': 'conic-gradient(#2B468B calc(('+(100*(totalHoras)/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1%), transparent calc(('+(100*(totalHoras)/appStateService.state?.userData?.curso.minimoHorasCurso)+')*1% + 0.3%))'}"
-                >
-                  <div class="sphere-progress-center translate-middle">
-                    <span
-                      style="font-size: 24px"
-                      class="mb-2"
-                      [ngClass]="addHorasFlag ? 'sucessColor' : ''"
-                      >{{(100*((totalHoras +
-                      totalHorasRascunho)+(addHoras-subHorasRascunho))/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span
-                    >
-                    <span
-                      class="nunito"
-                      style="font-size: 16px"
-                      [ngClass]="addHorasFlag ? 'sucessColor' : ''"
-                      >{{(totalHoras +
-                      totalHorasRascunho)+(addHoras-subHorasRascunho)}}h /
-                      {{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              *ngFor="let data of totalLocal"
-              class="pb-5 py-3"
-              style="zoom: 0.9"
-            >
-              <app-barra-progresso
-                [dataSource]="data.perfilAtividadeList"
-                [adicional]="(addHoras-subHorasRascunho)"
-              ></app-barra-progresso>
-            </div>
-          </div>
-        </div>
+			<div class="col-4 solicitacaoHoras mx-auto d-flex flex-column justify-content-between">
+				<div>
+					<h2 style="font-weight: 500; text-align: center">Suas Horas Totais</h2>
+					<div>
+						<div class="sphere-progress-container mx-auto">
+							<span class="nunito d-flex justify-content-center align-items-center"
+								>Total
+								<mat-icon
+									class="opacity-75"
+									style="font-size: 1rem"
+									matTooltip="A barra azul representa horas já aproveitadas, enquanto a barra verde representa horas em análise ou em rascunhos pendentes de envio."
+									>help</mat-icon
+								></span
+							>
+							{{totalHorasCalc()}}
+							<div
+								style="zoom: 0.8"
+								class="sphere-progress"
+								[ngStyle]="{'background': conicGradientFactory('rgb(95, 211, 177)', appStateService.state.isDark ? 'rgb(211, 220, 233, 0.3)' : 'rgb(211, 220, 233)', (addHoras-subHorasRascunho)+(totalHoras + totalHorasRascunho), appStateService.state?.userData?.curso.minimoHorasCurso)}"
+							>
+								<div
+									class="sphere-progress"
+									[ngStyle]="{'background': conicGradientFactory('rgb(43, 70, 139)', 'transparent', totalHoras, appStateService.state?.userData?.curso.minimoHorasCurso)}"
+								>
+									<div class="sphere-progress-center translate-middle">
+										<span style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+											>{{(100*((totalHoras +
+											totalHorasRascunho)+(addHoras-subHorasRascunho))/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span
+										>
+										<span class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+											>{{(totalHoras + totalHorasRascunho)+(addHoras-subHorasRascunho)}}h /
+											{{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngFor="let data of totalLocal" class="pb-5 py-3" style="zoom: 0.9">
+							<app-barra-progresso [dataSource]="data.perfilAtividadeList" [adicional]="(addHoras-subHorasRascunho)"></app-barra-progresso>
+						</div>
+					</div>
+				</div>
 
-        <div class="app-page-bottomsheet-actions">
-          <button
-            class="btn btn-primary-small"
-            [disabled]="!formControl.valid || !fileData"
-            color="primary"
-            (click)="save()"
-          >
-            {{new ? 'Criar' : 'Editar'}}
-          </button>
-          <button class="btn btn-danger-small" (click)="onCancel($event)">
-            Cancelar
-          </button>
-        </div>
-      </div>
-    </div>
-  </ng-template>
-  <ng-template [ngIf]="loading">
-    <div style="padding: 3rem 0px; text-align: center">
-      <mat-spinner style="margin: 0px auto"></mat-spinner>
-    </div>
-  </ng-template>
+				<div class="app-page-bottomsheet-actions">
+					<button class="btn btn-primary-small" [disabled]="!formControl.valid || !fileData" color="primary" (click)="save()">
+						{{new ? 'Criar' : 'Editar'}}
+					</button>
+					<button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+	<ng-template [ngIf]="loading">
+		<div style="padding: 3rem 0px; text-align: center">
+			<mat-spinner style="margin: 0px auto"></mat-spinner>
+		</div>
+	</ng-template>
 
-  <ng-template [ngIf]="!loading && actionComplete">
-    <p>
-      Rascunho:
-      <strong>
-        {{formControl.value.titulo? formControl.value.titulo : ''}}</strong
-      >
-      {{new ? 'criado' : 'editada'}} com sucesso
-    </p>
-    <div class="app-page-bottomsheet-actions">
-      <button class="btn btn-primary-small" (click)="onCancel($event)">
-        Ok
-      </button>
-    </div>
-  </ng-template>
+	<ng-template [ngIf]="!loading && actionComplete">
+		<p>
+			Rascunho:
+			<strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong>
+			{{new ? 'criado' : 'editada'}} com sucesso
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
 
-  <ng-template [ngIf]="!loading && error">
-    <p>
-      Solicitação <strong>{{formControl.value.description}}</strong> não foi
-      adicionada <br />
-      <small>{{ error.message }}</small>
-    </p>
-    <div class="app-page-bottomsheet-actions">
-      <button class="btn btn-primary-small" (click)="onCancel($event)">
-        Ok
-      </button>
-    </div>
-  </ng-template>
+	<ng-template [ngIf]="!loading && error">
+		<p>
+			Solicitação <strong>{{formControl.value.description}}</strong> não foi adicionada <br />
+			<small>{{ error.message }}</small>
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
 </div>
