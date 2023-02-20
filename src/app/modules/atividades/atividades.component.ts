@@ -63,7 +63,7 @@ export class AtividadesComponent implements OnInit {
 		const request = {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'atividade-complementar/table' + '?' + HttpUtils.buildHttpParams(filter),
+			path: 'atividade-complementar/table/' + this.appStateService.courseId() + '?' + HttpUtils.buildHttpParams(filter),
 		};
 		this.execute('http-request', request).subscribe((response: any) => {
 			response.itens.forEach((element: any) => {
@@ -76,7 +76,7 @@ export class AtividadesComponent implements OnInit {
 		this.execute('http-request', {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'atividade-barema/table',
+			path: 'atividade-barema/table/' + this.appStateService.courseId(),
 		}).subscribe((response: any) => {
 			this.atividadeBaremaList = response;
 		});
@@ -84,7 +84,7 @@ export class AtividadesComponent implements OnInit {
 		this.execute('http-request', {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'grupo-barema/table',
+			path: 'grupo-barema/table/' + this.appStateService.courseId(),
 		}).subscribe((response: any) => {
 			this.grupoBaremaList = response;
 		});

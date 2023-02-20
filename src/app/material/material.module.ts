@@ -10,20 +10,22 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
-  exports: [
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-    MatMenuModule,
-    MatBadgeModule,
-    MatListModule
-  ],
+	exports: [
+		MatSidenavModule,
+		MatSliderModule,
+		MatSlideToggleModule,
+		MatToolbarModule,
+		MatCheckboxModule,
+		MatIconModule,
+		MatButtonModule,
+		MatTooltipModule,
+		MatMenuModule,
+		MatBadgeModule,
+		MatListModule,
+		MatSelectModule,
+	],
 })
 export class MaterialModule {}

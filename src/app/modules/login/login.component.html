@@ -1,17 +1,21 @@
 <div class="d-flex flex-column align-items-center" style="zoom: 0.9">
-    <img class="login-logo py-5" src="../../../../assets/images/siachlogo.png" alt="Logo SIACH">
-    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
-        <mat-label>E-mail</mat-label>
-        <input type="text" matInput [(ngModel)]="credentials.email" />
-    </mat-form-field>
-    <mat-form-field style="width: 400px;" fxFlex="100%" appearance="outline">
-        <mat-label>Senha</mat-label>
-        <input type="password" matInput [(ngModel)]="credentials.senha" />
-    </mat-form-field>
+	<img
+		class="login-logo py-5"
+		src="../../../../assets/images/siachlogo.png"
+		alt="Logo SIACH"
+		[ngClass]="appStateService.state.isDark ? 'invert' : ''"
+	/>
+	<mat-form-field style="width: 400px" fxFlex="100%" appearance="outline">
+		<mat-label>E-mail</mat-label>
+		<input type="text" matInput [(ngModel)]="credentials.email" />
+	</mat-form-field>
+	<mat-form-field style="width: 400px" fxFlex="100%" appearance="outline">
+		<mat-label>Senha</mat-label>
+		<input type="password" matInput [(ngModel)]="credentials.senha" />
+	</mat-form-field>
 
-    <div class="d-flex gap-3 flex-column align-items-center">
-        <button class="btn btn-primary" (click)="login()">Entrar</button>
-        <span class="nunito">Não possui um cadastro? <span class="highlight-light" role="button" (click)="registrar()">Cadastre-se!</span></span>
-    </div>
-
+	<div class="d-flex gap-3 flex-column align-items-center">
+		<button class="btn btn-primary" (click)="login()">Entrar</button>
+		<span class="nunito">Não possui um cadastro? <span class="highlight-light" role="button" (click)="registrar()">Cadastre-se!</span></span>
+	</div>
 </div>

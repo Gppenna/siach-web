@@ -23,7 +23,7 @@ export class PerfilComponent implements OnInit {
 		const request = {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'perfil',
+			path: 'perfil/user/' + this.appStateService.userId(),
 		};
 		this.execute('http-request', request).subscribe((response: any) => {
 			this.dataSource = response;

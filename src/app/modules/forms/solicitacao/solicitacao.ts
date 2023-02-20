@@ -56,12 +56,12 @@ export class SolicitacaoSheet {
 		atividadeBarema: {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'atividade-barema/table',
+			path: 'atividade-barema/table/' + this.appStateService.courseId(),
 		},
 		totalHorasDependency: {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'perfil',
+			path: 'perfil/user/' + this.appStateService.userId(),
 		},
 	};
 

@@ -19,6 +19,7 @@ export class AppStateService {
 	USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
 	USER_AUTHORITY_SESSION_ATTRIBUTE = 'authenticatedUserAuthority';
 	USER_NAME_SESSION_ATTRIBUTE = 'authenticatedUserName';
+	USER_ID_SESSION_ATTRIBUTE = 'authenticatedUserId';
 	USER_COURSE_SESSION_ATTRIBUTE = 'authenticatedUserCourse';
 
 	static commands = {
@@ -141,6 +142,7 @@ export class AppStateService {
 						user: request,
 					});
 					sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, request.nome);
+					sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE, request.id);
 					sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.curso.id);
 				});
 				if (this.router.url === '/login') {
@@ -158,12 +160,21 @@ export class AppStateService {
 				sessionStorage.removeItem(this.USER_EMAIL_SESSION_ATTRIBUTE);
 				sessionStorage.removeItem(this.USER_AUTHORITY_SESSION_ATTRIBUTE);
 				sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE);
+				sessionStorage.removeItem(this.USER_ID_SESSION_ATTRIBUTE);
 				sessionStorage.removeItem(this.USER_COURSE_SESSION_ATTRIBUTE);
 				this.setState({
 					user: undefined,
 				});
 			}),
 		);
+	}
+
+	courseId() {
+		return sessionStorage.getItem(this.USER_COURSE_SESSION_ATTRIBUTE);
+	}
+
+	userId() {
+		return sessionStorage.getItem(this.USER_ID_SESSION_ATTRIBUTE);
 	}
 
 	isUserLoggedIn(): Observable<any> {
@@ -237,13 +248,17 @@ export class AppStateService {
 		);
 	}
 
-	toggleTheme(): void {
-		this.state.isDark = !this.state.isDark;
+	makeItDark() {
 		if (this.state.isDark) {
 			this.overlayContainer.getContainerElement().classList.add('dark-theme');
 		} else {
 			this.overlayContainer.getContainerElement().classList.remove('dark-theme');
 		}
+	}
+
+	toggleTheme(): void {
+		this.state.isDark = !this.state.isDark;
+		this.makeItDark();
 
 		this.httpRequest({
 			type: 'PUT',

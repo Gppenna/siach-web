@@ -2,48 +2,58 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppStateService } from 'src/app/app.state';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-registrar',
-  templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.scss']
+	selector: 'app-registrar',
+	templateUrl: './registrar.component.html',
+	styleUrls: ['./registrar.component.scss'],
 })
 export class RegistrarComponent implements OnInit {
+	registerForm: FormGroup;
 
-  registerForm: FormGroup;
+	confirmarSenha = '';
 
-  confirmarSenha = '';
+	cursoList: any = [];
 
-  constructor(
-    private readonly router: Router,
-    public appStateService: AppStateService,
-    private readonly formBuilder: FormBuilder) { }
+	constructor(private readonly router: Router, public appStateService: AppStateService, private readonly formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.buildRegisterForm();
-  }
+	ngOnInit(): void {
+		this.loadDependencies();
+		this.buildRegisterForm();
+	}
 
-  private buildRegisterForm(): void {
-    this.registerForm = this.formBuilder.group({
-      email: '',
-      matricula: '',
-      nome: '',
-      idCurso: '',
-      senha: '',
-      confirmarSenha: ''
-    });
-  }
+	loadDependencies() {
+		const request = {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: 'curso/list',
+		};
+		this.execute('http-request', request).subscribe((response: any) => {
+			this.cursoList = response;
+		});
+	}
 
-  execute(type: string, data?: any) {
-    return this.appStateService.execute({ type: type, data: data });
-  }
+	private buildRegisterForm(): void {
+		this.registerForm = this.formBuilder.group({
+			email: '',
+			matricula: '',
+			nome: '',
+			idCurso: '',
+			senha: '',
+			confirmarSenha: '',
+		});
+	}
 
-  registrar() {
-    this.execute('registrar', this.registerForm.value);
-  }
+	execute(type: string, data?: any) {
+		return this.appStateService.execute({ type: type, data: data });
+	}
 
-  cancel() {
-    this.router.navigate(['/login']);
-  }
+	registrar() {
+		this.execute('registrar', this.registerForm.value);
+	}
 
+	cancel() {
+		this.router.navigate(['/login']);
+	}
 }

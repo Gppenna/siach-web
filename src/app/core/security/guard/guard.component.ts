@@ -6,6 +6,7 @@ import { AppStateService } from 'src/app/app.state';
 @Injectable()
 export class GuardComponent implements CanActivate {
 	USER_EMAIL_SESSION_ATTRIBUTE = 'authenticatedUserEmail';
+	USER_ID_SESSION_ATTRIBUTE = 'authenticatedUserId';
 
 	constructor(private readonly router: Router, public appStateService: AppStateService) {}
 
@@ -19,7 +20,11 @@ export class GuardComponent implements CanActivate {
 			if (user.email != null) {
 				this.appStateService.state.userData = user;
 				this.appStateService.state.isDark = user.temaEscuro;
+				if (this.appStateService.state.isDark) {
+					this.appStateService.makeItDark();
+				}
 				sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, user.email);
+				sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE, user.id);
 				if (state.url === '/login' || state.url === '/registrar' || (state.url === '/admin' && this.appStateService.getAuthority() !== '1')) {
 					this.router.navigate(['/inicio']);
 				}
