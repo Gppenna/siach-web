@@ -23,7 +23,7 @@ app.use(
 
 app.use(
 	cors({
-		origin: app.get('env') === 'production' ? 'https://siach-api.vercel.app/' : 'http://localhost:8080/',
+		origin: app.get('env') === 'production' ? 'https://siach-api-production.up.railway.app/' : 'http://localhost:8080/',
 		methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
 		credentials: true,
 	}),
