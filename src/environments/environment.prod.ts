@@ -1,8 +1,7 @@
 export const environment = {
-  production: true,
-  envName: 'prod',
-  baseUrl: 'https://siach-web.herokuapp.com/',
-  apiUrl: 'https://siach-api.herokuapp.com/',
-  apiUrlSwitch: 'http://localhost:8080/'
+	production: true,
+	envName: 'prod',
+	baseUrl: 'https://siach-web.vercel.app/',
+	apiUrl: 'https://siach-api.vercel.app/',
+	apiUrlSwitch: 'http://localhost:8080/',
 };
-  
