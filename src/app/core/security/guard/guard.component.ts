@@ -15,6 +15,9 @@ export class GuardComponent implements CanActivate {
 		state: RouterStateSnapshot,
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		console.log(state, route, 'rotas');
+
+		sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, 'adminCC');
+
 		this.appStateService.isUserLoggedIn().subscribe((user: any) => {
 			console.log(user, 'user');
 			if (user.email != null) {
