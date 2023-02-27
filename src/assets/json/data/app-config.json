@@ -1,45 +1,49 @@
 {
-    "configs": {},
-    "menu": [{
-            "displayName": "Início",
-            "route": "/inicio"
-        },
-        {
-            "displayName": "Atividades",
-            "route": "/atividades"
-        },
-        {
-            "displayName": "Solicitações",
-            "children": [{
-                    "displayName": "Criar",
-                    "route": "/solicitacao/criar"
-                },
-                {
-                    "displayName": "Visualizar",
-                    "route": "/solicitacao"
-                }
-            ]
-        },
-        {
-            "icon": "account_circle",
-            "children": [{
-                    "displayName": "Perfil",
-                    "route": "/perfil"
-                },
-                {
-                    "displayName": "Admin",
-                    "route": "/admin",
-                    "admin": true
-                },
-                {
-                    "displayName": "Sair",
-                    "route": "/logout"
-                }
-            ]
-        },
-        {
-            "button": "brightness_6",
-            "action": "toggle_dark_theme"
-        }
-    ]
+	"configs": {},
+	"menu": [
+		{
+			"displayName": "Início",
+			"route": "/inicio"
+		},
+		{
+			"displayName": "Atividades",
+			"route": "/atividades"
+		},
+		{
+			"displayName": "Solicitações",
+			"children": [
+				{
+					"displayName": "Criar",
+					"route": "/solicitacao/criar"
+				},
+				{
+					"displayName": "Visualizar",
+					"route": "/solicitacao"
+				}
+			]
+		},
+		{
+			"icon": "account_circle",
+			"description": "Menu do usuário",
+			"children": [
+				{
+					"displayName": "Perfil",
+					"route": "/perfil"
+				},
+				{
+					"displayName": "Admin",
+					"route": "/admin",
+					"admin": true
+				},
+				{
+					"displayName": "Sair",
+					"route": "/logout"
+				}
+			]
+		},
+		{
+			"button": "brightness_6",
+			"action": "toggle_dark_theme"
+		}
+	]
 }

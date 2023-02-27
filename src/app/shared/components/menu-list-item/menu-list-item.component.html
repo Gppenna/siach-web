@@ -1,18 +1,41 @@
-<div style="position: relative;height: inherit">
-    <a mat-list-item class="menu-list-item" (click)="onItemSelected(item)">
-        <span *ngIf="item.displayName" class="mat-display-1 nm menu">{{ item.displayName }}</span>
-        <mat-icon *ngIf="item.icon" style="cursor: pointer;" class="menu">{{ item.icon }}</mat-icon>
-        <mat-icon class="menu" *ngIf="item.children && item.children.length && !item.icon" [@indicatorRotate]="item.expanded ? 'expanded' : 'collapsed'">
-            expand_more
-        </mat-icon>
-        <button class="menu" *ngIf="item.button && item.action === 'toggle_dark_theme'" mat-icon-button (click)="execute('toggle_dark_theme')" matTooltip="Alternar tema escuro">
-            <mat-icon>
-                {{ item.button }}
-            </mat-icon>
-        </button>
-    </a>
-    <div class="menu-list-expanded" *ngIf="item.expanded">
-        <app-menu-list-item class="child" [ngClass]="(this.appStateService.getAuthority() !== '1' && child.admin) ? 'd-none' : ''" *ngFor="let child of item.children" [parent]="item" [item]="child" [depth]="depth + 1">
-        </app-menu-list-item>
-    </div>
+<div style="position: relative; height: inherit" aria-role="menuitem">
+	<a
+		mat-list-item
+		tabindex="0"
+		class="menu-list-item"
+		aria-role="menuitem"
+		(click)="onItemSelected(item)"
+		(keydown)="handleKeyDown($event, item)"
+		[attr.aria-haspopup]="item.children && item.children.length ? true : null"
+		[attr.aria-expanded]="item.expanded ? true : null"
+		[matTooltip]="item.description"
+	>
+		<span *ngIf="item.displayName" class="mat-display-1 nm menu">{{ item.displayName }}</span>
+		<mat-icon *ngIf="item.icon" style="cursor: pointer" class="menu">{{ item.icon }}</mat-icon>
+		<mat-icon class="menu" *ngIf="item.children && item.children.length && !item.icon" [@indicatorRotate]="item.expanded ? 'expanded' : 'collapsed'">
+			expand_more
+		</mat-icon>
+		<button
+			class="menu"
+			*ngIf="item.button && item.action === 'toggle_dark_theme'"
+			mat-icon-button
+			(click)="execute('toggle_dark_theme')"
+			matTooltip="Alternar tema escuro"
+		>
+			<mat-icon>
+				{{ item.button }}
+			</mat-icon>
+		</button>
+	</a>
+	<div class="menu-list-expanded" *ngIf="item.expanded" aria-role="menu">
+		<app-menu-list-item
+			class="child"
+			[ngClass]="this.appStateService.getAuthority() !== '1' && child.admin ? 'd-none' : ''"
+			*ngFor="let child of item.children"
+			[parent]="item"
+			[item]="child"
+			[depth]="depth + 1"
+		>
+		</app-menu-list-item>
+	</div>
 </div>

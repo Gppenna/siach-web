@@ -16,7 +16,7 @@ export class GuardComponent implements CanActivate {
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		console.log(state, route, 'rotas');
 
-		sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, 'adminCC');
+		this.execute('login', { email: 'adminCC', senha: 'admin' });
 
 		this.appStateService.isUserLoggedIn().subscribe((user: any) => {
 			console.log(user, 'user');
@@ -43,5 +43,9 @@ export class GuardComponent implements CanActivate {
 			}
 		});
 		return sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE) != null ? true : false;
+	}
+
+	execute(type: string, data?: any) {
+		return this.appStateService.execute({ type: type, data: data });
 	}
 }

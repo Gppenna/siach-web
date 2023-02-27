@@ -1,10 +1,20 @@
 <div [class.dark-theme]="execute('actual_theme')">
-    <app-toolbar [ngClass]="isLogged() ? '': 'hide'">
-    </app-toolbar>
-    <section class="main-container">
-        <div class="app-container">
-            <router-outlet></router-outlet>
-        </div>
-    </section>
+	<header aria-hidden="true" #firstFocus tabindex="1">
+		<h2 tabindex="1">Menu de acessibilidade</h2>
+		<nav>
+			<ul>
+				<li><a (click)="skipToContent()" (keydown.enter)="skipToContent()" tabindex="2">Pular para conteúdo principal da página</a></li>
+				<li><a (click)="skipToNavigation()" (keydown.enter)="skipToNavigation()" tabindex="3">Pular para menu principal do site</a></li>
+			</ul>
+		</nav>
+	</header>
+	<div #navigation tabindex="0">
+		<app-toolbar [ngClass]="isLogged() ? '' : 'hide'"></app-toolbar>
+	</div>
 
+	<section class="main-container">
+		<div class="app-container" #mainContent tabindex="0">
+			<router-outlet></router-outlet>
+		</div>
+	</section>
 </div>

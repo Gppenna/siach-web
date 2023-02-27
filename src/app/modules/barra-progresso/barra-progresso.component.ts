@@ -40,14 +40,12 @@ export class BarraProgressoComponent implements OnInit {
 
 	calcValueContabilizado(atividade: any) {
 		const value = (100 * atividade.value.horasContabilizadas) / atividade.value.horasLimite;
-		console.log(value, 'calcValueContabilizado');
 		return value;
 	}
 
 	calcValueContabilizadoRascunho(atividade: any) {
 		const value =
 			(100 * (atividade.value.horasContabilizadas + atividade.value.horasContabilizadasRascunho + this.adicional)) / atividade.value.horasLimite;
-		console.log(value, 'calcValueContabilizadoRascunho');
 		return value;
 	}
 }

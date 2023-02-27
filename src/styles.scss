@@ -206,6 +206,18 @@ body {
 	display: block;
 }
 
+.mat-list-item:hover {
+	text-decoration: none;
+}
+
+.accessibility-header {
+	position: absolute !important;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+	overflow: hidden;
+	height: 1px;
+}
+
 .mat-list-item-content {
 	display: flex;
 	height: inherit;
