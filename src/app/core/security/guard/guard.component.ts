@@ -15,6 +15,9 @@ export class GuardComponent implements CanActivate {
 		state: RouterStateSnapshot,
 	): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 		console.log(state, route, 'rotas');
+
+		//this.execute('login', { email: 'adminCC', senha: 'admin' });
+
 		this.appStateService.isUserLoggedIn().subscribe((user: any) => {
 			console.log(user, 'user');
 			if (user.email != null) {
