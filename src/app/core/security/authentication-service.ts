@@ -7,22 +7,22 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
+	constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-  }
+	authenticate(credentials: any, callback?: any): Observable<any> {
+		let headers = new HttpHeaders(
+			credentials
+				? {
+						Authorization: 'Basic ' + btoa(credentials.email + ':' + credentials.senha),
+						'X-Requested-With': 'XMLHttpRequest',
+				  }
+				: { 'X-Requested-With': 'XMLHttpRequest' },
+		);
 
-    authenticate(credentials:any, callback?:any): Observable<any> {
+		return this.http.get(`${environment.apiUrl}login`, { headers: headers });
+	}
 
-        const headers = new HttpHeaders(credentials ? {
-            authorization : 'Basic ' + btoa(credentials.email + ':' + credentials.senha)
-        } : {});
-
-        return this.http.get(`${environment.apiUrl}login`, {headers: headers});
-
-    }
-
-    logout() {
-        return this.http.post(`${environment.apiUrl}logout`, {});
-    }
-
+	logout() {
+		return this.http.post(`${environment.apiUrl}logout`, {});
+	}
 }

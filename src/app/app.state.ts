@@ -136,21 +136,29 @@ export class AppStateService {
 
 	private login(credentials: any): Observable<any> {
 		return of(
-			this.authenticationService.authenticate(credentials).subscribe((response: any) => {
-				this.getUserInfo(response.name).subscribe((request: any) => {
-					this.setState({
-						user: request,
+			this.authenticationService.authenticate(credentials).subscribe(
+				(response: any) => {
+					this.getUserInfo(response.name).subscribe((request: any) => {
+						this.setState({
+							user: request,
+						});
+						sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, request.nome);
+						sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE, request.id);
+						sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.curso.id);
 					});
-					sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE, request.nome);
-					sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE, request.id);
-					sessionStorage.setItem(this.USER_COURSE_SESSION_ATTRIBUTE, request.curso.id);
-				});
-				if (this.router.url === '/login') {
-					this.router.navigate(['/inicio']);
-				}
-				sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, response.name);
-				sessionStorage.setItem(this.USER_AUTHORITY_SESSION_ATTRIBUTE, response.authorities[0].authority);
-			}),
+					if (this.router.url === '/login') {
+						this.router.navigate(['/inicio']);
+					}
+					sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, response.name);
+					sessionStorage.setItem(this.USER_AUTHORITY_SESSION_ATTRIBUTE, response.authorities[0].authority);
+				},
+				(error: any) => {
+					this.snackBar.open('Credenciais incorretas!', 'Ok', {
+						duration: 6000,
+						panelClass: ['red-snackbar'],
+					});
+				},
+			),
 		);
 	}
 
