@@ -5,14 +5,14 @@
 		alt="Logo SIACH"
 		[ngClass]="appStateService.state.isDark ? 'invert' : ''"
 	/>
-	<span class="nunito" tabindex="0">Faça login abaixo</span>
+	<h1 class="nunito" style="zoom: 0.8" tabindex="0">Faça login abaixo</h1>
 	<mat-form-field style="width: 400px" fxFlex="100%" appearance="outline">
 		<mat-label>E-mail</mat-label>
-		<input type="text" matInput [(ngModel)]="credentials.email" />
+		<input type="text" aria-label="E-mail" matInput [(ngModel)]="credentials.email" />
 	</mat-form-field>
 	<mat-form-field style="width: 400px" fxFlex="100%" appearance="outline">
 		<mat-label>Senha</mat-label>
-		<input type="password" matInput [(ngModel)]="credentials.senha" />
+		<input type="password" aria-label="Senha" matInput [(ngModel)]="credentials.senha" />
 	</mat-form-field>
 
 	<div class="d-flex gap-3 flex-column align-items-center">
