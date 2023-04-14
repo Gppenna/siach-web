@@ -48,7 +48,7 @@ export class SolicitacaoComponent implements OnInit {
 			type: 'PUT',
 			api: environment.apiUrl,
 			path: 'solicitacao/ativar',
-			body: this.dataSource.map((element: any) => element.id),
+			body: this.dataSource.map((element: any) => element.idSolicitacao),
 		};
 		this.execute('http-request', requestSol).subscribe((response: any) => {
 			this.loadSolicitacoes();

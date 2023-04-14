@@ -56,7 +56,7 @@ export class GrupoSheet {
 			this.new = false;
 		}
 		this.formControl = this.formBuilder.group({
-			id: data ? data.id : '',
+			idGrupoBarema: data ? data.idGrupoBarema : '',
 			descricao: data ? data.descricao : '',
 			minimoHoras: data ? data.minimoHoras : '',
 			numero: data ? data.numero : '',

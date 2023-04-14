@@ -15,7 +15,7 @@
 					<mat-form-field class="app-page-form-full" appearance="outline">
 						<mat-label>Atividade Associada</mat-label>
 						<mat-select [disabled]="!new" formControlName="idAtividadeBarema" (selectionChange)="totalLocalCalc($event.value)">
-							<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.id}}" [title]="item.descricao">
+							<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.idAtividadeBarema}}" [title]="item.descricao">
 								{{item.descricao}}
 							</mat-option>
 						</mat-select>

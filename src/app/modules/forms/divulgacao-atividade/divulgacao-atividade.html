@@ -1,84 +1,78 @@
 <div class="app-page-container-bottomsheet">
-    <div class="app-page-bottomsheet-header py-3">
-        <h1>Nova Divulgação de Atividade</h1>
-    </div>
-    <ng-template [ngIf]="!loading && !actionComplete && !error">
-        <form [formGroup]="formControl" style="font-size: 16px;">
-            <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Título da Atividade</mat-label>
-                    <input matInput required="true" type="text" formControlName="titulo" />
-                </mat-form-field>
-            </div>
-            <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Período de Inscrição</mat-label>
-                    <mat-date-range-input [rangePicker]="picker0">
-                        <input matStartDate #dateRangeStart formControlName="periodoInicio" placeholder="Data inicial">
-                        <input matEndDate #dateRangeEnd formControlName="periodoFim" placeholder="Data final">
-                    </mat-date-range-input>
-                    <mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
-                    <mat-date-range-picker #picker0></mat-date-range-picker>
-                </mat-form-field>
-            </div>
-            <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Descrição</mat-label>
-                    <textarea rows="5" matInput required="true" type="text" formControlName="descricao"></textarea>
-                </mat-form-field>
-            </div>
-            <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Carga Horária</mat-label>
-                    <input matInput required="true" type="number" formControlName="horas" />
-                </mat-form-field>
-            </div>
-            <mat-form-field class="app-page-form-full" appearance="outline">
-                <mat-label>Atividade Associada</mat-label>
-                <mat-select formControlName="idAtividadeBarema">
-                    <mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.id}}" [title]="item.descricao">
-                        {{item.descricao}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+	<div class="app-page-bottomsheet-header py-3">
+		<h1>Nova Divulgação de Atividade</h1>
+	</div>
+	<ng-template [ngIf]="!loading && !actionComplete && !error">
+		<form [formGroup]="formControl" style="font-size: 16px">
+			<div class="app-page-bottomsheet-content">
+				<mat-form-field class="app-page-form-full" appearance="outline">
+					<mat-label>Título da Atividade</mat-label>
+					<input matInput required="true" type="text" formControlName="titulo" />
+				</mat-form-field>
+			</div>
+			<div class="app-page-bottomsheet-content">
+				<mat-form-field class="app-page-form-full" appearance="outline">
+					<mat-label>Período de Inscrição</mat-label>
+					<mat-date-range-input [rangePicker]="picker0">
+						<input matStartDate #dateRangeStart formControlName="periodoInicio" placeholder="Data inicial" />
+						<input matEndDate #dateRangeEnd formControlName="periodoFim" placeholder="Data final" />
+					</mat-date-range-input>
+					<mat-datepicker-toggle matSuffix [for]="picker0"></mat-datepicker-toggle>
+					<mat-date-range-picker #picker0></mat-date-range-picker>
+				</mat-form-field>
+			</div>
+			<div class="app-page-bottomsheet-content">
+				<mat-form-field class="app-page-form-full" appearance="outline">
+					<mat-label>Descrição</mat-label>
+					<textarea rows="5" matInput required="true" type="text" formControlName="descricao"></textarea>
+				</mat-form-field>
+			</div>
+			<div class="app-page-bottomsheet-content">
+				<mat-form-field class="app-page-form-full" appearance="outline">
+					<mat-label>Carga Horária</mat-label>
+					<input matInput required="true" type="number" formControlName="horas" />
+				</mat-form-field>
+			</div>
+			<mat-form-field class="app-page-form-full" appearance="outline">
+				<mat-label>Atividade Associada</mat-label>
+				<mat-select formControlName="idAtividadeBarema">
+					<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.idAtividadeBarema}}" [title]="item.descricao">
+						{{item.descricao}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
 
-            <div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
-                <mat-label style="font-size: 20px;" class="nunito mb-3">Upload de Banner</mat-label>
-                <input required="true" type="file" (change)="inputFileChanged($event)" />
-            </div>
+			<div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
+				<mat-label style="font-size: 20px" class="nunito mb-3">Upload de Banner</mat-label>
+				<input required="true" type="file" (change)="inputFileChanged($event)" />
+			</div>
 
-            <div class="app-page-bottomsheet-actions">
-                <button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
-                <button class="btn btn-primary-small" [disabled]="!formControl.valid || !fileData" color="primary" (click)="save()">
-                    Criar
-                </button>
-            </div>
-        </form>
-    </ng-template>
-    <ng-template [ngIf]="loading">
-        <div style="padding: 3rem 0px; text-align: center">
-            <mat-spinner style="margin: 0px auto"></mat-spinner>
-        </div>
-    </ng-template>
+			<div class="app-page-bottomsheet-actions">
+				<button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
+				<button class="btn btn-primary-small" [disabled]="!formControl.valid || !fileData" color="primary" (click)="save()">Criar</button>
+			</div>
+		</form>
+	</ng-template>
+	<ng-template [ngIf]="loading">
+		<div style="padding: 3rem 0px; text-align: center">
+			<mat-spinner style="margin: 0px auto"></mat-spinner>
+		</div>
+	</ng-template>
 
-    <ng-template [ngIf]="!loading && actionComplete">
-        <p>Divulgação de Atividade: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> foi adicionado com sucesso</p>
-        <div class="app-page-bottomsheet-actions">
-            <button class="btn btn-primary-small" (click)="onCancel($event)">
-                Ok
-            </button>
-        </div>
-    </ng-template>
+	<ng-template [ngIf]="!loading && actionComplete">
+		<p>Divulgação de Atividade: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> foi adicionado com sucesso</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
 
-    <ng-template [ngIf]="!loading && error">
-        <p>Divulgação de Atividade
-            <strong>{{formControl.value.description}}</strong> não foi adicionado <br />
-            <small>{{ error.message }}</small>
-        </p>
-        <div class="app-page-bottomsheet-actions">
-            <button class="btn btn-primary-small" (click)="onCancel($event)">
-                Ok
-            </button>
-        </div>
-    </ng-template>
+	<ng-template [ngIf]="!loading && error">
+		<p>
+			Divulgação de Atividade <strong>{{formControl.value.description}}</strong> não foi adicionado <br />
+			<small>{{ error.message }}</small>
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
 </div>

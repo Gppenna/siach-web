@@ -190,8 +190,8 @@ export class SolicitacaoSheet {
 		objFormData.append('comprovante', this.fileData);
 		objFormData.append('comprovanteNome', this.fileData.name);
 		objFormData.append('email', sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE));
-		if (this.formControl.get('id')?.value) {
-			objFormData.append('id', this.formControl.get('id')?.value);
+		if (this.formControl.get('idSolicitacao')?.value) {
+			objFormData.append('idSolicitacao', this.formControl.get('idSolicitacao')?.value);
 		}
 
 		this.loading = true;
@@ -237,14 +237,14 @@ export class SolicitacaoSheet {
 	initFormControl(data?: any) {
 		console.log(data, 'data');
 		this.formControl = this.formBuilder.group({
-			id: data ? data.id : '',
+			idSolicitacao: data ? data.idSolicitacao : '',
 			titulo: data ? data.titulo : '',
 			horas: data ? data.horas : '',
 			coringaFlag: data ? (data.statusInterno === 'E' ? true : false) : false,
-			idAtividadeBarema: data ? data.atividadeBarema.id.toString() : '',
+			idAtividadeBarema: data ? data.atividadeBarema.idAtividadeBarema.toString() : '',
 		});
 		if (data) {
-			this.totalLocalCalc(data.atividadeBarema.id);
+			this.totalLocalCalc(data.atividadeBarema.idAtividadeBarema);
 			if (data.statusInterno !== 'E') {
 				this.subHorasRascunho = data.horas;
 			} else {

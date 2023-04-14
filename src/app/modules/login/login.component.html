@@ -5,6 +5,7 @@
 		alt="Logo SIACH"
 		[ngClass]="appStateService.state.isDark ? 'invert' : ''"
 	/>
+	<span class="nunito" tabindex="0">Faça login abaixo</span>
 	<mat-form-field style="width: 400px" fxFlex="100%" appearance="outline">
 		<mat-label>E-mail</mat-label>
 		<input type="text" matInput [(ngModel)]="credentials.email" />
@@ -16,6 +17,8 @@
 
 	<div class="d-flex gap-3 flex-column align-items-center">
 		<button class="btn btn-primary" (click)="login()">Entrar</button>
-		<span class="nunito">Não possui um cadastro? <span class="highlight-light" role="button" (click)="registrar()">Cadastre-se!</span></span>
+		<span class="nunito" tabindex="0"
+			>Não possui um cadastro? <span tabindex="0" class="highlight-light" role="button" (click)="registrar()">Cadastre-se!</span></span
+		>
 	</div>
 </div>

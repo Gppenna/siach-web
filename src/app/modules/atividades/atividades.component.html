@@ -26,7 +26,7 @@
 						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
 							<mat-label>Atividade</mat-label>
 							<mat-select [(ngModel)]="filtro.atividadeBaremaId" (selectionChange)="freshFilter()">
-								<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.id }}" [matTooltip]="item.descricao">
+								<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.idAtividadeBarema }}" [matTooltip]="item.descricao">
 									{{ item.descricao }}
 								</mat-option>
 							</mat-select>
@@ -36,7 +36,7 @@
 						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
 							<mat-label>Grupo</mat-label>
 							<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
-								<mat-option *ngFor="let item of grupoBaremaList" [matTooltip]="item.descricao" value="{{ item.id }}">
+								<mat-option *ngFor="let item of grupoBaremaList" [matTooltip]="item.descricao" value="{{ item.idGrupoBarema }}">
 									{{ item.numero }} - {{ item.descricao }}
 								</mat-option>
 							</mat-select>

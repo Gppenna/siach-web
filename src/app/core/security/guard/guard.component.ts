@@ -27,7 +27,7 @@ export class GuardComponent implements CanActivate {
 					this.appStateService.makeItDark();
 				}
 				sessionStorage.setItem(this.USER_EMAIL_SESSION_ATTRIBUTE, user.email);
-				sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE, user.id);
+				sessionStorage.setItem(this.USER_ID_SESSION_ATTRIBUTE, user.idUsuario);
 				if (state.url === '/login' || state.url === '/registrar' || (state.url === '/admin' && this.appStateService.getAuthority() !== '1')) {
 					this.router.navigate(['/inicio']);
 				}

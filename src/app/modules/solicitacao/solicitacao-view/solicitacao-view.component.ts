@@ -47,7 +47,7 @@ export class SolicitacaoViewComponent implements OnInit {
 	}
 
 	openDetails(solicitacao: any) {
-		this.router.navigate(['/solicitacao/detalhe/' + solicitacao.id]);
+		this.router.navigate(['/solicitacao/detalhe/' + solicitacao.idSolicitacao]);
 	}
 
 	statusColor(solicitacao: any) {
@@ -57,7 +57,7 @@ export class SolicitacaoViewComponent implements OnInit {
 				last = element;
 			}
 		});
-		switch (last.status.id) {
+		switch (last.status.idStatus) {
 			case 1:
 				solicitacao.statusNow = last.status.descricao;
 				return 'enviado';

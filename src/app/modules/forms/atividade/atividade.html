@@ -1,62 +1,61 @@
 <div class="app-page-container-bottomsheet">
-    <div class="app-page-bottomsheet-header py-3">
-        <h1>{{new ? 'Nova' : 'Editar'}} Atividade</h1>
-    </div>
-    <ng-template [ngIf]="!loading && !actionComplete && !error">
-        <form [formGroup]="formControl" style="font-size: 16px;">
-            <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Nome da Atividade</mat-label>
-                    <input matInput required="true" type="text" formControlName="descricao" />
-                </mat-form-field>
-            </div>
-            <div class="app-page-bottomsheet-content">
-                <mat-form-field class="app-page-form-full" appearance="outline">
-                    <mat-label>Carga Horária</mat-label>
-                    <input matInput required="true" type="number" formControlName="minimoHoras" />
-                </mat-form-field>
-            </div>
-            <mat-form-field class="app-page-form-full" appearance="outline">
-                <mat-label>Grupo associado</mat-label>
-                <mat-select formControlName="idGrupoBarema">
-                    <mat-option *ngFor="let item of dependenciesData.grupoBarema" value="{{item.id}}">
-                        {{item.numero}} - {{item.descricao}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+	<div class="app-page-bottomsheet-header py-3">
+		<h1>{{new ? 'Nova' : 'Editar'}} Atividade</h1>
+	</div>
+	<ng-template [ngIf]="!loading && !actionComplete && !error">
+		<form [formGroup]="formControl" style="font-size: 16px">
+			<div class="app-page-bottomsheet-content">
+				<mat-form-field class="app-page-form-full" appearance="outline">
+					<mat-label>Nome da Atividade</mat-label>
+					<input matInput required="true" type="text" formControlName="descricao" />
+				</mat-form-field>
+			</div>
+			<div class="app-page-bottomsheet-content">
+				<mat-form-field class="app-page-form-full" appearance="outline">
+					<mat-label>Carga Horária</mat-label>
+					<input matInput required="true" type="number" formControlName="minimoHoras" />
+				</mat-form-field>
+			</div>
+			<mat-form-field class="app-page-form-full" appearance="outline">
+				<mat-label>Grupo associado</mat-label>
+				<mat-select formControlName="idGrupoBarema">
+					<mat-option *ngFor="let item of dependenciesData.grupoBarema" value="{{item.idGrupoBarema}}">
+						{{item.numero}} - {{item.descricao}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
 
-            <div class="app-page-bottomsheet-actions">
-                <button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
-                <button class="btn btn-primary-small" [disabled]="!formControl.valid" color="primary" (click)="save(formControl.value)">
-                    {{new ? 'Criar' : 'Editar'}}
-                </button>
-            </div>
-        </form>
-    </ng-template>
-    <ng-template [ngIf]="loading">
-        <div style="padding: 3rem 0px; text-align: center">
-            <mat-spinner style="margin: 0px auto"></mat-spinner>
-        </div>
-    </ng-template>
+			<div class="app-page-bottomsheet-actions">
+				<button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
+				<button class="btn btn-primary-small" [disabled]="!formControl.valid" color="primary" (click)="save(formControl.value)">
+					{{new ? 'Criar' : 'Editar'}}
+				</button>
+			</div>
+		</form>
+	</ng-template>
+	<ng-template [ngIf]="loading">
+		<div style="padding: 3rem 0px; text-align: center">
+			<mat-spinner style="margin: 0px auto"></mat-spinner>
+		</div>
+	</ng-template>
 
-    <ng-template [ngIf]="!loading && actionComplete">
-        <p>Atividade: <strong> {{formControl.value.descricao? formControl.value.descricao : ''}}</strong> foi {{new ? 'adicionada' : 'editada'}} com sucesso</p>
-        <div class="app-page-bottomsheet-actions">
-            <button class="btn btn-primary-small" (click)="onCancel($event)">
-                Ok
-            </button>
-        </div>
-    </ng-template>
+	<ng-template [ngIf]="!loading && actionComplete">
+		<p>
+			Atividade: <strong> {{formControl.value.descricao? formControl.value.descricao : ''}}</strong> foi {{new ? 'adicionada' : 'editada'}} com
+			sucesso
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
 
-    <ng-template [ngIf]="!loading && error">
-        <p>Atividade
-            <strong>{{formControl.value.description}}</strong> não foi {{new ? 'adicionada' : 'editada'}} <br />
-            <small>{{ error.message }}</small>
-        </p>
-        <div class="app-page-bottomsheet-actions">
-            <button class="btn btn-primary-small" (click)="onCancel($event)">
-                Ok
-            </button>
-        </div>
-    </ng-template>
+	<ng-template [ngIf]="!loading && error">
+		<p>
+			Atividade <strong>{{formControl.value.description}}</strong> não foi {{new ? 'adicionada' : 'editada'}} <br />
+			<small>{{ error.message }}</small>
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
 </div>

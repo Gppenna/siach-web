@@ -1,21 +1,18 @@
 <div [class.dark-theme]="execute('actual_theme')">
-	<header aria-label="Menu de acessibilidade" #firstFocus tabindex="1" class="accessibility-header">
-		<h2 tabindex="1">Menu de acessibilidade</h2>
-		<nav aria-labelledby="accessibility-menu">
-			<ul>
-				<li>
-					<a (click)="skipToContent()" (keydown.enter)="skipToContent()" tabindex="2" aria-label="Pular para conteúdo principal da página"
-						>Pular para conteúdo principal da página</a
-					>
-				</li>
-				<li>
-					<a (click)="skipToNavigation()" (keydown.enter)="skipToNavigation()" tabindex="3" aria-label="Pular para menu principal do site"
-						>Pular para menu principal do site</a
-					>
-				</li>
-			</ul>
-		</nav>
-	</header>
+	<nav aria-labelledby="accessibility-menu">
+		<ul #firstFocus aria-label="Menu de acessibilidade" class="accessibility-header">
+			<li>
+				<a (click)="skipToContent()" (keydown.enter)="skipToContent()" tabindex="1" aria-label="Pular para conteúdo principal da página"
+					>Pular para conteúdo principal da página</a
+				>
+			</li>
+			<li *ngIf="isLogged()">
+				<a (click)="skipToNavigation()" (keydown.enter)="skipToNavigation()" tabindex="2" aria-label="Pular para menu principal do site"
+					>Pular para menu principal do site</a
+				>
+			</li>
+		</ul>
+	</nav>
 	<div #navigation tabindex="0">
 		<app-toolbar [ngClass]="isLogged() ? '' : 'hide'"></app-toolbar>
 	</div>

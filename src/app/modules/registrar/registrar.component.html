@@ -16,7 +16,7 @@
 		<mat-form-field style="width: 400px" appearance="outline">
 			<mat-label>Curso</mat-label>
 			<mat-select required="true" formControlName="idCurso">
-				<mat-option *ngFor="let item of cursoList" value="{{ item.id }}" [title]="item.descricao">
+				<mat-option *ngFor="let item of cursoList" value="{{ item.idCurso }}" [title]="item.descricao">
 					{{ item.descricao }}
 				</mat-option>
 			</mat-select>

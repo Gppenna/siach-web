@@ -72,7 +72,7 @@ export class AtividadeSheet {
 			this.new = false;
 		}
 		this.formControl = this.formBuilder.group({
-			id: data ? data.id : '',
+			idAtividadeBarema: data ? data.idAtividadeBarema : '',
 			descricao: data ? data.descricao : '',
 			minimoHoras: data ? data.minimoHoras : '',
 			idGrupoBarema: data ? data.idGrupoBarema.toString() : '',

@@ -68,7 +68,7 @@ export class ChSheet {
 			this.new = false;
 		}
 		this.formControl = this.formBuilder.group({
-			id: data ? data.id : '',
+			idCurso: data ? data.idCurso : '',
 			descricao: data ? data.descricao : '',
 			minimoHorasCurso: data ? data.minimoHorasCurso : '',
 		});
