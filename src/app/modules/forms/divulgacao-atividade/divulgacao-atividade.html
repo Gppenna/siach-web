@@ -1,6 +1,7 @@
 <div class="app-page-container-bottomsheet">
 	<div class="app-page-bottomsheet-header py-3">
-		<h1>Nova Divulgação de Atividade</h1>
+		<h1 tabindex="0">Nova Divulgação de Atividade</h1>
+		<span tabindex="0">Preencha o formulário abaixo.</span>
 	</div>
 	<ng-template [ngIf]="!loading && !actionComplete && !error">
 		<form [formGroup]="formControl" style="font-size: 16px">

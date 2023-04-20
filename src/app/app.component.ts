@@ -29,12 +29,7 @@ export class AppComponent {
 	@ViewChild('drawer') drawer: MatSidenav;
 	@ViewChild('firstFocus', { static: true }) firstFocus: ElementRef;
 
-	constructor(
-		public appStateService: AppStateService,
-		private _bottomSheet: MatBottomSheet,
-		private router: Router,
-		private cdr: ChangeDetectorRef,
-	) {}
+	constructor(public appStateService: AppStateService, private _bottomSheet: MatBottomSheet, public router: Router, private cdr: ChangeDetectorRef) {}
 
 	ngOnInit(): void {
 		this.initState();
