@@ -352,7 +352,7 @@ div.active {
 .inactive {
 	top: -35px !important;
 	text-align: center;
-	color: #b2b1b1;
+	color: #7a7979;
 }
 
 .mat-header-cell {
@@ -376,11 +376,11 @@ div.active {
 }
 
 .danger {
-	color: #e27060;
+	color: #d45b4c;
 }
 
 .danger-card {
-	background-color: #e27060;
+	background-color: #d45b4c;
 	color: #fff;
 	border-radius: 10px;
 	font-size: 18px;
@@ -398,11 +398,11 @@ div.active {
 }
 
 .green-snackbar {
-	background: #5fd3b1 !important;
+	background: #3caea3 !important;
 }
 
 .red-snackbar {
-	background: #e27060 !important;
+	background: #d45b4c !important;
 }
 
 .btn-no-style {
@@ -411,7 +411,7 @@ div.active {
 }
 
 .btn-danger {
-	background-color: #e27060;
+	background-color: #d45b4c;
 	font-family: 'Nunito';
 	width: 200px;
 	height: 45px;
@@ -424,7 +424,7 @@ div.active {
 }
 
 .btn-danger-small {
-	background-color: #e27060;
+	background-color: #d45b4c;
 	font-family: 'Nunito';
 	color: #fff;
 	width: 120px;
@@ -614,11 +614,11 @@ pre {
 }
 
 .sucessColor {
-	color: #5fd3b1 !important;
+	color: #3caea3 !important;
 }
 
 .warnColor {
-	color: #e27060 !important;
+	color: #d45b4c !important;
 }
 
 .mat-progress-bar-fill::after {
