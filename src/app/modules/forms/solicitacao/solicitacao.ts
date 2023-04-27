@@ -1,11 +1,12 @@
 import { environment } from '../../../../environments/environment';
-import { Component, EventEmitter, Output, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild, OnInit, AfterViewInit, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { AppStateService } from 'src/app/app.state';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateUtils } from 'src/app/utils/date-utils';
 import FileSaver, { saveAs } from 'file-saver';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'solicitacao',
@@ -50,7 +51,22 @@ export class SolicitacaoSheet {
 		private formBuilder: FormBuilder,
 		public appStateService: AppStateService,
 		private readonly snackBar: MatSnackBar,
+		private cdr: ChangeDetectorRef,
 	) {}
+
+	@ViewChild('form', { static: false }) form: ElementRef;
+	@ViewChild('hour', { static: false }) hour: ElementRef;
+
+	skipToForm(): void {
+		this.form.nativeElement.focus();
+		this.cdr.detectChanges();
+	}
+
+	skipToHour(): void {
+		console.log(this.hour, 'q');
+		this.hour.nativeElement.focus();
+		this.cdr.detectChanges();
+	}
 
 	dependencies: any = {
 		atividadeBarema: {

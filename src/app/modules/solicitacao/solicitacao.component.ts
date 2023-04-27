@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AppStateService } from 'src/app/app.state';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -13,7 +13,12 @@ export class SolicitacaoComponent implements OnInit {
 	userData: any = undefined;
 	dataSource: any = [];
 
-	constructor(public appStateService: AppStateService, private readonly snackBar: MatSnackBar, private readonly router: Router) {}
+	constructor(
+		public appStateService: AppStateService,
+		private cdr: ChangeDetectorRef,
+		private readonly snackBar: MatSnackBar,
+		private readonly router: Router,
+	) {}
 
 	ngOnInit(): void {
 		this.loadDependencies();
@@ -41,6 +46,32 @@ export class SolicitacaoComponent implements OnInit {
 				});
 			}, 500);
 		});
+	}
+
+	@ViewChild('info', { static: false }) info: ElementRef;
+	@ViewChild('rascunhos', { static: false }) rascunhos: ElementRef;
+
+	@ViewChild('enviar', { static: false }) enviar: ElementRef;
+	@ViewChild('rascunhosCards', { static: false }) rascunhosCards: ElementRef;
+
+	skipToInfo(): void {
+		this.info.nativeElement.focus();
+		this.cdr.detectChanges();
+	}
+
+	skipToRascunhos(): void {
+		this.rascunhos.nativeElement.focus();
+		this.cdr.detectChanges();
+	}
+
+	skipToRascunhosCards(): void {
+		this.rascunhosCards.nativeElement.focus();
+		this.cdr.detectChanges();
+	}
+
+	skipToEnviar(): void {
+		this.enviar.nativeElement.focus();
+		this.cdr.detectChanges();
 	}
 
 	ativar() {

@@ -1,11 +1,12 @@
 <section class="d-flex flex-column">
-    <div class="d-flex justify-content-between">
-        <h2 style="font-weight: 500;">Atividades: {{header}}</h2>
-        <div class="d-flex justify-content-end">
-            <mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
-        </div>
-    </div>
+	<div class="d-flex justify-content-between">
+		<h2 tabindex="0" style="font-weight: 500">Atividades: {{ header }}</h2>
+		<div class="d-flex justify-content-end" (click)="close()" (keydown.enter)="close()" aria-labelledby="fechar-label">
+			<span tabindex="0" id="fechar-label" class="accessibility-header" (keydown.enter)="close()">Fechar modal: </span>
+			<mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
+		</div>
+	</div>
 
-    <mat-divider></mat-divider>
-    <app-barra-progresso class="d-flex gap-3 flex-column m-auto py-3" [dataSource]="dataSource" style="width: 95%;"></app-barra-progresso>
+	<mat-divider></mat-divider>
+	<app-barra-progresso class="d-flex gap-3 flex-column m-auto py-3" [dataSource]="dataSource" style="width: 95%"></app-barra-progresso>
 </section>

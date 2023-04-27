@@ -1,10 +1,34 @@
 <div class="app-page-container-bottomsheet">
 	<div class="app-page-bottomsheet-header py-3">
-		<h1>{{new ? 'Nova' : 'Editar'}} Solicitação {{new ? '' : 'Pendente de Envio'}}</h1>
+		<h1 tabindex="0">{{new ? 'Nova' : 'Editar'}} Solicitação {{new ? '' : 'Pendente de Envio'}}</h1>
 	</div>
+	<nav aria-labelledby="accessibility-menu">
+		<ul class="accessibility-header">
+			<li>
+				<a
+					(click)="skipToForm()"
+					(keyup.enter)="skipToForm()"
+					(keydown.enter)="skipToForm()"
+					tabindex="0"
+					aria-label="Pular para formulário da solicitação"
+					>Pular para formulário da solicitação</a
+				>
+			</li>
+			<li>
+				<a
+					(click)="skipToHour()"
+					(keyup.enter)="skipToForm()"
+					(keydown.enter)="skipToHour()"
+					tabindex="0"
+					aria-label="Pular para resumo das suas horas"
+					>Pular para resumo das suas horas</a
+				>
+			</li>
+		</ul>
+	</nav>
 	<ng-template [ngIf]="!loading && !actionComplete && !error">
 		<div class="row">
-			<div class="solicitacaoForm col-7">
+			<div id="form" tabindex="0" #form class="solicitacaoForm col-7" aria-label="Formulário para criação de solicitação">
 				<form [formGroup]="formControl" style="font-size: 16px">
 					<div class="app-page-bottomsheet-content">
 						<mat-form-field class="app-page-form-full" appearance="outline">
@@ -21,15 +45,17 @@
 						</mat-select>
 					</mat-form-field>
 					<div class="app-page-bottomsheet-content">
-						<span *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" class="sucessColor"
+						<span tabindex="0" *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" class="sucessColor"
 							>Você ainda possui até {{horasRestantes()}} horas restantes para aproveitar na atividade selecionada.</span
 						>
 						<ng-template [ngIf]="stopFlag || stopFlagExceed">
 							<div class="d-flex flex-column" style="margin-bottom: 1rem">
-								<span class="warnColor w-100">Você não possui horas restantes para aproveitar na atividade selecionada.</span>
+								<span tabindex="0" class="warnColor w-100">Você não possui horas restantes para aproveitar na atividade selecionada.</span>
 								<div class="w-100">
-									<span class="warnColor" style="margin-right: 1rem">Deseja seguir com a solicitação apenas para contar no histórico?</span>
-									<mat-checkbox formControlName="coringaFlag"> </mat-checkbox>
+									<span tabindex="0" class="warnColor" style="margin-right: 1rem"
+										>Deseja seguir com a solicitação apenas para contar no histórico?</span
+									>
+									<mat-checkbox tabindex="0" formControlName="coringaFlag"> </mat-checkbox>
 								</div>
 							</div>
 						</ng-template>
@@ -54,19 +80,20 @@
 					</div>
 
 					<div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
-						<mat-label style="font-size: 20px" class="nunito mb-3">Seu Certificado</mat-label>
+						<mat-label tabindex="0" style="font-size: 20px" class="nunito mb-3">Upload de Certificado</mat-label>
 
 						<div
 							class="mb-3"
 							[ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
 						>
-							<label for="file" class="btn-primary-download">Escolher Arquivo</label>
-							<input id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none" />
+							<label tabindex="0" for="file" class="btn-primary-download">Escolher Arquivo</label>
+							<input tabindex="0" id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none" />
 						</div>
 						<div
 							class="d-grid cursor-pointer"
 							style="max-width: 90%; overflow-wrap: break-word; grid-template-columns: 10% 90%"
 							(click)="downloadActual()"
+							tabindex="0"
 							*ngIf="actualFile"
 						>
 							<mat-icon>cloud_download</mat-icon>
@@ -76,12 +103,18 @@
 				</form>
 			</div>
 
-			<div class="col-4 solicitacaoHoras mx-auto d-flex flex-column justify-content-between">
+			<div
+				id="hour"
+				tabindex="0"
+				#hour
+				class="col-4 solicitacaoHoras mx-auto d-flex flex-column justify-content-between"
+				aria-label="Resumo das horas totais"
+			>
 				<div>
-					<h2 style="font-weight: 500; text-align: center">Suas Horas Totais</h2>
+					<h2 style="font-weight: 500; text-align: center" tabindex="0">Suas Horas Totais</h2>
 					<div>
 						<div class="sphere-progress-container mx-auto">
-							<span class="nunito d-flex justify-content-center align-items-center"
+							<span class="nunito d-flex justify-content-center align-items-center" tabindex="0"
 								>Total
 								<mat-icon
 									class="opacity-75"
@@ -101,11 +134,11 @@
 									[ngStyle]="{'background': conicGradientFactory('rgb(43, 70, 139)', 'transparent', totalHoras, appStateService.state?.userData?.curso.minimoHorasCurso)}"
 								>
 									<div class="sphere-progress-center translate-middle">
-										<span style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+										<span tabindex="0" style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
 											>{{(100*((totalHoras +
 											totalHorasRascunho)+(addHoras-subHorasRascunho))/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span
 										>
-										<span class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+										<span tabindex="0" class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
 											>{{(totalHoras + totalHorasRascunho)+(addHoras-subHorasRascunho)}}h /
 											{{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span
 										>
@@ -135,7 +168,7 @@
 	</ng-template>
 
 	<ng-template [ngIf]="!loading && actionComplete">
-		<p>
+		<p tabindex="0">
 			Rascunho:
 			<strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong>
 			{{new ? 'criado' : 'editada'}} com sucesso
@@ -146,7 +179,7 @@
 	</ng-template>
 
 	<ng-template [ngIf]="!loading && error">
-		<p>
+		<p tabindex="0">
 			Solicitação <strong>{{formControl.value.description}}</strong> não foi adicionada <br />
 			<small>{{ error.message }}</small>
 		</p>

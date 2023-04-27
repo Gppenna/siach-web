@@ -5,31 +5,36 @@
 				<div class="row">
 					<div class="col">
 						<div class="d-flex position-relative">
-							<mat-icon class="back" (click)="back()">arrow_back</mat-icon>
-							<h1>{{ dataSource.titulo }}</h1>
+							<span id="voltar-label" class="accessibility-header">Voltar</span>
+
+							<div aria-labelledby="voltar-label">
+								<mat-icon class="back" (click)="back()">arrow_back</mat-icon>
+							</div>
+
+							<h1 tabindex="0">{{ dataSource.titulo }}</h1>
 						</div>
 					</div>
 
 					<div class="col">
 						<div class="d-flex justify-content-end gap-2">
-							<div *ngIf="dataSource.solicitacaoProgressoList" class="chip-large col mx-3" [ngClass]="statusColor(dataSource)">
+							<div tabindex="0" *ngIf="dataSource.solicitacaoProgressoList" class="chip-large col mx-3" [ngClass]="statusColor(dataSource)">
 								{{ dataSource.statusNow }}
 							</div>
-							<div class="chip primary col">{{ dataSource.horas }} horas</div>
+							<div class="chip primary col" tabindex="0">{{ dataSource.horas }} horas</div>
 						</div>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row" tabindex="0">
 					<h3 class="nm" style="color: #757575">CATEGORIA</h3>
 					<h4 style="font-size: 18px">{{ dataSource.grupoBarema?.descricao }}</h4>
 				</div>
-				<div class="row">
+				<div class="row" tabindex="0">
 					<h3 class="nm" style="color: #757575">ATIVIDADE</h3>
 					<h4 style="font-size: 18px">{{ dataSource.atividadeBarema?.descricao }}</h4>
 				</div>
 			</div>
-			<div class="row userCard my-4" *ngIf="userData">
+			<div class="row userCard my-4" *ngIf="userData" tabindex="0">
 				<div class="col d-flex flex-column gap-3 nunito">
 					<div class="row">
 						<span class="col-2 strong">Nome:</span>
@@ -51,10 +56,17 @@
 					</div>
 				</div>
 			</div>
-			<h1 style="color: #757575" class="mt-5">Progresso</h1>
+			<h1 tabindex="0" style="color: #757575" class="mt-5">Progresso</h1>
 			<div class="py-3 mx-5" *ngIf="leftActive">
 				<div class="progress-container">
-					<span style="top: -15px" [ngClass]="progressValue >= 0 ? 'active' : 'inactive'" class="left nunito">
+					<span tabindex="0" id="enviado-label" class="accessibility-header">Data de envio</span>
+					<span
+						aria-labelledby="enviado-label"
+						tabindex="0"
+						style="top: -15px"
+						[ngClass]="progressValue >= 0 ? 'active' : 'inactive'"
+						class="left nunito"
+					>
 						{{
 							leftActive.dataCadastro
 								? (leftActive.dataCadastro | date : 'dd/MM/yyyy')
@@ -63,7 +75,14 @@
 								: ''
 						}}
 					</span>
-					<span style="top: -15px" [ngClass]="progressValue >= 50 ? 'active' : 'inactive'" class="middle nunito">
+					<span tabindex="0" id="analise-label" class="accessibility-header">Data de início da análise</span>
+					<span
+						aria-labelledby="analise-label"
+						tabindex="0"
+						style="top: -15px"
+						[ngClass]="progressValue >= 50 ? 'active' : 'inactive'"
+						class="middle nunito"
+					>
 						{{
 							middleActive.dataCadastro
 								? (middleActive.dataCadastro | date : 'dd/MM/yyyy')
@@ -72,7 +91,14 @@
 								: ''
 						}}
 					</span>
-					<span style="top: -15px" [ngClass]="progressValue === 100 ? 'active' : 'inactive'" class="right nunito">
+					<span tabindex="0" id="fim-label" class="accessibility-header">Data de finalização da análise</span>
+					<span
+						aria-labelledby="fim-label"
+						tabindex="0"
+						style="top: -15px"
+						[ngClass]="progressValue === 100 ? 'active' : 'inactive'"
+						class="right nunito"
+					>
 						{{
 							rightActive.dataCadastro
 								? (rightActive.dataCadastro | date : 'dd/MM/yyyy')
@@ -94,9 +120,10 @@
 					<span class="right nunito" [ngClass]="rightActive ? 'active' : ''">Finalizado</span>
 				</div>
 			</div>
-			<h1 style="color: #757575" class="mt-5">Certificado Enviado</h1>
+			<h1 style="color: #757575" class="mt-5" tabindex="0">Certificado Enviado</h1>
 			<div class="py-2 mx-5">
 				<div
+					tabindex="0"
 					class="d-grid cursor-pointer"
 					style="max-width: 90%; overflow-wrap: break-word; grid-template-columns: 3% 90%"
 					(click)="downloadActual()"

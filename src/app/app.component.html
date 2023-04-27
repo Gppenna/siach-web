@@ -3,7 +3,7 @@
 		<ul #firstFocus aria-label="Menu de acessibilidade" class="accessibility-header">
 			<li>
 				<a
-					[href]="router.url + '#mainContent'"
+					[href]="getUrl('#mainContent')"
 					(click)="skipToContent()"
 					(keydown.enter)="skipToContent()"
 					tabindex="1"
@@ -13,7 +13,7 @@
 			</li>
 			<li *ngIf="isLogged()">
 				<a
-					[href]="router.url + '#navigation'"
+					[href]="getUrl('#navigation')"
 					(click)="skipToNavigation()"
 					(keydown.enter)="skipToNavigation()"
 					tabindex="2"
@@ -23,12 +23,12 @@
 			</li>
 		</ul>
 	</nav>
-	<div id="navigation" #navigation tabindex="0">
+	<div tabindex="0" id="navigation" #navigation>
 		<app-toolbar [ngClass]="isLogged() ? '' : 'hide'"></app-toolbar>
 	</div>
 
 	<section class="main-container">
-		<div id="mainContent" class="app-container" #mainContent tabindex="0">
+		<div tabindex="0" id="mainContent" class="app-container" #mainContent>
 			<router-outlet></router-outlet>
 		</div>
 	</section>

@@ -1,57 +1,60 @@
 <section class="d-flex flex-column mt-5">
-    <div>
-        <div>
-            <div>
-                <h1>Visualizar Solicitações</h1>
-            </div>
+	<div>
+		<div>
+			<div>
+				<h1 tabindex="0">Visualizar Solicitações</h1>
+			</div>
 
-            <div class="danger-card" *ngIf="dataSourcePendente.length > 0">
-                <span>
-                    Você ainda possui solicitações pendentes de envio! <a [routerLink]="['/solicitacao/criar']" style="color: #fff;text-decoration: underline; cursor:pointer">Clique aqui</a> para visualizar
-                </span>
-            </div>
+			<div class="danger-card" *ngIf="dataSourcePendente.length > 0">
+				<span tabindex="0">
+					Você ainda possui solicitações pendentes de envio!
+					<a tabindex="0" [routerLink]="['/solicitacao/criar']" style="color: #fff; text-decoration: underline; cursor: pointer">Clique aqui</a> para
+					visualizar
+				</span>
+			</div>
 
+			<div class="align-items-end d-flex flex-column gap-3">
+				<button tabindex="0" class="btn btn-new" style="width: 230px !important" [routerLink]="['/solicitacao/criar']">
+					<mat-icon>add_circle</mat-icon>Nova Solicitação
+				</button>
+			</div>
+		</div>
 
-            <div class="align-items-end d-flex flex-column gap-3">
-                <button class="btn btn-new" style="width: 230px!important" [routerLink]="['/solicitacao/criar']"><mat-icon>add_circle</mat-icon>Nova Solicitação</button>
-            </div>
-        </div>
+		<div
+			tabindex="0"
+			class="card-container my-4 pb-4"
+			style="cursor: pointer"
+			(click)="openDetails(solicitacao)"
+			*ngFor="let solicitacao of dataSource"
+		>
+			<div>
+				<div class="p-3 row">
+					<div class="col">
+						<h2 class="m-0" style="font-weight: 500">{{ solicitacao.titulo }}</h2>
+						<h4 style="font-size: 18px">{{ solicitacao.grupoBarema?.descricao }}</h4>
+					</div>
 
-        <div class="card-container my-4 pb-4" style="cursor: pointer;" (click)="openDetails(solicitacao)" *ngFor="let solicitacao of dataSource">
-            <div>
-                <div class="p-3 row">
-                    <div class="col">
-                        <h2 class="m-0" style="font-weight: 500;">{{solicitacao.titulo}}</h2>
-                        <h4 style="font-size: 18px;">{{solicitacao.grupoBarema?.descricao}}</h4>
-                    </div>
-
-                    <div class="col">
-                        <span class="nunito">
-                            {{solicitacao.atividadeBarema?.descricao}}
-                        </span>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex justify-content-end gap-2">
-                            <div class="chip primary col">
-                                {{solicitacao.horas}} horas
-                            </div>
-                            <div class="chip-large col" [ngClass]="statusColor(solicitacao)">
-                                {{solicitacao.statusNow}}
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <ng-template [ngIf]="dataSource.length === 0">
-            <div class="app-page-messages">
-                <mat-icon>search_off</mat-icon>
-                <h5 class="nunito">Você não possui solicitações!</h5>
-            </div>
-        </ng-template>
-
-
-    </div>
-
+					<div class="col">
+						<span class="nunito">
+							{{ solicitacao.atividadeBarema?.descricao }}
+						</span>
+					</div>
+					<div class="col">
+						<div class="d-flex justify-content-end gap-2">
+							<div class="chip primary col">{{ solicitacao.horas }} horas</div>
+							<div class="chip-large col" [ngClass]="statusColor(solicitacao)">
+								{{ solicitacao.statusNow }}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ng-template [ngIf]="dataSource.length === 0">
+			<div class="app-page-messages">
+				<mat-icon>search_off</mat-icon>
+				<h5 tabindex="0" class="nunito">Você não possui solicitações!</h5>
+			</div>
+		</ng-template>
+	</div>
 </section>

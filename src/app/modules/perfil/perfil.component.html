@@ -2,19 +2,19 @@
 	<div>
 		<div>
 			<div>
-				<h1>Seu Perfil</h1>
+				<h1 tabindex="0">Seu Perfil</h1>
 			</div>
 			<div class="d-grid p-5" style="grid-template-columns: 30% 70%" *ngIf="userData">
 				<div class="m-auto">
 					<div>
-						<img style="width: 150px" src="../../../../assets/images/enzo.png" alt="Avatar de Perfil" />
+						<img tabindex="0" style="width: 150px" src="../../../../assets/images/enzo.png" alt="Avatar de Perfil" />
 					</div>
 
-					<h2 class="nunito text-center mt-3 perfil-nome">
+					<h2 tabindex="0" class="nunito text-center mt-3 perfil-nome">
 						{{ userData.nome }}
 					</h2>
 				</div>
-				<div class="row userCard m-3">
+				<div class="row userCard m-3" tabindex="0">
 					<div class="col d-flex flex-column nunito justify-content-around">
 						<div class="row">
 							<span class="col-4 strong">Nome:</span>
@@ -38,10 +38,10 @@
 				</div>
 			</div>
 			<div>
-				<h1>Suas Horas</h1>
+				<h1 tabindex="0">Suas Horas</h1>
 				<div class="d-grid" style="grid-template-columns: 23% 77%">
 					<div class="sphere-progress-container mx-auto">
-						<span class="nunito d-flex justify-content-center align-items-center"
+						<span tabindex="0" class="nunito d-flex justify-content-center align-items-center"
 							>Total
 							<mat-icon
 								class="opacity-75"
@@ -73,10 +73,10 @@
 								}"
 							>
 								<div class="sphere-progress-center translate-middle">
-									<span style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+									<span tabindex="0" style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
 										>{{ ((100 * (totalHoras + totalHorasRascunho)) / appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3) }}%</span
 									>
-									<span class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+									<span tabindex="0" class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
 										>{{ totalHoras + totalHorasRascunho }}h / {{ appStateService.state?.userData?.curso.minimoHorasCurso }}h</span
 									>
 								</div>

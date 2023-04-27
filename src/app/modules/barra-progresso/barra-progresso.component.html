@@ -1,9 +1,25 @@
 <ng-template [ngIf]="dataSource">
 	<div *ngFor="let atividade of dataSource | keyvalue" class="mt-3">
-		<span class="nunito d-flex gap-2"
-			>{{ $any(atividade.value).descricao }}
-			<mat-icon *ngIf="dataSourceSecondary" class="cursor-pointer" (click)="openGrupo(dataSourceSecondary)">search</mat-icon></span
-		>
+		<ng-template [ngIf]="dataSourceSecondary">
+			<div aria-labelledby="buscar-label" (click)="openGrupo(dataSourceSecondary)">
+				<span tabindex="0" id="buscar-label" class="accessibility-header">Verificar atividade do grupo: {{ $any(atividade.value).descricao }}</span>
+				<span class="nunito d-flex gap-2"
+					>{{ $any(atividade.value).descricao }}
+
+					<mat-icon *ngIf="dataSourceSecondary" class="cursor-pointer">search</mat-icon></span
+				>
+			</div>
+		</ng-template>
+		<ng-template [ngIf]="!dataSourceSecondary">
+			<div aria-labelledby="buscar-label">
+				<span class="nunito d-flex gap-2" tabindex="0"
+					>{{ $any(atividade.value).descricao }}
+
+					<mat-icon *ngIf="dataSourceSecondary" class="cursor-pointer">search</mat-icon></span
+				>
+			</div>
+		</ng-template>
+
 		<div class="progresso-barra">
 			<div class="position-relative">
 				<div class="position-absolute w-100">
@@ -11,10 +27,13 @@
 					<div
 						*ngIf="adicional === 0"
 						class="position-absolute nunito"
+						aria-labelledby="blue-label"
+						tabindex="0"
 						[ngStyle]="{
 							left: calcValueContabilizado(atividade) + '%'
 						}"
 					>
+						<span id="blue-label" class="accessibility-header">Horas já aproveitadas: </span>
 						{{ calcValueContabilizado(atividade).toPrecision(3) }}%
 					</div>
 				</div>
@@ -24,16 +43,19 @@
 					</mat-progress-bar>
 					<div
 						style="color: #3caea3 !important"
+						tabindex="0"
+						aria-labelledby="green-label"
 						class="position-absolute nunito"
 						[ngStyle]="{
 							left: calcValueContabilizadoRascunho(atividade) + '%'
 						}"
 					>
+						<span id="green-label" class="accessibility-header">Horas atuais pendente de análise: </span>
 						{{ calcValueContabilizadoRascunho(atividade).toPrecision(3) }}%
 					</div>
 				</div>
 			</div>
-			<div class="nunito">{{ $any(atividade.value).horasLimite }}h</div>
+			<div class="nunito" aria-label="Horas limites">{{ $any(atividade.value).horasLimite }}h</div>
 		</div>
 	</div>
 </ng-template>

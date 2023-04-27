@@ -91,6 +91,11 @@ export class AppComponent {
 		});
 	}
 
+	getUrl(url: any) {
+		const urlNew = this.router.url.split('#');
+		return urlNew[0] + url;
+	}
+
 	isLogged() {
 		return sessionStorage.getItem(this.USER_EMAIL_SESSION_ATTRIBUTE) != null ? true : false;
 	}
