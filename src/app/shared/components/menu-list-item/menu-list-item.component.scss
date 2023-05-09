@@ -1,59 +1,62 @@
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 :host {
-    display: flex;
-    flex-direction: column;
-    outline: none;
-    width: 100%;
-    justify-content: center;
-    height: inherit;
-    .mat-list-item.active {}
-    &:hover,
-    &:focus {
-        >.mat-list-item:not(.expanded) {}
-    }
+	display: flex;
+	flex-direction: column;
+	outline: none;
+	width: 100%;
+	justify-content: center;
+	height: inherit;
+	.mat-list-item.active {
+	}
+	&:hover,
+	&:focus {
+		> .mat-list-item:not(.expanded) {
+		}
+	}
 }
 
 .mat-list-item {
-    width: 100%;
-    align-items: center;
-    height: inherit;
-    span {
-        cursor: pointer;
-        display: flex;
-        height: inherit;
-        align-items: center;
-    }
-    .routeIcon {
-        margin-right: 0.7rem;
-    }
+	width: 100%;
+	align-items: center;
+	height: inherit;
+	span {
+		cursor: pointer;
+		display: flex;
+		height: inherit;
+		align-items: center;
+	}
+	.routeIcon {
+		margin-right: 0.7rem;
+	}
 }
 
 .menu-list-expanded {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 7vw;
-    align-items: center;
-    background: #fff;
-    padding: 0px;
-    gap: 1px;
-    position: relative;
-    filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1));
-    border-radius: 8px;
-    color: #333333;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 7vw;
+	align-items: center;
+	background: #fff;
+	padding: 0px;
+	gap: 1px;
+	position: relative;
+	filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.1));
+	border-radius: 8px;
+	color: #333333;
+	z-index: 999;
 }
 
-.menu-list-expanded>* {
-    font-size: 17px;
-    padding: 8px;
+.menu-list-expanded > * {
+	font-size: 17px;
+	padding: 8px;
 }
 
-.menu-list-expanded>*:not(:last-child) {
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+.menu-list-expanded > *:not(:last-child) {
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .child {
-    .menu {
-        color: #333333!important;
-    }
+	.menu {
+		color: #333333 !important;
+	}
 }
