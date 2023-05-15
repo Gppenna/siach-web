@@ -25,6 +25,7 @@
 			class="card-container my-4 pb-4"
 			style="cursor: pointer"
 			(click)="openDetails(solicitacao)"
+			(keyup.enter)="openDetails(solicitacao)"
 			*ngFor="let solicitacao of dataSource"
 		>
 			<div>

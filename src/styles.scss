@@ -96,6 +96,7 @@ body {
 *:before,
 *:after {
 	box-sizing: inherit;
+	line-height: 1.5;
 }
 
 body {
@@ -227,7 +228,7 @@ body {
 	span.mat-display-1:hover,
 	span.mat-display-1:focus {
 		padding-bottom: 0px;
-		border-bottom: 2px solid #4b6f9e;
+		border-bottom: 2px solid #3e5884;
 	}
 }
 
@@ -250,12 +251,12 @@ a {
 }
 
 span.highlight {
-	color: #3a5cb2;
+	color: #3f5692;
 	font-weight: 500;
 }
 
 span.highlight-light {
-	color: #4b6f9e;
+	color: #3e5884;
 }
 
 span.menu {
@@ -266,7 +267,7 @@ h1,
 h2,
 h3,
 h4 {
-	color: #646464;
+	color: #595959;
 }
 
 .chip {
@@ -298,7 +299,7 @@ h4 {
 	width: 30px;
 	height: 30px;
 	border-radius: 30px;
-	background: #c3def5;
+	background: rgb(91, 91, 91) !important;
 	position: absolute;
 	z-index: 999;
 }
@@ -320,11 +321,11 @@ span.right {
 }
 
 span.active {
-	color: rgba(25, 115, 194, 1);
+	color: #3c5680;
 }
 
 div.active {
-	background: rgba(25, 115, 194, 1);
+	background: #3c5680 !important;
 }
 
 .left {
@@ -371,16 +372,20 @@ div.active {
 	font-size: 16px;
 }
 
+.mat-simple-snackbar {
+	font-size: 18px;
+}
+
 .chip.primary {
-	background-color: #4b6f9e;
+	background-color: #3c5a80;
 }
 
 .danger {
-	color: #b3291c;
+	color: #a8261a;
 }
 
 .danger-card {
-	background-color: #b3291c;
+	background-color: #a8261a;
 	color: #fff;
 	border-radius: 10px;
 	font-size: 18px;
@@ -390,7 +395,7 @@ div.active {
 }
 
 .mat-snack-bar-container {
-	background: #4b6f9e !important;
+	background: #3e5884 !important;
 }
 
 .mat-simple-snackbar-action {
@@ -398,11 +403,11 @@ div.active {
 }
 
 .green-snackbar {
-	background: #3caea3 !important;
+	background: #37a095 !important;
 }
 
 .red-snackbar {
-	background: #b3291c !important;
+	background: #a8261a !important;
 }
 
 .btn-no-style {
@@ -411,7 +416,7 @@ div.active {
 }
 
 .btn-danger {
-	background-color: #b3291c;
+	background-color: #a8261a;
 	font-family: 'Nunito';
 	width: 200px;
 	height: 45px;
@@ -424,7 +429,7 @@ div.active {
 }
 
 .btn-danger-small {
-	background-color: #b3291c;
+	background-color: #a8261a;
 	font-family: 'Nunito';
 	color: #fff;
 	width: 120px;
@@ -456,7 +461,7 @@ div.active {
 }
 
 .btn-primary {
-	background-color: #4b6f9e;
+	background-color: #3e5884;
 	font-family: 'Nunito';
 	width: 200px;
 	height: 45px;
@@ -470,7 +475,7 @@ div.active {
 
 .btn-primary-small {
 	cursor: pointer;
-	background-color: #4b6f9e;
+	background-color: #3e5884;
 	color: #fff;
 	font-family: 'Nunito';
 	width: 120px;
@@ -485,7 +490,7 @@ div.active {
 
 .btn-primary-download {
 	cursor: pointer;
-	background-color: #4b6f9e;
+	background-color: #3e5884;
 	color: #fff;
 	font-family: 'Nunito';
 	display: flex;
@@ -499,7 +504,7 @@ div.active {
 
 .btn-new {
 	color: #fff;
-	background-color: #2b468be5;
+	background-color: #3c5a80;
 	font-family: 'Nunito';
 	width: 170px;
 	height: 35px;
@@ -528,9 +533,22 @@ div.active {
 	stroke: #fff !important;
 }
 
+.icon {
+	border: none;
+	display: flex !important;
+	background: inherit;
+	gap: 0.5rem;
+}
+
+.icon > .mat-button-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
 .btn-load {
 	color: #fff;
-	background-color: #2b468be5;
+	background-color: #3c5a80;
 	font-family: 'Nunito';
 	width: 170px;
 	height: 35px;
@@ -593,7 +611,7 @@ pre {
 }
 
 .progresso-barra {
-	color: #4b6f9e;
+	color: #3c5680;
 	font-size: 16px;
 }
 
@@ -614,15 +632,15 @@ pre {
 }
 
 .sucessColor {
-	color: #3caea3 !important;
+	color: #37a095 !important;
 }
 
 .warnColor {
-	color: #b3291c !important;
+	color: #a8261a !important;
 }
 
 .mat-progress-bar-fill::after {
-	background-color: #4b6f9e;
+	background-color: #3c5680;
 	border-radius: 30px;
 }
 
@@ -643,7 +661,7 @@ pre {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	color: #4b6f9e;
+	color: #3c5680;
 }
 
 .w-47 {
@@ -827,7 +845,7 @@ pre {
 	.chip.primary,
 	.btn-load,
 	.btn-primary {
-		background-color: #49596e;
+		background-color: #93a8cc;
 	}
 	// mat-icon-stepper selected color change
 	.mat-step-header .mat-step-icon-selected,
@@ -959,12 +977,19 @@ pre {
 		* {
 			color: #fff;
 		}
+		button {
+			color: #1f1f1f !important;
+		}
 	}
-	.btn-primary-small {
-		background-color: rgb(96, 111, 143);
+	.btn-primary-small,
+	.btn-primary-download {
+		background-color: #93a8cc;
+	}
+	.dark-switch {
+		color: #1f1f1f;
 	}
 	.btn-danger-small {
-		background-color: #c45747;
+		background-color: #ec938d;
 	}
 	.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
 		opacity: 1;
@@ -978,6 +1003,9 @@ pre {
 		border-radius: 30px;
 	}
 	mat-icon {
+		color: #fff !important;
+	}
+	.menu mat-icon {
 		color: #fff !important;
 	}
 	.dark-theme .mat-option.mat-selected,
@@ -1002,5 +1030,47 @@ pre {
 	.perfil-nome {
 		font-weight: 500 !important;
 		color: var(--bs-body-color-heading-night-eye);
+	}
+	span.active {
+		color: #93a8cc;
+	}
+
+	div.active {
+		background: #93a8cc !important;
+	}
+	.progresso-barra {
+		color: #2b468b;
+		font-size: 16px;
+	}
+	.mat-progress-bar-fill::after {
+		background-color: #2b468b;
+		border-radius: 30px;
+	}
+
+	button *,
+	.chip {
+		color: #1c1c21 !important;
+	}
+
+	.mat-simple-snackbar * {
+		color: #fff !important;
+	}
+
+	.warnColor {
+		color: #ec938d !important;
+	}
+	.danger {
+		color: #ec938d;
+	}
+	.danger-card {
+		background-color: #ec938d;
+		color: #1c1c21;
+	}
+	.red-snackbar {
+		background-color: #ec938d;
+		color: #1c1c21;
+	}
+	input[type='checkbox'] {
+		filter: invert(100%);
 	}
 }

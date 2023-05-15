@@ -122,16 +122,18 @@
 			</div>
 			<h1 style="color: #757575" class="mt-5" tabindex="0">Certificado Enviado</h1>
 			<div class="py-2 mx-5">
-				<div
+				<button
 					tabindex="0"
-					class="d-grid cursor-pointer"
-					style="max-width: 90%; overflow-wrap: break-word; grid-template-columns: 3% 90%"
+					mat-icon-button
+					class="icon"
+					[matTooltipPosition]="'right'"
 					(click)="downloadActual()"
 					*ngIf="actualFile"
+					matTooltip="Baixar certificado enviado"
 				>
 					<mat-icon>cloud_download</mat-icon>
 					<span class="nunito">{{ actualFile.name }}</span>
-				</div>
+				</button>
 			</div>
 		</div>
 	</div>

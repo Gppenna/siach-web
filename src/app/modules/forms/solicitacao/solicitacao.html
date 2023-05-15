@@ -37,7 +37,7 @@
 						</mat-form-field>
 					</div>
 					<mat-form-field class="app-page-form-full" appearance="outline">
-						<mat-label>Atividade Associada</mat-label>
+						<mat-label>Categoria da Atividade</mat-label>
 						<mat-select [disabled]="!new" formControlName="idAtividadeBarema" (selectionChange)="totalLocalCalc($event.value)">
 							<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.idAtividadeBarema}}" [title]="item.descricao">
 								{{item.descricao}}
@@ -45,7 +45,7 @@
 						</mat-select>
 					</mat-form-field>
 					<div class="app-page-bottomsheet-content">
-						<span tabindex="0" *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" class="sucessColor"
+						<span tabindex="0" *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" style="color: rgb(52 188 147)"
 							>Você ainda possui até {{horasRestantes()}} horas restantes para aproveitar na atividade selecionada.</span
 						>
 						<ng-template [ngIf]="stopFlag || stopFlagExceed">
@@ -55,7 +55,12 @@
 									<span tabindex="0" class="warnColor" style="margin-right: 1rem"
 										>Deseja seguir com a solicitação apenas para contar no histórico?</span
 									>
-									<mat-checkbox tabindex="0" formControlName="coringaFlag"> </mat-checkbox>
+									<mat-checkbox
+										tabindex="0"
+										formControlName="coringaFlag"
+										[ngStyle]="{'filter': appStateService.state.isDark ? 'invert(1)' : 'invert(0)'}"
+									>
+									</mat-checkbox>
 								</div>
 							</div>
 						</ng-template>
@@ -86,19 +91,13 @@
 							class="mb-3"
 							[ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
 						>
-							<label tabindex="0" for="file" class="btn-primary-download">Escolher Arquivo</label>
+							<label tabindex="0" for="file" class="btn-primary-download dark-switch">Escolher Arquivo</label>
 							<input tabindex="0" id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none" />
 						</div>
-						<div
-							class="d-grid cursor-pointer"
-							style="max-width: 90%; overflow-wrap: break-word; grid-template-columns: 10% 90%"
-							(click)="downloadActual()"
-							tabindex="0"
-							*ngIf="actualFile"
-						>
+						<button (click)="downloadActual()" tabindex="0" class="icon" mat-icon-button *ngIf="actualFile" matTooltip="Baixar certificado enviado">
 							<mat-icon>cloud_download</mat-icon>
 							<span>{{actualFile.name}}</span>
-						</div>
+						</button>
 					</div>
 				</form>
 			</div>
@@ -127,18 +126,26 @@
 							<div
 								style="zoom: 0.8"
 								class="sphere-progress"
-								[ngStyle]="{'background': conicGradientFactory('rgb(95, 211, 177)', appStateService.state.isDark ? 'rgb(211, 220, 233, 0.3)' : 'rgb(211, 220, 233)', (addHoras-subHorasRascunho)+(totalHoras + totalHorasRascunho), appStateService.state?.userData?.curso.minimoHorasCurso)}"
+								[ngStyle]="{'background': conicGradientFactory('rgb(52, 188, 147)', appStateService.state.isDark ? 'rgb(211, 220, 233, 0.3)' : 'rgb(211, 220, 233)', (addHoras-subHorasRascunho)+(totalHoras + totalHorasRascunho), appStateService.state?.userData?.curso.minimoHorasCurso)}"
 							>
 								<div
 									class="sphere-progress"
-									[ngStyle]="{'background': conicGradientFactory('rgb(43, 70, 139)', 'transparent', totalHoras, appStateService.state?.userData?.curso.minimoHorasCurso)}"
+									[ngStyle]="{'background': conicGradientFactory(appStateService.state.isDark ? 'rgb(147, 168, 204)' : 'rgb(43, 70, 139)', 'transparent', totalHoras, appStateService.state?.userData?.curso.minimoHorasCurso)}"
 								>
 									<div class="sphere-progress-center translate-middle">
-										<span tabindex="0" style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+										<span
+											tabindex="0"
+											style="font-size: 24px"
+											class="mb-2"
+											[ngStyle]="{'color': addHorasFlag ? 'rgb(52, 188, 147)' : appStateService.state.isDark ? 'rgb(147, 168, 204)' : 'rgb(43, 70, 139)'}"
 											>{{(100*((totalHoras +
 											totalHorasRascunho)+(addHoras-subHorasRascunho))/appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)}}%</span
 										>
-										<span tabindex="0" class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
+										<span
+											tabindex="0"
+											class="nunito"
+											style="font-size: 16px"
+											[ngStyle]="{'color': addHorasFlag ? 'rgb(52, 188, 147)' : appStateService.state.isDark ? 'rgb(147, 168, 204)' : 'rgb(43, 70, 139)'}"
 											>{{(totalHoras + totalHorasRascunho)+(addHoras-subHorasRascunho)}}h /
 											{{appStateService.state?.userData?.curso.minimoHorasCurso}}h</span
 										>

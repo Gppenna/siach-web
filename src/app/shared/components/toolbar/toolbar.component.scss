@@ -1,40 +1,39 @@
 .example-container {
-    height: calc(100vh - 64px);
-    .mat-sidenav {
-        padding: 8px;
-        min-width: 300px;
-    }
-    .mat-sidenav-content {
-        height: calc(100vh - 64px);
-    }
+	height: calc(100vh - 64px);
+	.mat-sidenav {
+		padding: 8px;
+		min-width: 300px;
+	}
+	.mat-sidenav-content {
+		height: calc(100vh - 64px);
+	}
 }
 
 .menu-button {
-    text-transform: capitalize;
+	text-transform: capitalize;
 }
 
 .menu-grid {
-    display: grid;
-    grid-template-columns: 50% 35% 5%;
-    padding: 0 3rem;
+	display: grid;
+	grid-template-columns: 10% 80% 10%;
+	padding: 0 3rem;
 }
 
-mat-toolbar>* {
-    height: inherit;
+mat-toolbar > * {
+	height: inherit;
 }
 
 .itens-menu {
-    height: inherit;
-    align-items: center;
-    display: grid;
-    gap: 3rem;
-    grid-template-columns: 25% 25% 25% 12.5% 12.5%;
+	height: inherit;
+	align-items: center;
+	display: grid;
+	grid-template-columns: 25% 25% 25% 12.5% 12.5%;
 }
 
 .itens-menu * {
-    height: inherit;
+	height: inherit;
 }
 
 .mat-icon-no-color {
-    color: rbga(0, 0, 0, 0.54);
+	color: rbga(0, 0, 0, 0.54);
 }

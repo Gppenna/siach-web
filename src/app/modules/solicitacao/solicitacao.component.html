@@ -46,19 +46,24 @@
 						</div>
 					</div>
 				</div>
-				<span tabindex="0"
-					><span class="highlight">Cadastre várias solicitações de uma só vez!</span> As solicitações abaixo são salvas como rascunho para você poder
-					edita-las antes de enviar, para enviá-las para análise do colegiado clique no botão
-					<span class="highlight">"Enviar Solicitações"</span>.</span
-				>
-				<span tabindex="0" class="mt-3"
-					><span class="highlight">Caso saia desta página seus rascunhos ficam salvos</span>, você poderá visualizá-los novamente ao retornar :)</span
-				>
+				<span tabindex="0" class="highlight">Cadastre várias solicitações de uma só vez!</span>
+				<ul>
+					<li tabindex="0"><span> As solicitações abaixo são rascunhos, você poderá edita-las antes de enviar</span></li>
+					<li tabindex="0">
+						<span> Para enviá-las para análise do colegiado clique no botão <span class="highlight">"Enviar Solicitações"</span> </span>
+					</li>
+					<li tabindex="0">
+						<span class="mt-3"
+							><span class="highlight">Caso saia desta página seus rascunhos ficam salvos</span>, você poderá visualizá-los novamente ao retornar
+							:)</span
+						>
+					</li>
+				</ul>
 			</div>
 			<div id="rascunhos" #rascunhos tabindex="0" class="d-flex justify-content-between gap-3 solicitacaoCard">
 				<h2 style="font-weight: 500" tabindex="0">Solicitações Pendentes de Envio - Rascunho</h2>
 				<button tabindex="0" class="btn btn-new" style="width: 210px !important" (click)="novaDivulgacaoAtividade()">
-					<mat-icon>add_circle</mat-icon>Criar Solicitação
+					<mat-icon>add_circle</mat-icon><span>Criar Solicitação</span>
 				</button>
 			</div>
 
@@ -142,7 +147,7 @@
 			<ng-template [ngIf]="dataSource.length === 0">
 				<div class="app-page-messages" style="padding-top: 15vh !important">
 					<mat-icon>search_off</mat-icon>
-					<h5 class="nunito">Você não possui solicitações!</h5>
+					<h5 class="nunito">Você ainda não possui solicitações!</h5>
 				</div>
 			</ng-template>
 		</div>

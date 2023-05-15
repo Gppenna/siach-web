@@ -35,7 +35,7 @@
 				</mat-form-field>
 			</div>
 			<mat-form-field class="app-page-form-full" appearance="outline">
-				<mat-label>Atividade Associada</mat-label>
+				<mat-label>Categoria da Atividade</mat-label>
 				<mat-select formControlName="idAtividadeBarema">
 					<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.idAtividadeBarema}}" [title]="item.descricao">
 						{{item.descricao}}
@@ -61,7 +61,7 @@
 	</ng-template>
 
 	<ng-template [ngIf]="!loading && actionComplete">
-		<p>Divulgação de Atividade: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> foi adicionado com sucesso</p>
+		<p>Divulgação de Atividade: <strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong> foi adicionada com sucesso</p>
 		<div class="app-page-bottomsheet-actions">
 			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
 		</div>

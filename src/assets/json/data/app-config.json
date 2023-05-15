@@ -6,7 +6,7 @@
 			"route": "/inicio"
 		},
 		{
-			"displayName": "Atividades",
+			"displayName": "Encontrar Atividades",
 			"route": "/atividades"
 		},
 		{

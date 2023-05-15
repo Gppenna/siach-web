@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BarraProgressoModalComponent } from '../perfil/barra-progresso-modal/barra-progresso-modal.component';
+import { AppStateService } from '../../app.state';
 
 @Component({
 	selector: 'app-barra-progresso',
@@ -17,7 +18,7 @@ export class BarraProgressoComponent implements OnInit {
 	@Input()
 	dataSourceSecondary: any = undefined;
 
-	constructor(public dialog: MatDialog) {}
+	constructor(public dialog: MatDialog, public appStateService: AppStateService) {}
 
 	ngOnInit(): void {}
 

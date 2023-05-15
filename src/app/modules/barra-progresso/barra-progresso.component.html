@@ -26,6 +26,7 @@
 					<mat-progress-bar aria-label="Barra de progresso" mode="determinate" [value]="calcValueContabilizado(atividade)"> </mat-progress-bar>
 					<div
 						*ngIf="adicional === 0"
+						style="top: 200%"
 						class="position-absolute nunito"
 						aria-labelledby="blue-label"
 						tabindex="0"
@@ -42,7 +43,7 @@
 					<mat-progress-bar class="adicional" aria-label="Barra de progresso" mode="determinate" [value]="calcValueContabilizadoRascunho(atividade)">
 					</mat-progress-bar>
 					<div
-						style="color: #3caea3 !important"
+						style="color: #37a095 !important; top: -300%"
 						tabindex="0"
 						aria-labelledby="green-label"
 						class="position-absolute nunito"

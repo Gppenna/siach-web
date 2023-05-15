@@ -3,14 +3,11 @@
 		<div>
 			<div>
 				<h1 tabindex="0">Atividades Complementares</h1>
-				<span tabindex="0"
-					><span class="highlight">Precisa de um certificado?</span> Nesta página você poderá encontrar oportunidades que geram horas
-					complementares.</span
-				>
+				<span tabindex="0"><span class="highlight">Quer um certificado?</span> Encontre abaixo atividades que geram horas complementares.</span>
 			</div>
 			<div class="align-items-end d-flex flex-column gap-3">
 				<button class="btn btn-new" style="width: 230px !important" (click)="novaDivulgacaoAtividade()">
-					<mat-icon>add_circle</mat-icon>Divulgar Atividade
+					<mat-icon>add_circle</mat-icon><span>Divulgar Atividade</span>
 				</button>
 			</div>
 		</div>
@@ -24,7 +21,7 @@
 				<ng-template [ngIf]="showFilter">
 					<div>
 						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
-							<mat-label>Atividade</mat-label>
+							<mat-label>Categoria da Atividade</mat-label>
 							<mat-select [(ngModel)]="filtro.atividadeBaremaId" (selectionChange)="freshFilter()">
 								<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.idAtividadeBarema }}" [matTooltip]="item.descricao">
 									{{ item.descricao }}
@@ -34,7 +31,7 @@
 					</div>
 					<div>
 						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
-							<mat-label>Grupo</mat-label>
+							<mat-label>Grupo da Atividade</mat-label>
 							<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
 								<mat-option *ngFor="let item of grupoBaremaList" [matTooltip]="item.descricao" value="{{ item.idGrupoBarema }}">
 									{{ item.numero }} - {{ item.descricao }}
@@ -51,7 +48,7 @@
 					<ng-template [ngIf]="filtro.atividadeBaremaId !== undefined || filtro.grupoBaremaId !== undefined || filtro.cargaHoraria !== undefined">
 						<div>
 							<button mat-icon-button (click)="filtro = this.newFilter(); freshFilter()">
-								<mat-icon [matTooltip]="'Limpar filtros'" style="color: #b3291c">delete</mat-icon>
+								<mat-icon [matTooltip]="'Limpar filtros'" style="color: #a8261a">delete</mat-icon>
 							</button>
 						</div>
 					</ng-template>
@@ -84,12 +81,12 @@
 									</div>
 								</div>
 
-								<h3 tabindex="0">Grupo: {{ atividade.grupoBarema?.descricao }}</h3>
+								<h3 tabindex="0">Grupo da Atividade: {{ atividade.grupoBarema?.descricao }}</h3>
 							</div>
 
 							<mat-divider style="border-top-color: #000"></mat-divider>
 							<div class="mt-3 d-flex gap-4" tabindex="0">
-								<h4>Atividade:</h4>
+								<h4>Categoria da Atividade:</h4>
 								<span style="font-size: 18px">
 									{{ atividade.atividadeBarema?.descricao }}
 								</span>
@@ -97,7 +94,7 @@
 						</div>
 					</div>
 					<div
-						aria-label="Banner de divulgação"
+						aria-label="Banner da Atividade"
 						class="card-img"
 						style="width: 60%"
 						[ngStyle]="{ 'background-image': 'url(' + atividade.imagem + ')' }"
@@ -106,7 +103,7 @@
 			</div>
 			<div class="align-items-center d-flex gap-3 justify-content-center mt-3">
 				<button [disabled]="loading" class="btn btn-load position-relative" style="width: 230px !important" (click)="loadMore()">
-					<span> Mostrar Mais </span>
+					<span> Carregar Mais </span>
 					<ng-template [ngIf]="loading">
 						<div class="spinner-inside">
 							<div class="opacity-50">
