@@ -1,0 +1,96 @@
+<div class="app-page-container-bottomsheet">
+	<div class="app-page-bottomsheet-header py-3">
+		<h1 tabindex="0">Chat com Colegiado</h1>
+	</div>
+	<nav aria-labelledby="accessibility-menu">
+		<ul class="accessibility-header">
+			<li>
+				<a (click)="skipToChat()" (keyup.enter)="skipToChat()" (keydown.enter)="skipToChat()" tabindex="0" aria-label="Pular para visualizar chat"
+					>Pular para visualizar chat</a
+				>
+			</li>
+			<li>
+				<a (click)="skipToForm()" (keyup.enter)="skipToForm()" (keydown.enter)="skipToForm()" tabindex="0" aria-label="Pular para formulário do aluno"
+					>Pular para formulário do aluno</a
+				>
+			</li>
+		</ul>
+	</nav>
+	<ng-template [ngIf]="!loading && !actionComplete && !error">
+		<div style="border: 1px solid #ececec; box-shadow: 1px 1px 2px #a9a9a9" class="pt-3">
+			<div class="row mx-2" *ngFor="let comentario of data">
+				<span class="w-100 value d-flex">
+					<span class="pr-2">
+						<mat-icon class="comentarioIcon">comment</mat-icon>
+					</span>
+					<span><strong>{{ comentario.usuario.nome }}</strong> adicionou um comentário - {{ comentario.dataCriacao | date : 'dd/MM/yyyy' }}</span>
+				</span>
+				<div class="w-100 d-flex p-2 mt-1">
+					<span class="ml-1">
+						<pre>{{ comentario.mensagem }}</pre>
+					</span>
+				</div>
+				<div class="divider-grey"></div>
+			</div>
+		</div>
+
+		<ng-template [ngIf]="formControl">
+			<form [formGroup]="formControl">
+				<section class="mt-4">
+					<div>
+						<mat-form-field class="w-100 col np">
+							<mat-label class="ml-2">Escreva uma mensagem</mat-label>
+							<textarea
+								style="border: 1px solid #ececec; box-shadow: 1px 1px 2px #a9a9a9"
+								maxlength="3999"
+								formControlName="mensagem"
+								rows="3"
+								type="text"
+								matInput
+							></textarea>
+						</mat-form-field>
+					</div>
+					<div class="app-page-bottomsheet-actions">
+						<button class="btn btn-danger-small" (click)="onCancel($event)">Cancelar</button>
+						<button
+							class="btn btn-primary"
+							style="width: max-content"
+							[disabled]="!formControl.valid"
+							color="primary"
+							(click)="save()"
+							[disabled]="formControl.value.mensagem.length === 0"
+						>
+							Adicionar Mensagem
+						</button>
+					</div>
+				</section>
+			</form>
+		</ng-template>
+	</ng-template>
+	<ng-template [ngIf]="loading">
+		<div style="padding: 3rem 0px; text-align: center">
+			<mat-spinner style="margin: 0px auto"></mat-spinner>
+		</div>
+	</ng-template>
+
+	<ng-template [ngIf]="!loading && actionComplete">
+		<p tabindex="0">
+			Comentário
+			<strong> {{formControl.value.mensagem? formControl.value.mensagem : ''}}</strong>
+			{{new ? 'criado' : 'editada'}} com sucesso
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
+
+	<ng-template [ngIf]="!loading && error">
+		<p tabindex="0">
+			Comentário <strong>{{formControl.value.mensagem}}</strong> não foi adicionado <br />
+			<small>{{ error.message }}</small>
+		</p>
+		<div class="app-page-bottomsheet-actions">
+			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
+		</div>
+	</ng-template>
+</div>

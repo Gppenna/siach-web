@@ -57,69 +57,77 @@
 				</div>
 			</div>
 			<h1 tabindex="0" style="color: #757575" class="mt-5">Progresso</h1>
-			<div class="py-3 mx-5" *ngIf="leftActive">
-				<div class="progress-container">
-					<span tabindex="0" id="enviado-label" class="accessibility-header">Data de envio</span>
-					<span
-						aria-labelledby="enviado-label"
-						tabindex="0"
-						style="top: -15px"
-						[ngClass]="progressValue >= 0 ? 'active' : 'inactive'"
-						class="left nunito"
-					>
-						{{
-							leftActive.dataCadastro
-								? (leftActive.dataCadastro | date : 'dd/MM/yyyy')
-								: leftActive.dataPrevisao
-								? 'Previsão: ' + (leftActive.dataPrevisao | date : 'dd/MM/yyyy')
-								: ''
-						}}
-					</span>
-					<span tabindex="0" id="analise-label" class="accessibility-header">Data de início da análise</span>
-					<span
-						aria-labelledby="analise-label"
-						tabindex="0"
-						style="top: -15px"
-						[ngClass]="progressValue >= 50 ? 'active' : 'inactive'"
-						class="middle nunito"
-					>
-						{{
-							middleActive.dataCadastro
-								? (middleActive.dataCadastro | date : 'dd/MM/yyyy')
-								: middleActive.dataPrevisao
-								? 'Previsão: ' + (middleActive.dataPrevisao | date : 'dd/MM/yyyy')
-								: ''
-						}}
-					</span>
-					<span tabindex="0" id="fim-label" class="accessibility-header">Data de finalização da análise</span>
-					<span
-						aria-labelledby="fim-label"
-						tabindex="0"
-						style="top: -15px"
-						[ngClass]="progressValue === 100 ? 'active' : 'inactive'"
-						class="right nunito"
-					>
-						{{
-							rightActive.dataCadastro
-								? (rightActive.dataCadastro | date : 'dd/MM/yyyy')
-								: rightActive.dataPrevisao
-								? 'Previsão: ' + (rightActive.dataPrevisao | date : 'dd/MM/yyyy')
-								: ''
-						}}
-					</span>
+			<div class="d-flex">
+				<div class="py-3 mx-5 w-100" *ngIf="leftActive">
+					<div class="progress-container">
+						<span tabindex="0" id="enviado-label" class="accessibility-header">Data de envio</span>
+						<span
+							aria-labelledby="enviado-label"
+							tabindex="0"
+							style="top: -15px"
+							[ngClass]="progressValue >= 0 ? 'active' : 'inactive'"
+							class="left nunito"
+						>
+							{{
+								leftActive.dataCadastro
+									? (leftActive.dataCadastro | date : 'dd/MM/yyyy')
+									: leftActive.dataPrevisao
+									? 'Previsão: ' + (leftActive.dataPrevisao | date : 'dd/MM/yyyy')
+									: ''
+							}}
+						</span>
+						<span tabindex="0" id="analise-label" class="accessibility-header">Data de início da análise</span>
+						<span
+							aria-labelledby="analise-label"
+							tabindex="0"
+							style="top: -15px"
+							[ngClass]="progressValue >= 50 ? 'active' : 'inactive'"
+							class="middle nunito"
+						>
+							{{
+								middleActive.dataCadastro
+									? (middleActive.dataCadastro | date : 'dd/MM/yyyy')
+									: middleActive.dataPrevisao
+									? 'Previsão: ' + (middleActive.dataPrevisao | date : 'dd/MM/yyyy')
+									: ''
+							}}
+						</span>
+						<span tabindex="0" id="fim-label" class="accessibility-header">Data de finalização da análise</span>
+						<span
+							aria-labelledby="fim-label"
+							tabindex="0"
+							style="top: -15px"
+							[ngClass]="progressValue === 100 ? 'active' : 'inactive'"
+							class="right nunito"
+						>
+							{{
+								rightActive.dataCadastro
+									? (rightActive.dataCadastro | date : 'dd/MM/yyyy')
+									: rightActive.dataPrevisao
+									? 'Previsão: ' + (rightActive.dataPrevisao | date : 'dd/MM/yyyy')
+									: ''
+							}}
+						</span>
+					</div>
+					<div class="p-3 progress-container">
+						<div class="progress-sphere left" [ngClass]="progressValue >= 0 ? 'active' : ''"></div>
+						<div class="progress-sphere middle" [ngClass]="progressValue >= 50 ? 'active' : ''"></div>
+						<div class="progress-sphere right" [ngClass]="progressValue === 100 ? 'active' : ''"></div>
+						<mat-progress-bar aria-label="Barra de progresso da solicitação" mode="determinate" [value]="progressValue"></mat-progress-bar>
+					</div>
+					<div class="progress-container">
+						<span class="left nunito" [ngClass]="leftActive ? 'active' : ''">Enviado</span>
+						<span class="middle nunito" [ngClass]="middleActive ? 'active' : ''">Em análise</span>
+						<span class="right nunito" [ngClass]="rightActive ? 'active' : ''">Finalizado</span>
+					</div>
 				</div>
-				<div class="p-3 progress-container">
-					<div class="progress-sphere left" [ngClass]="progressValue >= 0 ? 'active' : ''"></div>
-					<div class="progress-sphere middle" [ngClass]="progressValue >= 50 ? 'active' : ''"></div>
-					<div class="progress-sphere right" [ngClass]="progressValue === 100 ? 'active' : ''"></div>
-					<mat-progress-bar aria-label="Barra de progresso da solicitação" mode="determinate" [value]="progressValue"></mat-progress-bar>
-				</div>
-				<div class="progress-container">
-					<span class="left nunito" [ngClass]="leftActive ? 'active' : ''">Enviado</span>
-					<span class="middle nunito" [ngClass]="middleActive ? 'active' : ''">Em análise</span>
-					<span class="right nunito" [ngClass]="rightActive ? 'active' : ''">Finalizado</span>
+				<div class="align-items-end d-flex flex-column gap-3 justify-content-center">
+					<button tabindex="0" class="btn btn-new" style="width: max-content" (click)="openChat()">
+						<mat-icon>chat</mat-icon><span class="ml-3">Chat com Colegiado</span>
+					</button>
 				</div>
 			</div>
+
 			<h1 style="color: #757575" class="mt-5" tabindex="0">Certificado Enviado</h1>
 			<div class="py-2 mx-5">
 				<button

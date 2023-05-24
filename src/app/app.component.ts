@@ -8,6 +8,7 @@ import { DivulgacaoAtividadeSheet } from './modules/forms/divulgacao-atividade/d
 import { SolicitacaoSheet } from './modules/forms/solicitacao/solicitacao';
 import { ChSheet } from './modules/forms/ch/ch';
 import { NavigationEnd, Router } from '@angular/router';
+import { ChatSheet } from './modules/forms/chat/chat';
 
 @Component({
 	selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent {
 		divulgacaoAtividadeSheet: DivulgacaoAtividadeSheet,
 		solicitacaoSheet: SolicitacaoSheet,
 		chSheet: ChSheet,
+		chatSheet: ChatSheet,
 	};
 
 	@ViewChild('drawer') drawer: MatSidenav;

@@ -3,7 +3,7 @@
 		<h2 tabindex="0" style="font-weight: 500">Atividades: {{ header }}</h2>
 		<div class="d-flex justify-content-end" (click)="close()" (keydown.enter)="close()" aria-labelledby="fechar-label">
 			<span tabindex="0" id="fechar-label" class="accessibility-header" (keydown.enter)="close()">Fechar modal: </span>
-			<mat-icon class="cursor-pointer" (click)="close()">close</mat-icon>
+			<mat-icon class="cursor-pointer" (click)="close()" (keyup.enter)="close()">close</mat-icon>
 		</div>
 	</div>
 

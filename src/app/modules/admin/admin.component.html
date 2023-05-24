@@ -1,83 +1,101 @@
 <section class="d-flex flex-column mt-5">
-    <div>
-        <div class="mb-5 d-flex justify-content-between">
-            <div>
-                <h1>Administrar Curso</h1>
-                <span>Nesta página você poderá configurar o barema do seu curso.</span>
-            </div>
-            <div class="align-items-end d-flex flex-column gap-3">
-                <button class="btn btn-new" (click)="novoGrupo()"><mat-icon>add_circle</mat-icon>Novo Grupo</button>
-                <button class="btn btn-new" style="width: 200px!important" (click)="novaAtividade()"><mat-icon>add_circle</mat-icon>Nova Atividade</button>
-            </div>
+	<div>
+		<div class="mb-5 d-flex justify-content-between">
+			<div>
+				<h1>Administrar Curso</h1>
+				<span>Nesta página você poderá configurar o barema do seu curso.</span>
+			</div>
+			<div class="align-items-end d-flex flex-column gap-3">
+				<button class="btn btn-new" (click)="novoGrupo()"><mat-icon>add_circle</mat-icon>Novo Grupo</button>
+				<button class="btn btn-new" style="width: 200px !important" (click)="novaAtividade()"><mat-icon>add_circle</mat-icon>Nova Atividade</button>
+				<div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
+					<mat-label style="font-size: 20px" class="nunito mb-3">Atualizar PDF Barema</mat-label>
+					<input required="true" type="file" (change)="inputFileChanged($event)" />
+				</div>
+			</div>
+		</div>
 
-        </div>
+		<div class="mb-5">
+			<h3 class="nm" style="display: flex; gap: 0.5rem">
+				Carga Horária Total
+				<mat-icon (click)="editCH()" style="cursor: pointer">edit</mat-icon>
+			</h3>
+			<span class="nunito">{{ appStateService.state?.userData?.curso.minimoHorasCurso }} horas</span>
+		</div>
+		<div>
+			<h3>Tabela de Conversão das Atividades Complementares</h3>
+			<table aria-label="Tabela referente ao barema do curso" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+				<ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+					<th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+					<ng-template [ngIf]="column.columnDef !== 'edit'">
+						<td mat-cell *matCellDef="let element">{{ element[column.columnDef] }}</td>
+					</ng-template>
+					<ng-template [ngIf]="column.columnDef === 'edit'">
+						<td mat-cell *matCellDef="let element" (click)="editGrupo(element)" style="cursor: pointer">
+							<mat-icon>edit</mat-icon>
+						</td>
+					</ng-template>
+				</ng-container>
+				<ng-container matColumnDef="expand">
+					<th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+					<td mat-cell *matCellDef="let element">
+						<button
+							class="btn-no-style"
+							mat-icon-button
+							aria-label="expand row"
+							(click)="expandedElement = expandedElement === element ? null : element; $event.stopPropagation()"
+						>
+							<mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+							<mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+						</button>
+					</td>
+				</ng-container>
 
-        <div class="mb-5">
-            <h3 class="nm" style="display: flex;gap: 0.5rem;">Carga Horária Total
-                <mat-icon (click)="editCH()" style="cursor: pointer;">edit</mat-icon>
-            </h3>
-            <span class="nunito">{{appStateService.state?.userData?.curso.minimoHorasCurso}} horas</span>
-        </div>
-        <div>
-            <h3>Tabela de Conversão das Atividades Complementares</h3>
-            <table aria-label="Tabela referente ao barema do curso" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
-                <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-                    <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
-                    <ng-template [ngIf]="column.columnDef !== 'edit'">
-                        <td mat-cell *matCellDef="let element"> {{element[column.columnDef]}} </td>
-                    </ng-template>
-                    <ng-template [ngIf]="column.columnDef === 'edit'">
-                        <td mat-cell *matCellDef="let element" (click)="editGrupo(element)" style="cursor: pointer;">
-                            <mat-icon>edit</mat-icon>
-                        </td>
-                    </ng-template>
+				<!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+				<ng-container matColumnDef="expandedDetail">
+					<td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+						<div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+							<table
+								style="width: 99%; margin: auto"
+								mat-table
+								aria-label="Tabela referente às atividades do grupo"
+								[dataSource]="element.atividadeBaremaList"
+								multiTemplateDataRows
+								class="mat-elevation-z8"
+							>
+								<ng-container *ngFor="let column of columnsExpanded" [matColumnDef]="column.columnDef">
+									<th mat-header-cell *matHeaderCellDef>{{ column.header }}</th>
+									<ng-template [ngIf]="column.columnDef !== 'edit' && column.columnDef !== 'delete'">
+										<td mat-cell *matCellDef="let element">{{ element[column.columnDef] }}</td>
+									</ng-template>
+									<ng-template [ngIf]="column.columnDef === 'edit'">
+										<td mat-cell *matCellDef="let element" (click)="editAtividade(element)" style="cursor: pointer">
+											<mat-icon>edit</mat-icon>
+										</td>
+									</ng-template>
+									<ng-template [ngIf]="column.columnDef === 'delete'">
+										<td mat-cell *matCellDef="let element" (click)="deleteAtividade(element)" style="cursor: pointer">
+											<mat-icon>delete</mat-icon>
+										</td>
+									</ng-template>
+								</ng-container>
+								<tr mat-header-row *matHeaderRowDef="columnsExpandedToDisplay"></tr>
+								<tr mat-row *matRowDef="let row; columns: columnsExpandedToDisplay"></tr>
+							</table>
+						</div>
+					</td>
+				</ng-container>
 
-                </ng-container>
-                <ng-container matColumnDef="expand">
-                    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-                    <td mat-cell *matCellDef="let element">
-                        <button class="btn-no-style" mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-                            <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                            <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-                <ng-container matColumnDef="expandedDetail">
-                    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-                        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                            <table style="width: 99%;margin: auto;" mat-table aria-label="Tabela referente às atividades do grupo" [dataSource]="element.atividadeBaremaList" multiTemplateDataRows class="mat-elevation-z8">
-                                <ng-container *ngFor="let column of columnsExpanded" [matColumnDef]="column.columnDef">
-                                    <th mat-header-cell *matHeaderCellDef> {{column.header}} </th>
-                                    <ng-template [ngIf]="column.columnDef !== 'edit' && column.columnDef !== 'delete'">
-                                        <td mat-cell *matCellDef="let element"> {{element[column.columnDef]}} </td>
-                                    </ng-template>
-                                    <ng-template [ngIf]="column.columnDef === 'edit'">
-                                        <td mat-cell *matCellDef="let element" (click)="editAtividade(element)" style="cursor: pointer;">
-                                            <mat-icon>edit</mat-icon>
-                                        </td>
-                                    </ng-template>
-                                    <ng-template [ngIf]="column.columnDef === 'delete'">
-                                        <td mat-cell *matCellDef="let element" (click)="deleteAtividade(element)" style="cursor: pointer;">
-                                            <mat-icon>delete</mat-icon>
-                                        </td>
-                                    </ng-template>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="columnsExpandedToDisplay"></tr>
-                                <tr mat-row *matRowDef="let row; columns: columnsExpandedToDisplay;"></tr>
-                            </table>
-                        </div>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row class="example-element-row" *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-                <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = expandedElement === element ? null : element">
-                </tr>
-                <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-            </table>
-        </div>
-
-    </div>
-
+				<tr mat-header-row class="example-element-row" *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+				<tr
+					mat-row
+					*matRowDef="let element; columns: columnsToDisplayWithExpand"
+					class="example-element-row"
+					[class.example-expanded-row]="expandedElement === element"
+					(click)="expandedElement = expandedElement === element ? null : element"
+				></tr>
+				<tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+			</table>
+		</div>
+	</div>
 </section>

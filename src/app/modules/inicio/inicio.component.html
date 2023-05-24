@@ -1,8 +1,23 @@
 <section class="d-flex flex-column align-items-center mt-5">
-	<h1 style="width: 60%; zoom: 0.9" tabindex="0">Bem vindo, {{ getUserName() }}!</h1>
-	<span style="width: 60%" tabindex="0">
-		Este é o <span class="mat-title highlight">Sistema de Aproveitamento de Carga Horária Complementar.</span></span
-	>
+	<div class="d-flex">
+		<div class="col-8">
+			<h1 style="zoom: 0.9" tabindex="0">Bem vindo, {{ getUserName() }}!</h1>
+			<span tabindex="0"> Este é o <span class="mat-title highlight">Sistema de Aproveitamento de Carga Horária Complementar.</span> </span>
+		</div>
+
+		<div tabindex="0" class="col">
+			<div>
+				<span class="highlight d-flex justify-content-center">Dúvidas sobre atividades complementares? </span>
+			</div>
+
+			<div class="align-items-center d-flex gap-3 justify-content-center" style="zoom: 0.9">
+				<button class="btn btn-load" style="width: 230px !important" (click)="openModal()">
+					<span> Quero Ajuda! </span>
+				</button>
+			</div>
+		</div>
+	</div>
+
 	<img class="w-50" tabindex="0" src="../../../../assets/images/homepage.png" alt="Imagem de boas vindas" />
 	<span style="width: 60%" tabindex="0"
 		>Aqui vamos te ajudar a encurtar e simplificar a abertura do processo que te deixa mais próximo da sua tão sonhada formatura.</span

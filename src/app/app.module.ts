@@ -41,9 +41,10 @@ import { PerfilComponent } from './modules/perfil/perfil.component';
 import { BarraProgressoComponent } from './modules/barra-progresso/barra-progresso.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ChatSheet } from './modules/forms/chat/chat';
 
 @NgModule({
-	declarations: [AppComponent, GrupoSheet, AtividadeSheet, DivulgacaoAtividadeSheet, SolicitacaoSheet, ChSheet],
+	declarations: [AppComponent, GrupoSheet, AtividadeSheet, DivulgacaoAtividadeSheet, SolicitacaoSheet, ChSheet, ChatSheet],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
@@ -56,6 +57,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 		PerfilModule,
 		MatToolbarModule,
 		MatTooltipModule,
+		MatIconModule,
 	],
 	providers: [
 		{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
