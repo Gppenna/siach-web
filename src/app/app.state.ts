@@ -120,7 +120,6 @@ export class AppStateService {
 	private registrar(form: any): Observable<any> {
 		return of(
 			this.http.post(`${environment.apiUrl}register`, form).subscribe((response: any) => {
-				console.log('registrar', response);
 				this.snackBar.open('Cadastro realizado com sucesso!', 'Ok', {
 					duration: 6000,
 					panelClass: ['green-snackbar'],
@@ -223,11 +222,9 @@ export class AppStateService {
 		skipValidation?: boolean;
 	}): Observable<any> {
 		const url = `${request.api}${request.path}${request.query ? '?' + request.query : ''}`;
-		console.log('HTTP REQUEST', request);
 
 		return of(request.type).pipe(
 			switchMap((type) => {
-				console.log('TYPE', request);
 				if (type === 'GET') {
 					return request.headers
 						? this.http.get(url, {
@@ -237,11 +234,9 @@ export class AppStateService {
 						: this.http.get(url);
 				}
 				if (type === 'PUT') {
-					console.log('PUT: ', request.body);
 					return this.http.put(url, request.body);
 				}
 				if (type === 'POST') {
-					console.log('POST: ', request.body);
 					return this.http.post(url, request.body);
 				}
 				if (type === 'PATCH') {
@@ -303,12 +298,8 @@ export class AppStateService {
 	}
 
 	private registerSheet(data: any) {
-		console.log('REGISTERSHEET', data);
-
 		data.sheet.afterDismissed().subscribe((value: any) => {
-			console.log('afterDismissed', value);
 			if (data.value.backSearch && data.componentInstance.actionComplete) {
-				console.log(data);
 				data.value.backSearch.func(data.value.backSearch.parameter);
 			} else {
 				if (data.componentInstance.actionComplete) {
@@ -321,14 +312,12 @@ export class AppStateService {
 			}
 		});
 		data.sheet.afterOpened().subscribe((value: any) => {
-			console.log('afterOpened', value);
 			this.manageSheetActions(data.sheet, data.componentInstance, data.value);
 			data.componentInstance.onConnectedToParent();
 		});
 	}
 
 	private manageSheetActions(sheet: any, component: any, valueRef: any) {
-		console.log('manageSheetActions', sheet, component, valueRef);
 		const hasLog = component.getLogs;
 		const dependencies = component.dependencies;
 		component.defaultValues = valueRef;
@@ -342,33 +331,26 @@ export class AppStateService {
 						return this.loadDependencies(dependencies, valueRef);
 					}),
 					tap((result) => {
-						console.log('deps :::::: complete ::: ', result);
 						component.dependenciesData = result;
 					}),
 				)
 				.subscribe(
 					(result) => {
-						console.log('initialize complete :: ', value, dependencies);
 						component.loading = false;
 					},
 					(error: any) => {
-						console.log('error >>> ', error);
 						component.loading = false;
 						component.error = error;
 					},
 				);
-			console.log('initialize', value, dependencies);
 		});
 
 		if (hasLog) {
-			component.getLogs.subscribe((value: any) => {
-				console.log('getLogs', value);
-			});
+			component.getLogs.subscribe((value: any) => {});
 		}
 
 		if (component.httpRequest) {
 			component.httpRequest.subscribe((value: any) => {
-				console.log('httpRequest', value, valueRef);
 				const path = this.replaceValuesFromSource(value.path, '/', valueRef);
 				const query = this.replaceValuesFromSource(value.query, '&', valueRef);
 				const requestData = {
@@ -399,7 +381,6 @@ export class AppStateService {
 							this.sheetEvent.emit(true);
 						},
 						(error: any) => {
-							console.log('error >>> ', error);
 							component.loading = false;
 							component.error = error;
 						},
@@ -414,9 +395,7 @@ export class AppStateService {
 		}
 
 		if (component.cancel) {
-			component.cancel.subscribe((value: any) => {
-				console.log('>>>> cancel :: ', value);
-			});
+			component.cancel.subscribe((value: any) => {});
 		}
 	}
 

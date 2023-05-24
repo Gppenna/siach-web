@@ -40,7 +40,6 @@ export class AppComponent {
 	ngAfterViewInit() {
 		this.router.events.subscribe((event) => {
 			if (event instanceof NavigationEnd) {
-				console.log(event, 'navigate');
 				this.firstFocus.nativeElement.focus();
 				this.cdr.detectChanges();
 			}
@@ -49,7 +48,6 @@ export class AppComponent {
 
 	private initState() {
 		this.appStateService.getState().subscribe((state) => {
-			console.log('state', state);
 			this.update(state);
 		});
 	}
@@ -58,7 +56,6 @@ export class AppComponent {
 	@ViewChild('navigation', { static: true }) navigation: ElementRef;
 
 	skipToContent(): void {
-		console.log('skipping content');
 		this.mainContent.nativeElement.focus();
 		this.cdr.detectChanges();
 	}
@@ -78,7 +75,6 @@ export class AppComponent {
 		}
 
 		if (state.openSheet) {
-			console.log(' >>> open shet', state.openSheet);
 			this.openLink('register-sheet', state.openSheet.type, state.openSheet);
 		}
 	}

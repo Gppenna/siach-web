@@ -42,6 +42,7 @@ import { BarraProgressoComponent } from './modules/barra-progresso/barra-progres
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ChatSheet } from './modules/forms/chat/chat';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
 	declarations: [AppComponent, GrupoSheet, AtividadeSheet, DivulgacaoAtividadeSheet, SolicitacaoSheet, ChSheet, ChatSheet],
@@ -58,6 +59,7 @@ import { ChatSheet } from './modules/forms/chat/chat';
 		MatToolbarModule,
 		MatTooltipModule,
 		MatIconModule,
+		MatAutocompleteModule,
 	],
 	providers: [
 		{ provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },

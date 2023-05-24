@@ -6,7 +6,8 @@ import { environment } from 'src/environments/environment';
 import { AtividadesModalComponent } from './atividades-modal/atividades-modal.component';
 import { FiltroUtil } from 'src/app/utils/filtro-util';
 import { HttpUtils } from 'src/app/utils/http-utils';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
 	selector: 'app-atividades',
@@ -33,6 +34,7 @@ export class AtividadesComponent implements OnInit {
 			limit: 5,
 			page: 0,
 			atividadeBaremaId: undefined as any,
+			atividadeBarema: '',
 			grupoBaremaId: undefined as any,
 			cargaHoraria: undefined as any,
 		};
@@ -53,6 +55,11 @@ export class AtividadesComponent implements OnInit {
 		this.filtro.page = 0;
 		this.filtro.limit = 5;
 		this.loadDependencies();
+	}
+
+	autoCompleteSelect(event: any) {
+		this.filtro.atividadeBaremaId = event.value.idAtividadeBarema;
+		this.filtro.atividadeBarema = event.value.descricao;
 	}
 
 	loadDependencies() {
@@ -79,6 +86,10 @@ export class AtividadesComponent implements OnInit {
 			path: 'atividade-barema/table/' + this.appStateService.courseId(),
 		}).subscribe((response: any) => {
 			this.atividadeBaremaList = response;
+			this.filteredOptions = this.formControl.valueChanges.pipe(
+				startWith(''),
+				map((value) => this._filter(value || '')),
+			);
 		});
 
 		this.execute('http-request', {
@@ -88,6 +99,17 @@ export class AtividadesComponent implements OnInit {
 		}).subscribe((response: any) => {
 			this.grupoBaremaList = response;
 		});
+	}
+	formControl: FormControl = new FormControl();
+	filteredOptions: Observable<any>;
+
+	private _filter(value: string): string[] {
+		if (typeof value !== 'object') {
+			const filterValue = value.toLowerCase();
+
+			return this.atividadeBaremaList.filter((option: any) => option.descricao.toLowerCase().includes(filterValue));
+		}
+		return this.atividadeBaremaList;
 	}
 
 	loadMore() {

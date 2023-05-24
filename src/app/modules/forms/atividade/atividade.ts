@@ -77,6 +77,5 @@ export class AtividadeSheet {
 			minimoHoras: data ? data.minimoHoras : '',
 			idGrupoBarema: data ? data.idGrupoBarema.toString() : '',
 		});
-		console.log(this.formControl);
 	}
 }

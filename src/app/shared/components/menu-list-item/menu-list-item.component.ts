@@ -64,7 +64,6 @@ export class MenuListItemComponent implements OnInit {
 			}
 		} else {
 			if ((!item.children || !item.children.length) && this.parent) {
-				console.log(this.parent, 'parent', item);
 				if (this.parent.children[this.parent.children.length - 1] === item) {
 					this.parent.expanded = !this.parent.expanded;
 				}

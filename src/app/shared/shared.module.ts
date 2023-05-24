@@ -24,6 +24,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MomentModule } from 'ngx-moment';
 import { VLibrasComponent } from './components/vlibras/vlibras.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
 	declarations: [ToolbarComponent, MenuListItemComponent, BarraProgressoComponent, VLibrasComponent],
@@ -50,6 +51,7 @@ import { VLibrasComponent } from './components/vlibras/vlibras.component';
 		MatNativeDateModule,
 		MomentModule,
 		MatToolbarModule,
+		MatAutocompleteModule,
 	],
 	exports: [
 		CommonModule,

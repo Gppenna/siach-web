@@ -64,7 +64,6 @@ export class SolicitacaoViewDetalheComponent {
 	}
 
 	loadProgress(value: any) {
-		console.log(value, 'value');
 		value.solicitacaoProgressoList.forEach((element: any) => {
 			if (element.idStatus === 1) {
 				this.leftActive = element;

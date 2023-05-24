@@ -56,7 +56,6 @@ export class PerfilComponent implements OnInit {
 				this.totalHorasRascunho += element.perfilGrupo[key].horasContabilizadasRascunho;
 			});
 		});
-		console.log(this.totalHoras, 'hrs', this.totalHorasRascunho);
 	}
 
 	execute(type: string, data?: any) {

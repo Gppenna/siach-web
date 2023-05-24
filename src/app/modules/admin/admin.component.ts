@@ -59,7 +59,6 @@ export class AdminComponent implements OnInit {
 		};
 		this.execute('http-request', request).subscribe((response: any) => {
 			this.dataSource = response;
-			console.log(response, 'response');
 		});
 	}
 
@@ -125,7 +124,6 @@ export class AdminComponent implements OnInit {
 		const file: File = event.target.files[0];
 		if (file && file.type === 'application/pdf') {
 			this.fileData = file;
-			console.log('inputFileChanged', file);
 			let objFormData = new FormData();
 			objFormData.append('idCurso', this.appStateService.state?.userData?.curso.idCurso);
 			objFormData.append('descricao', this.appStateService.state?.userData?.curso.descricao);

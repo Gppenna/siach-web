@@ -20,13 +20,15 @@
 			<div class="np d-flex align-items-center" style="width: 90%; gap: 1rem">
 				<ng-template [ngIf]="showFilter">
 					<div>
-						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
+						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 500px">
 							<mat-label>Categoria da Atividade</mat-label>
-							<mat-select [(ngModel)]="filtro.atividadeBaremaId" (selectionChange)="freshFilter()">
-								<mat-option *ngFor="let item of atividadeBaremaList" value="{{ item.idAtividadeBarema }}" [matTooltip]="item.descricao">
-									{{ item.descricao }}
-								</mat-option>
-							</mat-select>
+							<input type="text" matInput [value]="filtro.atividadeBarema" [formControl]="formControl" [matAutocomplete]="auto" />
+							<input type="text" class="d-none" matInput [(ngModel)]="filtro.atividadeBaremaId" />
+							<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option); freshFilter()">
+								<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao">{{
+									select.descricao
+								}}</mat-option>
+							</mat-autocomplete>
 						</mat-form-field>
 					</div>
 					<div>

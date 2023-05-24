@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const routes: Routes = [
 	{
@@ -21,11 +22,7 @@ const routes: Routes = [
 
 @NgModule({
 	declarations: [AtividadesComponent, AtividadesModalComponent],
-	imports: [
-		RouterModule.forChild(routes),
-		MatDividerModule,
-		SharedModule
-	],
+	imports: [RouterModule.forChild(routes), MatDividerModule, SharedModule, MatAutocompleteModule],
 	providers: [MatDatepickerModule],
 	entryComponents: [AtividadesComponent],
 })

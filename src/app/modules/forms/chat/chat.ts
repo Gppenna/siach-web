@@ -61,12 +61,10 @@ export class ChatSheet {
 			path: `parecer/criar`,
 			body: objFormData,
 		};
-		console.log('save :: ', objFormData);
 		this.httpRequest.emit(request);
 	}
 
 	initFormControl(data?: any) {
-		console.log(data, 'data');
 		this.formControl = this.formBuilder.group({
 			idSolicitacao: data ? data.idSolicitacao : '',
 			mensagem: '',

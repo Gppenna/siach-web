@@ -59,7 +59,6 @@ export class ChSheet {
 			path: `curso/editar-ch`,
 			body: value,
 		};
-		console.log('save :: ', this.itenData);
 		this.httpRequest.emit(request);
 	}
 
@@ -73,6 +72,5 @@ export class ChSheet {
 			minimoHorasCurso: data ? data.minimoHorasCurso : '',
 			barema: data ? data.barema : '',
 		});
-		console.log(this.formControl);
 	}
 }

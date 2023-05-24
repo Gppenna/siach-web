@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DateUtils } from 'src/app/utils/date-utils';
 import FileSaver, { saveAs } from 'file-saver';
 import { Router } from '@angular/router';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
 	selector: 'solicitacao',
@@ -63,17 +64,11 @@ export class SolicitacaoSheet {
 	}
 
 	skipToHour(): void {
-		console.log(this.hour, 'q');
 		this.hour.nativeElement.focus();
 		this.cdr.detectChanges();
 	}
 
 	dependencies: any = {
-		atividadeBarema: {
-			type: 'GET',
-			api: environment.apiUrl,
-			path: 'atividade-barema/table/' + this.appStateService.courseId(),
-		},
 		totalHorasDependency: {
 			type: 'GET',
 			api: environment.apiUrl,
@@ -82,6 +77,15 @@ export class SolicitacaoSheet {
 	};
 
 	dependenciesData: any;
+
+	filteredOptions: Observable<any>;
+
+	atividadeBaremaList: any;
+
+	autoCompleteSelect(event: any) {
+		this.formControl.patchValue({ idAtividadeBarema: event.value.idAtividadeBarema, atividadeBarema: event.value.descricao });
+		this.formControl.updateValueAndValidity();
+	}
 
 	colorsCalc(numerador: any, denominador: any, normalize?: any) {
 		let arit = (100 * numerador) / denominador;
@@ -114,7 +118,6 @@ export class SolicitacaoSheet {
 			});
 
 			this.exectotalHorasCalc = false;
-			console.log(this.totalHoras, this.totalHorasRascunho, 'horas');
 		}
 	}
 
@@ -134,7 +137,6 @@ export class SolicitacaoSheet {
 	changeCh() {
 		if (this.getHorasContabilizadas() + this.formControl.value.horas - this.subHorasRascunho <= this.getHoraLimite()) {
 			this.addHoras = this.formControl.value.horas;
-			console.log(this.addHoras, 'addhoras');
 		} else {
 			this.addHoras = this.getHoraLimite() - this.getHorasContabilizadas() + this.subHorasRascunho;
 		}
@@ -158,7 +160,7 @@ export class SolicitacaoSheet {
 		const request = {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: `perfil/${data}`,
+			path: `perfil/${data.value.idAtividadeBarema}`,
 		};
 		this.execute('http-request', request).subscribe((response: any) => {
 			this.totalLocal = response;
@@ -170,7 +172,6 @@ export class SolicitacaoSheet {
 	}
 
 	checkLimiteHoras() {
-		console.log(this.getHorasContabilizadas(), this.getHoraLimite(), 'horasRestantesLimite');
 		if (this.getHorasContabilizadas() === this.getHoraLimite() && this.new) {
 			this.stopFlag = true;
 			this.snackBar.open('Você já aproveitou todas as horas possíveis a esta atividade!', 'Ok', {
@@ -217,7 +218,6 @@ export class SolicitacaoSheet {
 			path: `solicitacao/criar`,
 			body: objFormData,
 		};
-		console.log('save :: ', objFormData);
 		this.httpRequest.emit(request);
 	}
 
@@ -228,7 +228,6 @@ export class SolicitacaoSheet {
 	inputFileChanged(event: any) {
 		const file: File = event.target.files[0];
 		if (file && file.type === 'application/pdf') {
-			console.log('inputFileChanged', file);
 			this.fileData = file;
 			this.actualFile = { name: file.name };
 			file.arrayBuffer().then((arrayBuffer) => {
@@ -251,13 +250,14 @@ export class SolicitacaoSheet {
 	}
 
 	initFormControl(data?: any) {
-		console.log(data, 'data');
+		this.loadDependencies();
 		this.formControl = this.formBuilder.group({
 			idSolicitacao: data ? data.idSolicitacao : '',
 			titulo: data ? data.titulo : '',
 			horas: data ? data.horas : '',
 			coringaFlag: data ? (data.statusInterno === 'E' ? true : false) : false,
 			idAtividadeBarema: data ? data.atividadeBarema.idAtividadeBarema.toString() : '',
+			atividadeBarema: '',
 		});
 		if (data) {
 			this.totalLocalCalc(data.atividadeBarema.idAtividadeBarema);
@@ -276,5 +276,29 @@ export class SolicitacaoSheet {
 					this.fileData = new File([blob], data.comprovanteNome, { type: 'application/pdf' });
 				});
 		}
+	}
+
+	loadDependencies() {
+		const request = {
+			type: 'GET',
+			api: environment.apiUrl,
+			path: 'atividade-barema/table/' + this.appStateService.courseId(),
+		};
+		this.execute('http-request', request).subscribe((result) => {
+			this.atividadeBaremaList = result;
+			this.filteredOptions = this.formControl.get('atividadeBarema').valueChanges.pipe(
+				startWith(''),
+				map((value) => this._filter(value || '')),
+			);
+		});
+	}
+
+	private _filter(value: string): string[] {
+		if (typeof value !== 'object') {
+			const filterValue = value.toLowerCase();
+
+			return this.atividadeBaremaList.filter((option: any) => option.descricao.toLowerCase().includes(filterValue));
+		}
+		return this.atividadeBaremaList;
 	}
 }

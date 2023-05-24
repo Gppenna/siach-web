@@ -38,11 +38,13 @@
 					</div>
 					<mat-form-field class="app-page-form-full" appearance="outline">
 						<mat-label>Categoria da Atividade</mat-label>
-						<mat-select [disabled]="!new" formControlName="idAtividadeBarema" (selectionChange)="totalLocalCalc($event.value)">
-							<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.idAtividadeBarema}}" [title]="item.descricao">
-								{{item.descricao}}
-							</mat-option>
-						</mat-select>
+						<input type="text" [disabled]="!new" matInput formControlName="atividadeBarema" [matAutocomplete]="auto" />
+						<input type="text" class="d-none" matInput formControlName="idAtividadeBarema" />
+						<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option); totalLocalCalc($event.option)">
+							<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao"
+								>{{ select.descricao }}</mat-option
+							>
+						</mat-autocomplete>
 					</mat-form-field>
 					<div class="app-page-bottomsheet-content">
 						<span tabindex="0" *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" style="color: rgb(52 188 147)"

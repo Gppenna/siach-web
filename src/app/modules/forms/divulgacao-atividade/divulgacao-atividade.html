@@ -36,11 +36,13 @@
 			</div>
 			<mat-form-field class="app-page-form-full" appearance="outline">
 				<mat-label>Categoria da Atividade</mat-label>
-				<mat-select formControlName="idAtividadeBarema">
-					<mat-option *ngFor="let item of dependenciesData.atividadeBarema" value="{{item.idAtividadeBarema}}" [title]="item.descricao">
-						{{item.descricao}}
-					</mat-option>
-				</mat-select>
+				<input type="text" matInput formControlName="atividadeBarema" [matAutocomplete]="auto" />
+				<input type="text" class="d-none" matInput formControlName="idAtividadeBarema" />
+				<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option)">
+					<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao"
+						>{{ select.descricao }}</mat-option
+					>
+				</mat-autocomplete>
 			</mat-form-field>
 
 			<div class="app-page-bottomsheet-content d-flex flex-column px-2 mb-3">
@@ -69,7 +71,7 @@
 
 	<ng-template [ngIf]="!loading && error">
 		<p>
-			Divulgação de Atividade <strong>{{formControl.value.description}}</strong> não foi adicionado <br />
+			Divulgação de Atividade não foi adicionada <br />
 			<small>{{ error.message }}</small>
 		</p>
 		<div class="app-page-bottomsheet-actions">

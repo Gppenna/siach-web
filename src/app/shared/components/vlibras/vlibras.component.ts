@@ -16,7 +16,6 @@ export class VLibrasComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('vlibras');
 		this.script = document.createElement('script');
 		this.script.src = this.scriptSrc;
 		document.head.appendChild(this.script);
@@ -25,7 +24,6 @@ export class VLibrasComponent implements OnInit {
 			let test = new window.VLibras.Widget(this.widgetSrc);
 			// @ts-ignore
 			window.onload();
-			console.log(test, 'vlibra22222s');
 		};
 	}
 }

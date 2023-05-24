@@ -47,7 +47,6 @@ export class GrupoSheet {
 			path: `grupo-barema/criar`,
 			body: value,
 		};
-		console.log('save :: ', this.itenData);
 		this.httpRequest.emit(request);
 	}
 
@@ -62,6 +61,5 @@ export class GrupoSheet {
 			numero: data ? data.numero : '',
 			idCurso: sessionStorage.getItem(this.USER_COURSE_SESSION_ATTRIBUTE),
 		});
-		console.log(this.formControl);
 	}
 }
