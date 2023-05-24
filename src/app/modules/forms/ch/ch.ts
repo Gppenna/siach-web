@@ -71,6 +71,7 @@ export class ChSheet {
 			idCurso: data ? data.idCurso : '',
 			descricao: data ? data.descricao : '',
 			minimoHorasCurso: data ? data.minimoHorasCurso : '',
+			barema: data ? data.barema : '',
 		});
 		console.log(this.formControl);
 	}
