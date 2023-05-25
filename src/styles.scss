@@ -904,7 +904,7 @@ pre {
 
 	/* Apply dark background to the hover state */
 	.mat-calendar-body .mat-calendar-body-selected:hover {
-		background-color: #333;
+		background-color: #fff;
 	}
 
 	/* Apply dark background to the disabled state */
@@ -1048,7 +1048,7 @@ pre {
 		border-radius: 30px;
 	}
 
-	button *,
+	.btn *,
 	.chip {
 		color: #1c1c21 !important;
 	}
@@ -1073,5 +1073,88 @@ pre {
 	}
 	input[type='checkbox'] {
 		filter: invert(100%);
+	}
+	.mat-calendar > * {
+		color: #fff !important;
+	}
+
+	/* Estilizando o cabeçalho */
+	.mat-expansion-panel-header {
+		background-color: #333;
+		color: #fff;
+	}
+
+	/* Estilizando o conteúdo */
+	.mat-expansion-panel-content {
+		background-color: #444;
+		color: #fff;
+	}
+
+	/* Estilizando o ícone de expansão */
+	.mat-expansion-indicator {
+		color: #fff;
+	}
+
+	/* Estilizando o ícone de expansão quando o painel está aberto */
+	.mat-expansion-panel-header.mat-expanded .mat-expansion-indicator {
+		transform: rotate(180deg);
+	}
+	.mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled='true']),
+	.mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled='true']),
+	.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled='true']),
+	.mat-expansion-panel-header.mat-expanded:focus,
+	.mat-expansion-panel-header.mat-expanded:hover {
+		background-color: #555;
+	}
+	.mat-expansion-panel {
+		background-color: #333;
+	}
+
+	.mat-option:hover:not(.mat-option-disabled),
+	.mat-option:focus:not(.mat-option-disabled),
+	.mat-option.mat-active {
+		background-color: #555;
+	}
+
+	/* Estilizando o cabeçalho do calendário */
+	.mat-calendar-header {
+		background-color: #222;
+		color: #fff;
+	}
+
+	/* Estilizando o título do mês */
+	.mat-calendar-header .mat-calendar-period-button {
+		color: #fff;
+	}
+
+	/* Estilizando os botões de navegação do mês */
+	.mat-calendar-previous-button,
+	.mat-calendar-next-button {
+		color: #fff;
+	}
+
+	/* Estilizando os dias da semana */
+	.mat-calendar-table .mat-calendar-weekday {
+		color: #fff;
+	}
+
+	/* Estilizando os dias do mês */
+	.mat-calendar-body .mat-calendar-cell {
+		color: #fff;
+	}
+
+	/* Estilizando os dias selecionados */
+	.mat-calendar-body .mat-calendar-body-cell.mat-selected {
+		background-color: #555;
+	}
+
+	/* Estilizando os dias em foco (hoje) */
+	.mat-calendar-body .mat-calendar-body-cell.mat-calendar-body-active {
+		background-color: #444;
+	}
+
+	/* Estilizando os dias desabilitados */
+	.mat-calendar-body .mat-calendar-body-cell.mat-calendar-body-disabled {
+		color: #777;
 	}
 }
