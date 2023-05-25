@@ -1,8 +1,15 @@
 <ng-template [ngIf]="dataSource">
 	<div *ngFor="let atividade of dataSource | keyvalue" class="mt-3">
 		<ng-template [ngIf]="dataSourceSecondary">
-			<div aria-labelledby="buscar-label" (click)="openGrupo(dataSourceSecondary)">
-				<span tabindex="0" id="buscar-label" class="accessibility-header">Verificar atividade do grupo: {{ $any(atividade.value).descricao }}</span>
+			<div aria-labelledby="buscar-label" (click)="openGrupo(dataSourceSecondary)" (keyup.enter)="openGrupo(dataSourceSecondary)">
+				<span
+					tabindex="0"
+					id="buscar-label"
+					(keyup.enter)="openGrupo(dataSourceSecondary)"
+					(click)="openGrupo(dataSourceSecondary)"
+					class="accessibility-header"
+					>Verificar atividades do grupo: {{ $any(atividade.value).descricao }}</span
+				>
 				<span class="nunito d-flex gap-2"
 					>{{ $any(atividade.value).descricao }}
 
@@ -20,7 +27,7 @@
 			</div>
 		</ng-template>
 
-		<div class="progresso-barra">
+		<div class="progresso-barra mt-3">
 			<div class="position-relative">
 				<div class="position-absolute w-100">
 					<mat-progress-bar aria-label="Barra de progresso" mode="determinate" [value]="calcValueContabilizado(atividade)"> </mat-progress-bar>
@@ -56,7 +63,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="nunito" aria-label="Horas limites">{{ $any(atividade.value).horasLimite }}h</div>
+			<div class="nunito" tabindex="0" aria-label="Horas limites">
+				<span id="green-label" class="accessibility-header">Limite de horas: </span>
+				{{ $any(atividade.value).horasLimite }}h
+			</div>
 		</div>
 	</div>
 </ng-template>

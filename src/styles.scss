@@ -251,12 +251,12 @@ a {
 }
 
 span.highlight {
-	color: #3f5692;
+	color: #3f5692 !important;
 	font-weight: 500;
 }
 
 span.highlight-light {
-	color: #3e5884;
+	color: #3e5884 !important;
 }
 
 span.menu {
@@ -408,6 +408,10 @@ div.active {
 
 .red-snackbar {
 	background: #a8261a !important;
+}
+
+.mat-dialog-container {
+	overflow-x: hidden !important;
 }
 
 .btn-no-style {
@@ -810,7 +814,7 @@ pre {
 		background-color: var(--bs-body-bg-night-eye);
 	}
 	span.highlight {
-		color: rgb(157, 179, 225);
+		color: rgb(157, 179, 225) !important;
 	}
 	.menu,
 	.menu mat-icon {

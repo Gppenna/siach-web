@@ -23,27 +23,17 @@
 			]
 		},
 		{
-			"icon": "account_circle",
-			"description": "Menu do usuário",
-			"children": [
-				{
-					"displayName": "Perfil",
-					"route": "/perfil"
-				},
-				{
-					"displayName": "Admin",
-					"route": "/admin",
-					"admin": true
-				},
-				{
-					"displayName": "Sair",
-					"route": "/logout"
-				}
-			]
+			"displayName": "Minhas Horas",
+			"route": "/perfil"
 		},
 		{
 			"button": "brightness_6",
 			"action": "toggle_dark_theme"
+		},
+		{
+			"icon": "logout",
+			"description": "Sair da conta",
+			"route": "/logout"
 		}
 	]
 }

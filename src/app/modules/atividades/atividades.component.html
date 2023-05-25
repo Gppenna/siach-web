@@ -5,11 +5,13 @@
 				<h1 tabindex="0">Encontrar Atividades</h1>
 				<span tabindex="0"><span class="highlight">Quer um certificado?</span> Encontre abaixo atividades que geram horas complementares.</span>
 			</div>
-			<div class="align-items-end d-flex flex-column gap-3">
-				<button class="btn btn-new" style="width: 230px !important" (click)="novaDivulgacaoAtividade()">
-					<mat-icon>add_circle</mat-icon><span>Divulgar Atividade</span>
-				</button>
-			</div>
+			<ng-template [ngIf]="this.appStateService.getAuthority() === '1'">
+				<div class="align-items-end d-flex flex-column gap-3">
+					<button class="btn btn-new" style="width: 230px !important" (click)="novaDivulgacaoAtividade()">
+						<mat-icon>add_circle</mat-icon><span>Divulgar Atividade</span>
+					</button>
+				</div>
+			</ng-template>
 		</div>
 		<div class="row mt-5 mx-0 align-items-center">
 			<div class="d-flex np align-items-center mr-3" style="width: fit-content; opacity: 0.7">
