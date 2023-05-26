@@ -161,7 +161,7 @@ export class SolicitacaoSheet {
 		const request = {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: `perfil/${data}`,
+			path: `perfil/${data}/${this.appStateService.userId()}`,
 		};
 		this.execute('http-request', request).subscribe((response: any) => {
 			this.totalLocal = response;
