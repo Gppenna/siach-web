@@ -157,10 +157,11 @@ export class SolicitacaoSheet {
 	}
 
 	totalLocalCalc(data: any) {
+		console.log(data, 'totalLocalCalc');
 		const request = {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: `perfil/${data.value.idAtividadeBarema}`,
+			path: `perfil/${data}`,
 		};
 		this.execute('http-request', request).subscribe((response: any) => {
 			this.totalLocal = response;
@@ -251,6 +252,7 @@ export class SolicitacaoSheet {
 
 	initFormControl(data?: any) {
 		this.loadDependencies();
+
 		this.formControl = this.formBuilder.group({
 			idSolicitacao: data ? data.idSolicitacao : '',
 			titulo: data ? data.titulo : '',
@@ -259,8 +261,10 @@ export class SolicitacaoSheet {
 			idAtividadeBarema: data ? data.atividadeBarema.idAtividadeBarema.toString() : '',
 			atividadeBarema: '',
 		});
+
 		if (data) {
 			this.totalLocalCalc(data.atividadeBarema.idAtividadeBarema);
+			console.log('initFormControl', data);
 			if (data.statusInterno !== 'E') {
 				this.subHorasRascunho = data.horas;
 			} else {
@@ -286,6 +290,13 @@ export class SolicitacaoSheet {
 		};
 		this.execute('http-request', request).subscribe((result) => {
 			this.atividadeBaremaList = result;
+			if (this.formControl.value.idAtividadeBarema) {
+				this.formControl.patchValue({
+					atividadeBarema: this.atividadeBaremaList.find(
+						(atividade: any) => Number(atividade.idAtividadeBarema) === Number(this.formControl.value.idAtividadeBarema),
+					).descricao,
+				});
+			}
 			this.filteredOptions = this.formControl.get('atividadeBarema').valueChanges.pipe(
 				startWith(''),
 				map((value) => this._filter(value || '')),
