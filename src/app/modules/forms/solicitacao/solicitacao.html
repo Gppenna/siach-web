@@ -40,7 +40,10 @@
 						<mat-label>Categoria da Atividade</mat-label>
 						<input type="text" [disabled]="!new" matInput formControlName="atividadeBarema" [matAutocomplete]="auto" />
 						<input type="text" class="d-none" matInput formControlName="idAtividadeBarema" />
-						<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option); totalLocalCalc($event.option.value)">
+						<mat-autocomplete
+							#auto="matAutocomplete"
+							(optionSelected)="autoCompleteSelect($event.option); totalLocalCalc($event.option.value.idAtividadeBarema)"
+						>
 							<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao"
 								>{{ select.descricao }}</mat-option
 							>
