@@ -86,6 +86,11 @@
 								type="number"
 								formControlName="horas"
 							/>
+							<mat-error>
+								<span tabindex="0" class="warnColor w-100"
+									>Para cargas horárias acima do limite restante de {{horasRestantes()}} horas, coloque {{horasRestantes()}} horas.</span
+								>
+							</mat-error>
 						</mat-form-field>
 					</div>
 
