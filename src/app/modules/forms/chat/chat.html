@@ -17,22 +17,30 @@
 		</ul>
 	</nav>
 	<ng-template [ngIf]="!loading && !actionComplete && !error">
-		<div style="border: 1px solid #ececec; box-shadow: 1px 1px 2px #a9a9a9" class="pt-3">
-			<div class="row mx-2" *ngFor="let comentario of data">
-				<span class="w-100 value d-flex">
-					<span class="pr-2">
-						<mat-icon class="comentarioIcon">comment</mat-icon>
+		<ng-template [ngIf]="data.length > 0">
+			<div style="border: 1px solid #ececec; box-shadow: 1px 1px 2px #a9a9a9" class="pt-3">
+				<div class="row mx-2" *ngFor="let comentario of data">
+					<span class="w-100 value d-flex">
+						<span class="pr-2">
+							<mat-icon class="comentarioIcon">comment</mat-icon>
+						</span>
+						<span><strong>{{ comentario.usuario.nome }}</strong> adicionou uma mensagem - {{ comentario.dataCriacao | date : 'dd/MM/yyyy' }}</span>
 					</span>
-					<span><strong>{{ comentario.usuario.nome }}</strong> adicionou uma mensagem - {{ comentario.dataCriacao | date : 'dd/MM/yyyy' }}</span>
-				</span>
-				<div class="w-100 d-flex p-2 mt-1">
-					<span class="ml-1">
-						<pre>{{ comentario.mensagem }}</pre>
-					</span>
+					<div class="w-100 d-flex p-2 mt-1">
+						<span class="ml-1">
+							<pre>{{ comentario.mensagem }}</pre>
+						</span>
+					</div>
+					<div class="divider-grey"></div>
 				</div>
-				<div class="divider-grey"></div>
 			</div>
-		</div>
+		</ng-template>
+		<ng-template [ngIf]="data.length === 0">
+			<div class="app-page-messages" style="padding-top: 0px !important">
+				<mat-icon>search_off</mat-icon>
+				<h5 class="nunito">Sem mensagens ainda</h5>
+			</div>
+		</ng-template>
 
 		<ng-template [ngIf]="formControl">
 			<form [formGroup]="formControl">
@@ -75,9 +83,9 @@
 
 	<ng-template [ngIf]="!loading && actionComplete">
 		<p tabindex="0">
-			Comentário
+			Mensagem
 			<strong> {{formControl.value.mensagem? formControl.value.mensagem : ''}}</strong>
-			{{new ? 'criado' : 'editada'}} com sucesso
+			{{new ? 'criada' : 'editada'}} com sucesso
 		</p>
 		<div class="app-page-bottomsheet-actions">
 			<button class="btn btn-primary-small" (click)="onCancel($event)">Ok</button>
@@ -86,7 +94,7 @@
 
 	<ng-template [ngIf]="!loading && error">
 		<p tabindex="0">
-			Comentário <strong>{{formControl.value.mensagem}}</strong> não foi adicionado <br />
+			Mensagem <strong>{{formControl.value.mensagem}}</strong> não foi adicionada <br />
 			<small>{{ error.message }}</small>
 		</p>
 		<div class="app-page-bottomsheet-actions">

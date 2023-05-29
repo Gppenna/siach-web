@@ -498,6 +498,10 @@ div.active {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.mat-bottom-sheet-container-large {
+	min-width: 1000px !important;
+}
+
 .btn-primary-download {
 	cursor: pointer;
 	background-color: #3e5884;
@@ -853,6 +857,7 @@ pre {
 	.btn-load,
 	.btn-primary {
 		background-color: #93a8cc;
+		color: #1c1c21 !important;
 	}
 	// mat-icon-stepper selected color change
 	.mat-step-header .mat-step-icon-selected,
@@ -1155,6 +1160,10 @@ pre {
 	/* Estilizando os dias selecionados */
 	.mat-calendar-body .mat-calendar-body-cell.mat-selected {
 		background-color: #555;
+	}
+
+	::placeholder {
+		color: #919191;
 	}
 
 	/* Estilizando os dias em foco (hoje) */

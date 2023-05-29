@@ -35,8 +35,8 @@
 				</mat-form-field>
 			</div>
 			<mat-form-field class="app-page-form-full" appearance="outline">
-				<mat-label>Categoria da Atividade</mat-label>
-				<input type="text" matInput formControlName="atividadeBarema" [matAutocomplete]="auto" />
+				<mat-label>Atividade</mat-label>
+				<input type="text" placeholder="Buscar Atividade.." matInput formControlName="atividadeBarema" [matAutocomplete]="auto" />
 				<input type="text" class="d-none" matInput formControlName="idAtividadeBarema" />
 				<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option)">
 					<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao"

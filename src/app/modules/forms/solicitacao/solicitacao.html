@@ -37,8 +37,15 @@
 						</mat-form-field>
 					</div>
 					<mat-form-field class="app-page-form-full" appearance="outline">
-						<mat-label>Categoria da Atividade</mat-label>
-						<input type="text" [disabled]="!new" matInput formControlName="atividadeBarema" [matAutocomplete]="auto" />
+						<mat-label>Atividade</mat-label>
+						<input
+							type="text"
+							placeholder="Buscar Atividade.."
+							[disabled]="!new"
+							matInput
+							formControlName="atividadeBarema"
+							[matAutocomplete]="auto"
+						/>
 						<input type="text" class="d-none" matInput formControlName="idAtividadeBarema" />
 						<mat-autocomplete
 							#auto="matAutocomplete"
@@ -75,7 +82,7 @@
 							appearance="outline"
 							[ngClass]="formControl.value.idAtividadeBarema === '' || (stopFlag && !formControl.value.coringaFlag)? 'field-blocked' : ''"
 						>
-							<mat-label>Carga Horária</mat-label>
+							<mat-label>Carga Horária do Certificado</mat-label>
 							<input
 								matInput
 								[min]="0"

@@ -25,7 +25,7 @@ export class ChatSheet {
 	httpRequest = new EventEmitter<any>();
 	@Output()
 	cancel = new EventEmitter<any>();
-	data: any;
+	data: any = [];
 
 	constructor(
 		private _bottomSheetRef: MatBottomSheetRef<ChatSheet>,

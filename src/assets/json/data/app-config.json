@@ -6,21 +6,16 @@
 			"route": "/inicio"
 		},
 		{
-			"displayName": "Explorar Atividades",
+			"displayName": "Encontrar Atividades",
 			"route": "/atividades"
 		},
 		{
-			"displayName": "Solicitações",
-			"children": [
-				{
-					"displayName": "Criar",
-					"route": "/solicitacao/criar"
-				},
-				{
-					"displayName": "Visualizar",
-					"route": "/solicitacao"
-				}
-			]
+			"displayName": "Criar Solicitação",
+			"route": "/solicitacao/criar"
+		},
+		{
+			"displayName": "Visualizar Solicitações",
+			"route": "/solicitacao"
 		},
 		{
 			"displayName": "Minhas Horas",

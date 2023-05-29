@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class SolicitacaoComponent implements OnInit {
 	userData: any = undefined;
 	dataSource: any = [];
+	loading = true;
 
 	constructor(
 		public appStateService: AppStateService,
@@ -38,8 +39,10 @@ export class SolicitacaoComponent implements OnInit {
 			api: environment.apiUrl,
 			path: 'solicitacao/table/rascunho/' + this.appStateService.userId(),
 		};
+		this.loading = true;
 		this.execute('http-request', requestSol).subscribe((response: any) => {
 			this.dataSource = response;
+			this.loading = false;
 			setTimeout(function () {
 				document.querySelector('.bottom').scrollIntoView({
 					behavior: 'smooth',
@@ -81,9 +84,10 @@ export class SolicitacaoComponent implements OnInit {
 			path: 'solicitacao/ativar',
 			body: this.dataSource.map((element: any) => element.idSolicitacao),
 		};
+		this.loading = true;
 		this.execute('http-request', requestSol).subscribe((response: any) => {
 			this.loadSolicitacoes();
-			this.snackBar.open('Solicitações enviadas com sucesso!', 'Ok', {
+			this.snackBar.open('Solicitação de aproveitamento enviada com sucesso!', 'Ok', {
 				duration: 6000,
 				panelClass: ['green-snackbar'],
 			});

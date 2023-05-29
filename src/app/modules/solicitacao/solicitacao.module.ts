@@ -11,6 +11,7 @@ import { SolicitacaoViewDetalheComponent } from './solicitacao-view-detalhe/soli
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const routes: Routes = [
 	{
@@ -37,6 +38,7 @@ const routes: Routes = [
 		MatIconModule,
 		MatProgressBarModule,
 		MatToolbarModule,
+		MatProgressSpinnerModule,
 		MatTooltipModule,
 	],
 	providers: [MatDatepickerModule],
