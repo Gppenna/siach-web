@@ -40,7 +40,7 @@
 						<mat-label>Atividade</mat-label>
 						<input
 							type="text"
-							placeholder="Buscar Atividade.."
+							placeholder="Busque Atividades.."
 							[disabled]="!new"
 							matInput
 							formControlName="atividadeBarema"
@@ -112,7 +112,7 @@
 							<input tabindex="0" id="file" required="true" type="file" (change)="inputFileChanged($event)" style="display: none" />
 						</div>
 						<button (click)="downloadActual()" tabindex="0" class="icon" mat-icon-button *ngIf="actualFile" matTooltip="Baixar certificado enviado">
-							<mat-icon>cloud_download</mat-icon>
+							<mat-icon>download</mat-icon>
 							<span>{{actualFile.name}}</span>
 						</button>
 					</div>
