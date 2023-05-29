@@ -67,6 +67,12 @@
 			</div>
 		</div>
 
+		<ng-template [ngIf]="loading">
+			<div class="app-page-messages" style="padding-top: 15vh !important">
+				<mat-spinner class="normal-stroke"></mat-spinner>
+			</div>
+		</ng-template>
+
 		<ng-template [ngIf]="dataSource">
 			<div
 				tabindex="0"

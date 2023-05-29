@@ -549,9 +549,14 @@ div.active {
 	top: 2%;
 }
 
+.normal-stroke.mat-progress-spinner circle,
+.normal-stroke.mat-spinner circle {
+	stroke: #3c5a80 !important;
+}
+
 .mat-progress-spinner circle,
 .mat-spinner circle {
-	stroke: #fff !important;
+	stroke: #fff;
 }
 
 .icon {
