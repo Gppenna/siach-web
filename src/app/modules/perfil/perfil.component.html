@@ -39,8 +39,8 @@
 			</div>
 			<div>
 				<h1 tabindex="0">Suas Horas</h1>
-				<div class="d-grid" style="grid-template-columns: 23% 77%">
-					<div class="sphere-progress-container mx-auto">
+				<div class="d-flex w-100">
+					<div class="sphere-progress-container mr-5">
 						<span tabindex="0" class="nunito d-flex justify-content-center align-items-center"
 							>Total
 							<mat-icon
@@ -54,7 +54,7 @@
 							class="sphere-progress"
 							[ngStyle]="{
 								background: conicGradientFactory(
-									'rgb(95, 211, 177)',
+									'rgb(52, 188, 147)',
 									appStateService.state.isDark ? 'rgb(211, 220, 233, 0.3)' : 'rgb(211, 220, 233)',
 									totalHoras + totalHorasRascunho,
 									appStateService.state?.userData?.curso.minimoHorasCurso
@@ -65,7 +65,7 @@
 								class="sphere-progress"
 								[ngStyle]="{
 									background: conicGradientFactory(
-										'rgb(43, 70, 139)',
+										appStateService.state.isDark ? 'rgb(147, 168, 204)' : 'rgb(43, 70, 139)',
 										'transparent',
 										totalHoras,
 										appStateService.state?.userData?.curso.minimoHorasCurso
@@ -73,17 +73,64 @@
 								}"
 							>
 								<div class="sphere-progress-center translate-middle">
-									<span tabindex="0" style="font-size: 24px" class="mb-2" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
-										>{{ ((100 * (totalHoras + totalHorasRascunho)) / appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3) }}%</span
-									>
-									<span tabindex="0" class="nunito" style="font-size: 16px" [ngClass]="addHorasFlag ? 'sucessColor' : ''"
-										>{{ totalHoras + totalHorasRascunho }}h / {{ appStateService.state?.userData?.curso.minimoHorasCurso }}h</span
-									>
+									<div class="d-flex">
+										<span tabindex="0" id="blue-label" class="accessibility-header">Percentual de horas já aproveitadas: </span>
+										<span
+											tabindex="0"
+											style="font-size: 24px"
+											class="mb-2"
+											[ngStyle]="{
+												color: appStateService.state.isDark ? 'rgb(147, 168, 204)' : 'rgb(43, 70, 139)'
+											}"
+											>{{ ((100 * totalHoras) / appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3) }}%</span
+										>
+										<ng-template [ngIf]="totalHorasRascunho > 0">
+											<span class="mx-2" style="font-size: 24px">-></span>
+											<span tabindex="0" id="blue-label" class="accessibility-header">Percentual de horas atuais pendente de análise: </span>
+											<span tabindex="0" style="font-size: 24px; color: rgb(52, 188, 147)" class="mb-2">
+												{{
+													((100 * (totalHoras + totalHorasRascunho)) / appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)
+												}}%</span
+											>
+										</ng-template>
+									</div>
+									<div class="d-flex">
+										<div>
+											<span tabindex="0" id="blue-label" class="accessibility-header">Horas já aproveitadas: </span>
+											<span
+												tabindex="0"
+												class="nunito"
+												style="font-size: 16px"
+												[ngStyle]="{
+													color: appStateService.state.isDark ? 'rgb(147, 168, 204)' : 'rgb(43, 70, 139)'
+												}"
+												>{{ totalHoras }}h</span
+											>
+										</div>
+
+										<ng-template [ngIf]="totalHorasRascunho > 0">
+											<div>
+												<span class="nunito" style="font-size: 16px">-></span>
+											</div>
+											<div>
+												<span tabindex="0" id="blue-label" class="accessibility-header">Horas atuais pendente de análise: </span>
+												<span tabindex="0" class="nunito" style="font-size: 16px; color: rgb(52, 188, 147)"
+													>{{ totalHoras + totalHorasRascunho }}h</span
+												>
+											</div>
+										</ng-template>
+										<div>
+											<span tabindex="0" id="blue-label" class="accessibility-header">Horas máximas do curso: </span>
+											<span tabindex="0" class="nunito" style="font-size: 16px">
+												/ {{ appStateService.state?.userData?.curso.minimoHorasCurso }}h</span
+											>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="d-grid justify-content-between" style="grid-template-columns: 45% 45%">
+					<div class="d-grid justify-content-between w-100" style="grid-template-columns: 45% 45%">
 						<div *ngFor="let data of dataSource" class="py-3">
 							<app-barra-progresso [dataSource]="data.perfilGrupo" [dataSourceSecondary]="data.perfilAtividadeList"></app-barra-progresso>
 						</div>

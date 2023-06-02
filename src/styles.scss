@@ -643,8 +643,8 @@ pre {
 
 .sphere-progress {
 	position: relative;
-	width: 200px;
-	height: 200px;
+	width: 230px;
+	height: 230px;
 	border-radius: 100%;
 	z-index: 1;
 }
@@ -676,8 +676,8 @@ pre {
 
 .sphere-progress-center {
 	position: absolute;
-	width: 160px;
-	height: 160px;
+	width: 190px;
+	height: 190px;
 	border-radius: 100%;
 	z-index: 2;
 	background: #fff;
@@ -1062,6 +1062,10 @@ pre {
 		color: #93a8cc;
 	}
 
+	.danger-card span {
+		color: #fff;
+	}
+
 	div.active {
 		background: #93a8cc !important;
 	}
@@ -1070,7 +1074,7 @@ pre {
 		font-size: 16px;
 	}
 	.mat-progress-bar-fill::after {
-		background-color: #2b468b;
+		background-color: #93a8cc;
 		border-radius: 30px;
 	}
 

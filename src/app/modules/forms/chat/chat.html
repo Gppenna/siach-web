@@ -18,16 +18,18 @@
 	</nav>
 	<ng-template [ngIf]="!loading && !actionComplete && !error">
 		<ng-template [ngIf]="data.length > 0">
-			<div style="border: 1px solid #ececec; box-shadow: 1px 1px 2px #a9a9a9" class="pt-3">
+			<div style="border: 1px solid #ececec; box-shadow: 1px 1px 2px #a9a9a9" class="pt-3" tabindex="0" #chat id="chat">
 				<div class="row mx-2" *ngFor="let comentario of data">
 					<span class="w-100 value d-flex">
 						<span class="pr-2">
 							<mat-icon class="comentarioIcon">comment</mat-icon>
 						</span>
-						<span><strong>{{ comentario.usuario.nome }}</strong> adicionou uma mensagem - {{ comentario.dataCriacao | date : 'dd/MM/yyyy' }}</span>
+						<span tabindex="0"
+							><strong>{{ comentario.usuario.nome }}</strong> adicionou uma mensagem - {{ comentario.dataCriacao | date : 'dd/MM/yyyy' }}</span
+						>
 					</span>
 					<div class="w-100 d-flex p-2 mt-1">
-						<span class="ml-1">
+						<span tabindex="0" class="ml-1">
 							<pre>{{ comentario.mensagem }}</pre>
 						</span>
 					</div>
@@ -38,12 +40,12 @@
 		<ng-template [ngIf]="data.length === 0">
 			<div class="app-page-messages" style="padding-top: 0px !important">
 				<mat-icon>search_off</mat-icon>
-				<h5 class="nunito">Sem mensagens ainda</h5>
+				<h5 tabindex="0" class="nunito">Sem mensagens ainda</h5>
 			</div>
 		</ng-template>
 
 		<ng-template [ngIf]="formControl">
-			<form [formGroup]="formControl">
+			<form [formGroup]="formControl" tabindex="0" #form id="form">
 				<section class="mt-4">
 					<div>
 						<mat-form-field class="w-100 col np">
