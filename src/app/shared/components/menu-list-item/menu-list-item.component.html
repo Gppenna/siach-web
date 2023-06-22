@@ -1,4 +1,4 @@
-<div style="position: relative; height: inherit" aria-role="menuitem">
+<div style="position: relative; height: inherit" aria-role="menu">
 	<a
 		mat-list-item
 		tabindex="0"
@@ -19,6 +19,7 @@
 			class="menu"
 			*ngIf="item.button && item.action === 'toggle_dark_theme'"
 			mat-icon-button
+			type="submit"
 			(click)="execute('toggle_dark_theme')"
 			matTooltip="Alternar tema escuro"
 		>
