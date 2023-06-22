@@ -1,34 +1,39 @@
 // ? Importing `Work Sans` font for headings, you can change this if you want
-@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500&display=swap');
 // ? 1. Default theme
-$theming-material-components-primary: mat-palette($mat-blue,
-600);
-$theming-material-components-accent: mat-palette($mat-green,
-200);
-$theming-material-components-warn: mat-palette($mat-red,
-300);
-$theming-material-components-theme: mat-light-theme( $theming-material-components-primary,
-$theming-material-components-accent,
-$theming-material-components-warn);
+$theming-material-components-primary: mat-palette($mat-blue, 600);
+$theming-material-components-accent: mat-palette($mat-green, 200);
+$theming-material-components-warn: mat-palette($mat-red, 300);
+$theming-material-components-theme: mat-light-theme(
+	$theming-material-components-primary,
+	$theming-material-components-accent,
+	$theming-material-components-warn
+);
 // ? 2. Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
-$dark-accent: mat-palette($mat-amber,
-A200,
-A100,
-A400);
+$dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
-$dark-theme: mat-dark-theme( ( color: ( primary: $dark-primary, accent: $dark-accent, warn: $dark-warn, ), ));
+$dark-theme: mat-dark-theme(
+	(
+		color: (
+			primary: $dark-primary,
+			accent: $dark-accent,
+			warn: $dark-warn,
+		),
+	)
+);
 // ? 3. Define a custom heading typography config
 $heading-font-family: "'Nunito', sans-serif";
-$body-font-family: "'Patrick Hand'";
-$typography: mat-typography-config( $display-4: mat-typography-level(112px, $font-family: $heading-font-family),
-$display-3: mat-typography-level(56px, $font-family: $heading-font-family),
-$display-2: mat-typography-level(45px, $font-family: $heading-font-family),
-$display-1: mat-typography-level(20px, $font-family: $heading-font-family),
-$body-1: mat-typography-level(20px, $font-family: $body-font-family),
-$headline: mat-typography-level(32px, $font-family: $heading-font-family),
-$title: mat-typography-level(24px, $font-family: $heading-font-family, $font-weight: 700),
-$subheading-2: mat-typography-level(24px, $font-family: $heading-font-family, $font-weight: 500),
-$subheading-1: mat-typography-level(22px, $font-family: $heading-font-family, $font-weight: 500),
-$caption: mat-typography-level(14px, $font-family: $heading-font-family, $font-weight: 700),
+$body-font-family: "'Nunito', sans-serif";
+$typography: mat-typography-config(
+	$display-4: mat-typography-level(112px, $font-family: $heading-font-family),
+	$display-3: mat-typography-level(56px, $font-family: $heading-font-family),
+	$display-2: mat-typography-level(45px, $font-family: $heading-font-family),
+	$display-1: mat-typography-level(17px, $font-family: $heading-font-family),
+	$body-1: mat-typography-level(17px, $font-family: $body-font-family),
+	$headline: mat-typography-level(32px, $font-family: $heading-font-family),
+	$title: mat-typography-level(24px, $font-family: $heading-font-family, $font-weight: 700),
+	$subheading-2: mat-typography-level(24px, $font-family: $heading-font-family, $font-weight: 500),
+	$subheading-1: mat-typography-level(22px, $font-family: $heading-font-family, $font-weight: 500),
+	$caption: mat-typography-level(14px, $font-family: $heading-font-family, $font-weight: 700),
 );
