@@ -1,9 +1,8 @@
-<div style="position: relative; height: inherit" aria-role="menu">
+<div style="position: relative; height: inherit" aria-role="menuitem">
 	<a
 		mat-list-item
 		tabindex="0"
 		class="menu-list-item"
-		aria-role="menuitem"
 		(click)="onItemSelected(item)"
 		(keydown)="handleKeyDown($event, item)"
 		[attr.aria-haspopup]="item.children && item.children.length ? true : null"
@@ -19,7 +18,6 @@
 			class="menu"
 			*ngIf="item.button && item.action === 'toggle_dark_theme'"
 			mat-icon-button
-			type="submit"
 			(click)="execute('toggle_dark_theme')"
 			matTooltip="Alternar tema escuro"
 		>
@@ -28,7 +26,7 @@
 			</mat-icon>
 		</button>
 	</a>
-	<div class="menu-list-expanded" *ngIf="item.expanded" aria-role="menu">
+	<div class="menu-list-expanded" *ngIf="item.expanded">
 		<app-menu-list-item
 			class="child"
 			[ngClass]="this.appStateService.getAuthority() !== '1' && child.admin ? 'd-none' : ''"
