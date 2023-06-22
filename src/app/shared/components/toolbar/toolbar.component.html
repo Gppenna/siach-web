@@ -2,7 +2,7 @@
 	<mat-toolbar class="menu-grid">
 		<img class="logo" src="../../../../assets/images/siachlogo.png" alt="Logo SIACH" [ngClass]="appStateService.state.isDark ? 'invert' : ''" />
 		<div>
-			<div class="itens-menu" aria-role="menu">
+			<div class="itens-menu">
 				<app-menu-list-item *ngFor="let item of appStateService.state.menu" [item]="item" (masterMindCloseEvent)="closeAll($event)">
 				</app-menu-list-item>
 			</div>
