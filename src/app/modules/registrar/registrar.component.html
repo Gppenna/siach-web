@@ -3,11 +3,11 @@
 		<h1>Cadastrar</h1>
 		<mat-form-field style="width: 400px" appearance="outline">
 			<mat-label>E-mail</mat-label>
-			<input required="true" type="text" matInput formControlName="email" />
+			<input required="true" type="email" matInput formControlName="email" email />
 		</mat-form-field>
 		<mat-form-field style="width: 400px" appearance="outline">
 			<mat-label>Matrícula</mat-label>
-			<input required="true" type="text" matInput formControlName="matricula" />
+			<input required="true" (keypress)="numberOnly($event)" type="text" matInput formControlName="matricula" />
 		</mat-form-field>
 		<mat-form-field style="width: 400px" appearance="outline">
 			<mat-label>Nome</mat-label>
@@ -25,15 +25,16 @@
 			<mat-label>Senha</mat-label>
 			<input required="true" type="password" matInput formControlName="senha" />
 		</mat-form-field>
+		<span
+			*ngIf="registerForm.value.senha && registerForm.value.confirmarSenha && registerForm.value.confirmarSenha !== registerForm.value.senha"
+			class="danger pb-3"
+			style="text-decoration: underline"
+			>As senhas digitadas não correspondem!</span
+		>
 		<mat-form-field style="width: 400px" appearance="outline">
 			<mat-label>Confirmar Senha</mat-label>
 			<input required="true" type="password" matInput formControlName="confirmarSenha" />
 		</mat-form-field>
-		<span
-			*ngIf="registerForm.value.senha && registerForm.value.confirmarSenha && registerForm.value.confirmarSenha !== registerForm.value.senha"
-			class="danger pb-3"
-			>As senhas digitadas não correspondem!</span
-		>
 
 		<div class="d-flex gap-3 align-items-center" style="zoom: 0.9">
 			<button

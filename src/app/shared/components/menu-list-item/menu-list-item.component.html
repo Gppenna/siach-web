@@ -6,7 +6,6 @@
 		(click)="onItemSelected(item)"
 		(keydown)="handleKeyDown($event, item)"
 		[attr.aria-haspopup]="item.children && item.children.length ? true : null"
-		[attr.aria-expanded]="item.expanded ? true : null"
 		[matTooltip]="item.description"
 	>
 		<span *ngIf="item.displayName" class="mat-display-1 nm menu">{{ item.displayName }}</span>

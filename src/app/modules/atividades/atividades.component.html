@@ -14,40 +14,55 @@
 			</ng-template>
 		</div>
 		<div class="row mt-5 mx-0 align-items-center">
-			<div class="d-flex np align-items-center mr-3" style="width: fit-content; opacity: 0.7">
-				<button mat-icon-button (click)="showFilter = !showFilter; filtro = this.newFilter()">
-					<mat-icon [matTooltip]="showFilter ? 'Esconder filtros' : 'Mostrar filtros'">{{ showFilter ? 'filter_alt_off' : 'filter_alt' }}</mat-icon>
-				</button>
-			</div>
 			<div class="np d-flex align-items-center" style="width: 90%; gap: 1rem">
 				<ng-template [ngIf]="showFilter">
 					<div>
 						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 500px">
 							<mat-label>Atividade</mat-label>
-							<input
-								type="text"
-								placeholder="Buscar Atividade.."
-								matInput
-								[value]="filtro.atividadeBarema"
-								[formControl]="formControl"
-								[matAutocomplete]="auto"
-							/>
-							<input type="text" class="d-none" matInput [(ngModel)]="filtro.atividadeBaremaId" />
-							<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option); freshFilter()">
-								<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao">{{
-									select.descricao
-								}}</mat-option>
-							</mat-autocomplete>
+
+							<div class="position-relative">
+								<input
+									type="text"
+									placeholder="Buscar Atividade.."
+									matInput
+									[value]="filtro.atividadeBarema"
+									[formControl]="formControl"
+									[matAutocomplete]="auto"
+									style="max-width: 90%; overflow: hidden; text-overflow: ellipsis"
+								/>
+								<input type="text" class="d-none" matInput [(ngModel)]="filtro.atividadeBaremaId" />
+								<mat-autocomplete #auto="matAutocomplete" (optionSelected)="autoCompleteSelect($event.option); freshFilter()">
+									<mat-option *ngFor="let select of filteredOptions | async" [value]="select" [matTooltip]="select.descricao">{{
+										select.descricao
+									}}</mat-option>
+								</mat-autocomplete>
+								<ng-template [ngIf]="filtro.atividadeBaremaId !== undefined">
+									<div class="clear-filter">
+										<button mat-icon-button (click)="filtro.atividadeBaremaId = undefined; filtro.atividadeBarema = ''; freshFilter()">
+											<mat-icon [matTooltip]="'Limpar filtro'" style="color: #a8261a !important">filter_alt_off</mat-icon>
+										</button>
+									</div>
+								</ng-template>
+							</div>
 						</mat-form-field>
 					</div>
 					<div>
 						<mat-form-field class="np" appearance="outline" style="font-size: 15px; width: 300px">
 							<mat-label>Grupo da Atividade</mat-label>
-							<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
-								<mat-option *ngFor="let item of grupoBaremaList" [matTooltip]="item.descricao" value="{{ item.idGrupoBarema }}">
-									{{ item.numero }} - {{ item.descricao }}
-								</mat-option>
-							</mat-select>
+							<div class="position-relative">
+								<mat-select [(ngModel)]="filtro.grupoBaremaId" (selectionChange)="freshFilter()">
+									<mat-option *ngFor="let item of grupoBaremaList" [matTooltip]="item.descricao" value="{{ item.idGrupoBarema }}">
+										{{ item.numero }} - {{ item.descricao }}
+									</mat-option>
+								</mat-select>
+								<ng-template [ngIf]="filtro.grupoBaremaId !== undefined">
+									<div class="clear-filter-select">
+										<button mat-icon-button (click)="filtro.grupoBaremaId = undefined; freshFilter()">
+											<mat-icon [matTooltip]="'Limpar filtro'" style="color: #a8261a !important">filter_alt_off</mat-icon>
+										</button>
+									</div>
+								</ng-template>
+							</div>
 						</mat-form-field>
 					</div>
 					<div>
@@ -56,13 +71,6 @@
 							<input matInput min="1" type="number" (input)="freshFilterDelay()" [(ngModel)]="filtro.cargaHoraria" />
 						</mat-form-field>
 					</div>
-					<ng-template [ngIf]="filtro.atividadeBaremaId !== undefined || filtro.grupoBaremaId !== undefined || filtro.cargaHoraria !== undefined">
-						<div>
-							<button mat-icon-button (click)="filtro = this.newFilter(); freshFilter()">
-								<mat-icon [matTooltip]="'Limpar filtros'" style="color: #a8261a !important">delete</mat-icon>
-							</button>
-						</div>
-					</ng-template>
 				</ng-template>
 			</div>
 		</div>

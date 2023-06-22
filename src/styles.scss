@@ -104,6 +104,20 @@ body {
 	font-family: 'Nunito';
 }
 
+.clear-filter-select {
+	top: 0;
+	transform: translate(-25%, -25%);
+	left: 85%;
+	position: absolute;
+}
+
+.clear-filter {
+	top: 0;
+	transform: translate(-25%, -25%);
+	left: 95%;
+	position: absolute;
+}
+
 .nm {
 	margin: 0 !important;
 }
