@@ -305,10 +305,12 @@ export class SolicitacaoSheet {
 	}
 
 	private _filter(value: string): string[] {
-		if (typeof value !== 'object') {
-			const filterValue = value.toLowerCase();
+		const removeDiacritics = require('diacritics').remove;
 
-			return this.atividadeBaremaList.filter((option: any) => option.descricao.toLowerCase().includes(filterValue));
+		if (typeof value !== 'object') {
+			const filterValue = removeDiacritics(value.toLowerCase());
+
+			return this.atividadeBaremaList.filter((option: any) => removeDiacritics(option.descricao.toLowerCase()).includes(filterValue));
 		}
 		return this.atividadeBaremaList;
 	}
