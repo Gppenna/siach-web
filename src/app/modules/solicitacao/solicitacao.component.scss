@@ -1,4 +1,39 @@
-
 .userCard-container {
-    width: 90%;
+	width: 90%;
+}
+
+.enviado {
+	background-color: #757575;
+}
+
+.analise {
+	background-color: #c79400;
+}
+
+.finalizado {
+	background-color: #37a095;
+}
+
+.edit-icon {
+	cursor: pointer;
+	scale: 1.2;
+	width: 40px;
+	padding-left: 1rem;
+}
+
+.edit-container {
+	position: absolute;
+	left: -2%;
+	top: -4%;
+	display: flex;
+	background: #ffffff;
+	border-radius: 20px;
+	border: 1px solid #d6d5d5;
+}
+
+.status-container {
+	border-radius: 0 20px 20px 0;
+	padding: 0.5rem 2rem;
+	color: #fff;
+	margin-left: 1rem;
 }

@@ -16,10 +16,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 const routes: Routes = [
 	{
 		path: '',
-		component: SolicitacaoViewComponent,
-	},
-	{
-		path: 'criar',
 		component: SolicitacaoComponent,
 	},
 	{

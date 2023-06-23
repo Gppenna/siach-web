@@ -37,22 +37,21 @@ export class SolicitacaoComponent implements OnInit {
 		const requestSol = {
 			type: 'GET',
 			api: environment.apiUrl,
-			path: 'solicitacao/table/rascunho/' + this.appStateService.userId(),
+			path: 'solicitacao/table/' + this.appStateService.userId(),
 		};
 		this.loading = true;
 		this.execute('http-request', requestSol).subscribe((response: any) => {
 			this.dataSource = response;
 			this.loading = false;
-			setTimeout(function () {
-				document.querySelector('.bottom').scrollIntoView({
-					behavior: 'smooth',
-				});
-			}, 500);
 		});
 	}
 
+	openDetails(solicitacao: any) {
+		this.router.navigate(['/solicitacao/detalhe/' + solicitacao.idSolicitacao]);
+	}
+
 	@ViewChild('info', { static: false }) info: ElementRef;
-	@ViewChild('rascunhos', { static: false }) rascunhos: ElementRef;
+	@ViewChild('aproveitamentos', { static: false }) aproveitamentos: ElementRef;
 
 	@ViewChild('enviar', { static: false }) enviar: ElementRef;
 	@ViewChild('rascunhosCards', { static: false }) rascunhosCards: ElementRef;
@@ -62,37 +61,14 @@ export class SolicitacaoComponent implements OnInit {
 		this.cdr.detectChanges();
 	}
 
-	skipToRascunhos(): void {
-		this.rascunhos.nativeElement.focus();
+	skipToAproveitamentos(): void {
+		this.aproveitamentos.nativeElement.focus();
 		this.cdr.detectChanges();
 	}
 
-	skipToRascunhosCards(): void {
+	skipToAproveitamentosCards(): void {
 		this.rascunhosCards.nativeElement.focus();
 		this.cdr.detectChanges();
-	}
-
-	skipToEnviar(): void {
-		this.enviar.nativeElement.focus();
-		this.cdr.detectChanges();
-	}
-
-	ativar() {
-		const requestSol = {
-			type: 'PUT',
-			api: environment.apiUrl,
-			path: 'solicitacao/ativar',
-			body: this.dataSource.map((element: any) => element.idSolicitacao),
-		};
-		this.loading = true;
-		this.execute('http-request', requestSol).subscribe((response: any) => {
-			this.loadSolicitacoes();
-			this.snackBar.open('Solicitação de aproveitamento enviada com sucesso!', 'Ok', {
-				duration: 6000,
-				panelClass: ['green-snackbar'],
-			});
-			this.router.navigate(['/solicitacao']);
-		});
 	}
 
 	execute(type: string, data?: any) {
@@ -107,6 +83,29 @@ export class SolicitacaoComponent implements OnInit {
 				parameter: {},
 			},
 		});
+	}
+
+	statusColor(solicitacao: any) {
+		let last = solicitacao.solicitacaoProgressoList[0];
+		solicitacao.solicitacaoProgressoList.forEach((element: any) => {
+			if (element.dataCadastro) {
+				last = element;
+			}
+		});
+		switch (last.status.idStatus) {
+			case 1:
+				solicitacao.statusNow = last.status.descricao;
+				return 'enviado';
+			case 2:
+				solicitacao.statusNow = last.status.descricao;
+				return 'analise';
+			case 3:
+				solicitacao.statusNow = last.status.descricao;
+				return 'finalizado';
+			default:
+				solicitacao.statusNow = last.status.descricao;
+				return 'enviado';
+		}
 	}
 
 	editSolicitacao(solicitacao: any) {

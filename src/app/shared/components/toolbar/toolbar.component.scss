@@ -15,7 +15,7 @@
 
 .menu-grid {
 	display: grid;
-	grid-template-columns: 5% 95% 0%;
+	grid-template-columns: 10% 90% 0%;
 	padding: 0 3rem;
 }
 
@@ -27,7 +27,7 @@ mat-toolbar > * {
 	height: inherit;
 	align-items: center;
 	display: grid;
-	grid-template-columns: 10% 20% 20% 20% 15% 5% 10%;
+	grid-template-columns: 20% 20% 20% 20% 5% 5%;
 }
 
 .itens-menu * {

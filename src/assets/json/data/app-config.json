@@ -10,11 +10,7 @@
 			"route": "/atividades"
 		},
 		{
-			"displayName": "Criar Solicitação",
-			"route": "/solicitacao/criar"
-		},
-		{
-			"displayName": "Visualizar Solicitações",
+			"displayName": "Solicitações",
 			"route": "/solicitacao"
 		},
 		{

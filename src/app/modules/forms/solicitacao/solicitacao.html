@@ -1,6 +1,6 @@
 <div class="app-page-container-bottomsheet">
 	<div class="app-page-bottomsheet-header py-3">
-		<h1 tabindex="0">{{new ? 'Nova' : 'Editar'}} Solicitação {{new ? '' : 'Pendente de Envio'}}</h1>
+		<h1 tabindex="0">{{new ? 'Nova' : 'Editar'}} Solicitação de Aproveitamento</h1>
 	</div>
 	<nav aria-labelledby="accessibility-menu">
 		<ul class="accessibility-header">
@@ -135,7 +135,7 @@
 								<mat-icon
 									class="opacity-75"
 									style="font-size: 1rem"
-									matTooltip="A barra azul representa horas já aproveitadas, enquanto a barra verde representa horas em análise ou em rascunhos pendentes de envio."
+									matTooltip="A barra azul representa horas já aproveitadas, enquanto a barra verde representa horas em análise ou em aproveitamentos pendentes de envio."
 									>help</mat-icon
 								></span
 							>
@@ -193,7 +193,7 @@
 
 	<ng-template [ngIf]="!loading && actionComplete">
 		<p tabindex="0">
-			Rascunho:
+			Solicitação:
 			<strong> {{formControl.value.titulo? formControl.value.titulo : ''}}</strong>
 			{{new ? 'criado' : 'editada'}} com sucesso
 		</p>
