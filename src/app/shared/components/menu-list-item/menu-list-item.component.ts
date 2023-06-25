@@ -17,7 +17,6 @@ import { AppStateService } from 'src/app/app.state';
 })
 export class MenuListItemComponent implements OnInit {
 	@Input() item: any = { expanded: false };
-	@HostBinding('attr.aria-expanded') ariaExpanded = this.item.expanded;
 
 	@Output()
 	masterMindCloseEvent = new EventEmitter<any>();

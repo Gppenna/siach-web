@@ -7,23 +7,11 @@
 		(keydown)="handleKeyDown($event, item)"
 		[attr.aria-haspopup]="item.children && item.children.length ? true : null"
 		[matTooltip]="item.description"
+		(click)="execute(item.action)"
+		(keydown.enter)="execute(item.action)"
 	>
 		<span *ngIf="item.displayName" class="mat-display-1 nm menu">{{ item.displayName }}</span>
 		<mat-icon *ngIf="item.icon" style="cursor: pointer" class="menu">{{ item.icon }}</mat-icon>
-		<mat-icon class="menu" *ngIf="item.children && item.children.length && !item.icon" [@indicatorRotate]="item.expanded ? 'expanded' : 'collapsed'">
-			expand_more
-		</mat-icon>
-		<button
-			class="menu"
-			*ngIf="item.button && item.action === 'toggle_dark_theme'"
-			mat-icon-button
-			(click)="execute('toggle_dark_theme')"
-			matTooltip="Alternar tema escuro"
-		>
-			<mat-icon>
-				{{ item.button }}
-			</mat-icon>
-		</button>
 	</a>
 	<div class="menu-list-expanded" *ngIf="item.expanded">
 		<app-menu-list-item

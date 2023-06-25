@@ -18,7 +18,8 @@
 			"route": "/perfil"
 		},
 		{
-			"button": "brightness_6",
+			"icon": "brightness_6",
+			"description": "Alternar tema escuro",
 			"action": "toggle_dark_theme"
 		},
 		{
