@@ -130,7 +130,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="d-grid justify-content-between w-100" style="grid-template-columns: 45% 45%">
+					<ng-template [ngIf]="loading">
+						<div style="padding: 3rem 0px; text-align: center">
+							<mat-spinner class="normal-stroke" style="margin: 0px auto"></mat-spinner>
+						</div>
+					</ng-template>
+					<div class="d-grid justify-content-between w-100" style="grid-template-columns: 45% 45%" *ngIf="!loading">
 						<div *ngFor="let data of dataSource" class="py-3">
 							<app-barra-progresso [dataSource]="data.perfilGrupo" [dataSourceSecondary]="data.perfilAtividadeList"></app-barra-progresso>
 						</div>

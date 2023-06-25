@@ -57,7 +57,10 @@
 						</mat-autocomplete>
 					</mat-form-field>
 					<div class="app-page-bottomsheet-content">
-						<span tabindex="0" *ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)" style="color: rgb(52 188 147)"
+						<span
+							tabindex="0"
+							*ngIf="!(formControl.value.idAtividadeBarema === '' || stopFlag || stopFlagExceed)"
+							style="color: rgb(52 188 147); text-decoration: underline"
 							>Você ainda possui até {{horasRestantes()}} horas restantes para aproveitar na atividade selecionada.</span
 						>
 						<ng-template [ngIf]="stopFlag || stopFlagExceed">
@@ -187,7 +190,7 @@
 	</ng-template>
 	<ng-template [ngIf]="loading">
 		<div style="padding: 3rem 0px; text-align: center">
-			<mat-spinner style="margin: 0px auto"></mat-spinner>
+			<mat-spinner class="normal-stroke" style="margin: 0px auto"></mat-spinner>
 		</div>
 	</ng-template>
 

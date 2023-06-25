@@ -102,10 +102,16 @@
 				</div>
 			</ng-template>
 
-			<ng-template [ngIf]="dataSource.length === 0">
+			<ng-template [ngIf]="!loading && dataSource.length === 0">
 				<div class="app-page-messages" style="padding-top: 15vh !important">
 					<mat-icon>search_off</mat-icon>
 					<h5 class="nunito">Você ainda não possui aproveitamentos criados!</h5>
+				</div>
+			</ng-template>
+
+			<ng-template [ngIf]="loading">
+				<div class="app-page-messages" style="padding-top: 15vh !important">
+					<mat-spinner class="normal-stroke"></mat-spinner>
 				</div>
 			</ng-template>
 		</div>

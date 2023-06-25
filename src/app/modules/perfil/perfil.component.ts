@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PerfilComponent implements OnInit {
 	dataSource: any[] = [];
-
+	loading = true;
 	totalHoras = 0;
 	totalHorasRascunho = 0;
 	addHorasFlag = false;
@@ -20,6 +20,7 @@ export class PerfilComponent implements OnInit {
 	}
 
 	loadDependencies() {
+		this.loading = true;
 		const request = {
 			type: 'GET',
 			api: environment.apiUrl,
@@ -28,6 +29,7 @@ export class PerfilComponent implements OnInit {
 		this.execute('http-request', request).subscribe((response: any) => {
 			this.dataSource = response;
 			this.totalHorasCalc(response);
+			this.loading = false;
 		});
 	}
 
