@@ -1,7 +1,7 @@
 <ng-template [ngIf]="dataSource">
 	<div *ngFor="let atividade of dataSource | keyvalue" class="mt-3">
 		<ng-template [ngIf]="dataSourceSecondary">
-			<div aria-labelledby="buscar-label" (click)="openGrupo(dataSourceSecondary)" (keyup.enter)="openGrupo(dataSourceSecondary)">
+			<div (click)="openGrupo(dataSourceSecondary)" (keyup.enter)="openGrupo(dataSourceSecondary)">
 				<span
 					tabindex="0"
 					id="buscar-label"
@@ -18,7 +18,7 @@
 			</div>
 		</ng-template>
 		<ng-template [ngIf]="!dataSourceSecondary">
-			<div aria-labelledby="buscar-label">
+			<div>
 				<span class="nunito d-flex gap-2" tabindex="0"
 					>{{ $any(atividade.value).descricao }}
 
@@ -35,7 +35,6 @@
 						*ngIf="adicional === 0"
 						style="top: 200%"
 						class="position-absolute nunito"
-						aria-labelledby="blue-label"
 						tabindex="0"
 						[ngStyle]="{
 							left: calcValueContabilizado(atividade) + '%'
@@ -52,7 +51,6 @@
 					<div
 						style="color: #37a095 !important; top: -300%"
 						tabindex="0"
-						aria-labelledby="green-label"
 						class="position-absolute nunito"
 						[ngStyle]="{
 							left: calcValueContabilizadoRascunho(atividade) + '%'
