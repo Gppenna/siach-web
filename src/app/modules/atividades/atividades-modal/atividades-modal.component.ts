@@ -14,6 +14,7 @@ export class AtividadesModalComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.dataSource = this.data.dataSource;
+		console.log(this.dataSource);
 	}
 
 	execute(type: string, data?: any) {
