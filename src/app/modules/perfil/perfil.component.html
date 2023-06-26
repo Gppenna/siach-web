@@ -54,7 +54,7 @@
 							class="sphere-progress"
 							[ngStyle]="{
 								background: conicGradientFactory(
-									'rgb(52, 188, 147)',
+									'#248467',
 									appStateService.state.isDark ? 'rgb(211, 220, 233, 0.3)' : 'rgb(211, 220, 233)',
 									totalHoras + totalHorasRascunho,
 									appStateService.state?.userData?.curso.minimoHorasCurso
@@ -87,7 +87,7 @@
 										<ng-template [ngIf]="totalHorasRascunho > 0">
 											<span class="mx-2" style="font-size: 20px">-></span>
 											<span tabindex="0" id="blue-label" class="accessibility-header">Percentual de horas atuais pendente de análise: </span>
-											<span tabindex="0" style="font-size: 20px; color: rgb(52, 188, 147)" class="mb-2">
+											<span tabindex="0" style="font-size: 20px; color: #248467" class="mb-2">
 												{{
 													((100 * (totalHoras + totalHorasRascunho)) / appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)
 												}}%</span
@@ -114,9 +114,7 @@
 											</div>
 											<div>
 												<span tabindex="0" id="blue-label" class="accessibility-header">Horas atuais pendente de análise: </span>
-												<span tabindex="0" class="nunito" style="font-size: 16px; color: rgb(52, 188, 147)"
-													>{{ totalHoras + totalHorasRascunho }}h</span
-												>
+												<span tabindex="0" class="nunito" style="font-size: 16px; color: #248467">{{ totalHoras + totalHorasRascunho }}h</span>
 											</div>
 										</ng-template>
 										<div>
