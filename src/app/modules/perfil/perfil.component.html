@@ -74,7 +74,7 @@
 							>
 								<div class="sphere-progress-center translate-middle">
 									<div class="d-flex">
-										<span tabindex="0" id="blue-label" class="accessibility-header">Percentual de horas já aproveitadas: </span>
+										<span tabindex="0" class="accessibility-header">Percentual de horas já aproveitadas: </span>
 										<span
 											tabindex="0"
 											style="font-size: 20px"
@@ -86,7 +86,7 @@
 										>
 										<ng-template [ngIf]="totalHorasRascunho > 0">
 											<span class="mx-2" style="font-size: 20px">-></span>
-											<span tabindex="0" id="blue-label" class="accessibility-header">Percentual de horas atuais pendente de análise: </span>
+											<span tabindex="0" class="accessibility-header">Percentual de horas atuais pendente de análise: </span>
 											<span tabindex="0" style="font-size: 20px; color: #248467" class="mb-2">
 												{{
 													((100 * (totalHoras + totalHorasRascunho)) / appStateService.state?.userData?.curso.minimoHorasCurso).toPrecision(3)
@@ -96,7 +96,7 @@
 									</div>
 									<div class="d-flex">
 										<div>
-											<span tabindex="0" id="blue-label" class="accessibility-header">Horas já aproveitadas: </span>
+											<span tabindex="0" class="accessibility-header">Horas já aproveitadas: </span>
 											<span
 												tabindex="0"
 												class="nunito"
@@ -113,12 +113,12 @@
 												<span class="nunito" style="font-size: 16px">-></span>
 											</div>
 											<div>
-												<span tabindex="0" id="blue-label" class="accessibility-header">Horas atuais pendente de análise: </span>
+												<span tabindex="0" class="accessibility-header">Horas atuais pendente de análise: </span>
 												<span tabindex="0" class="nunito" style="font-size: 16px; color: #248467">{{ totalHoras + totalHorasRascunho }}h</span>
 											</div>
 										</ng-template>
 										<div>
-											<span tabindex="0" id="blue-label" class="accessibility-header">Horas máximas do curso: </span>
+											<span tabindex="0" class="accessibility-header">Horas máximas do curso: </span>
 											<span tabindex="0" class="nunito" style="font-size: 16px">
 												/ {{ appStateService.state?.userData?.curso.minimoHorasCurso }}h</span
 											>
