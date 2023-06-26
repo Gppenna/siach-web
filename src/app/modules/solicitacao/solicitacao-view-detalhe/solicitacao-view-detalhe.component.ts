@@ -97,7 +97,7 @@ export class SolicitacaoViewDetalheComponent {
 				last = element;
 			}
 		});
-		switch (last.status.id) {
+		switch (last.status.idStatus) {
 			case 1:
 				solicitacao.statusNow = last.status.descricao;
 				return 'enviado';
