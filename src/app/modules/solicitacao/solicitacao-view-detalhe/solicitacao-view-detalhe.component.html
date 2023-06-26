@@ -5,7 +5,7 @@
 				<div class="row">
 					<div class="col">
 						<div class="d-flex position-relative">
-							<span id="voltar-label" class="accessibility-header">Voltar</span>
+							<span class="accessibility-header">Voltar</span>
 
 							<div>
 								<mat-icon class="back" (click)="back()">arrow_back</mat-icon>
@@ -60,7 +60,7 @@
 			<div class="d-flex">
 				<div class="py-3 mx-5 w-100" *ngIf="leftActive">
 					<div class="progress-container">
-						<span tabindex="0" id="enviado-label" class="accessibility-header">Data de envio</span>
+						<span tabindex="0" class="accessibility-header">Data de envio</span>
 						<span tabindex="0" style="top: -15px" [ngClass]="progressValue >= 0 ? 'active' : 'inactive'" class="left nunito">
 							{{
 								leftActive.dataCadastro
@@ -70,7 +70,7 @@
 									: ''
 							}}
 						</span>
-						<span tabindex="0" id="analise-label" class="accessibility-header">Data de início da análise</span>
+						<span tabindex="0" class="accessibility-header">Data de início da análise</span>
 						<span tabindex="0" style="top: -15px" [ngClass]="progressValue >= 50 ? 'active' : 'inactive'" class="middle nunito">
 							{{
 								middleActive.dataCadastro
@@ -80,7 +80,7 @@
 									: ''
 							}}
 						</span>
-						<span tabindex="0" id="fim-label" class="accessibility-header">Data de finalização da análise</span>
+						<span tabindex="0" class="accessibility-header">Data de finalização da análise</span>
 						<span tabindex="0" style="top: -15px" [ngClass]="progressValue === 100 ? 'active' : 'inactive'" class="right nunito">
 							{{
 								rightActive.dataCadastro

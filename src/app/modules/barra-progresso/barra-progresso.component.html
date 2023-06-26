@@ -51,13 +51,13 @@
 							left: calcValueContabilizadoRascunho(atividade) + '%'
 						}"
 					>
-						<span id="green-label" class="accessibility-header">Horas atuais pendente de análise: </span>
+						<span class="accessibility-header">Horas atuais pendente de análise: </span>
 						{{ calcValueContabilizadoRascunho(atividade).toPrecision(3) }}%
 					</div>
 				</div>
 			</div>
 			<div class="nunito" tabindex="0" aria-label="Horas limites">
-				<span id="green-label" class="accessibility-header">Limite de horas: </span>
+				<span class="accessibility-header">Limite de horas: </span>
 				{{ $any(atividade.value).horasLimite }}h
 			</div>
 		</div>
